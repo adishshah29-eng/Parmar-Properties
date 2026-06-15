@@ -1,0 +1,70 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
+import { TestimonialCard } from "@/sections/TestimonialsSection/components/TestimonialCard";
+
+export const TestimonialCarousel = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let isScrolling = false;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (!el) return;
+
+      const atStart = el.scrollLeft === 0;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+
+      // If at the end and scrolling down, let page scroll normally
+      if (atEnd && e.deltaY > 0) return;
+      // If at the start and scrolling up, let page scroll normally
+      if (atStart && e.deltaY < 0) return;
+
+      // Otherwise intercept and convert to horizontal
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => el.removeEventListener("wheel", handleWheel);
+  }, []);
+
+  return (
+    <div className="box-border caret-transparent text-[10px] leading-[11.5px] outline-neutral-900 outline-[3px] static no-underline mt-10 md:text-[6.66667px] md:leading-[7.66667px] md:relative md:mt-[33.3333px]">
+      <div className="box-border caret-transparent text-[10px] leading-[11.5px] list-none outline-neutral-900 outline-[3px] relative no-underline z-[1] overflow-hidden mx-auto md:text-[6.66667px] md:leading-[7.66667px]">
+        <div ref={scrollRef} className="caret-transparent flex flex-nowrap overflow-x-auto snap-x snap-mandatory text-[10px] h-full leading-[11.5px] outline-neutral-900 outline-[3px] relative no-underline w-full z-[1] pt-[100px] md:text-[6.66667px] md:leading-[7.66667px] md:pt-[66.6667px] [scrollbar-width:none] scroll-smooth hide-scrollbar">
+          <TestimonialCard
+            quote={`"Michael was a great realtor. Such a hard worker, dedicated to helping us find the perfect neighborhood, price point and home. He's a workaholic so he was available morning, noon and night. Tireless and dedicated. Would recommend him 100%!"`}
+            author="Bernadette Hogan"
+          />
+          <TestimonialCard
+            quote='"Shirin was truly a blessing to work with. She helped us find our perfect condo in a great area. She was patient and very understanding. I would recommend working with her if you are in need of someone who will go out of their way to make sure you find the home of your dreams. She is honest and has a pure heart."'
+            author="Tyleen"
+          />
+          <TestimonialCard
+            quote='"Working with Mathew was an absolute pleasure, and I highly recommend him to any serious homebuyer—especially first-time buyers like myself who may feel overwhelmed by the process. From the start, Mathew’s problem-solving skills stood out. Thank you, Mathew, for making this happen—we are truly happy in our new home!"'
+            author="Johanna Nieto"
+          />
+          <TestimonialCard
+            quote={`"Shirin was an invaluable resource, consultant, and general guide through the home-buying process from the initial search to closing. She immediately understood what we were looking for in a home and helped tailor our search in the right direction. Shirin was quickly responsive and proactive in pushing the agenda forward through all stages with a steady, reassuring hand."`}
+            author="mattmpowers"
+          />
+          <TestimonialCard
+            quote='"After 12 years in NYC, I have had my best broker experience by far with Fay Blau. Fay helped me find a beautiful apartment on the Upper West Side that fit my needs like a glove. As an Upper West Side local, she knows the neighborhood like the back of her hand. She was an excellent communicator throughout the entire process."'
+            author="Giavridis Theodore"
+          />
+        </div>
+        <div className="box-border caret-transparent gap-x-[13px] flex text-[10px] leading-[11.5px] outline-neutral-900 outline-[3px] absolute gap-y-[13px] no-underline z-[4] top-0 inset-x-0 md:gap-x-[8.66667px] md:text-[6.66667px] md:leading-[7.66667px] md:gap-y-[8.66667px] after:accent-auto after:bg-[url(data:image/svg+xml,<svg%20xmlns=\%22http://www.w3.org/2000/svg\%22%20fill=\%22none\%22%20viewBox=\%220%200%2049%2049\%22><path%20fill=\%22%23151717\%22%20d=\%22M10.72%2020.9.16%2010.34%2010.72%200l10.34%2010.34L1.48%2048.4.16%2047.08%2010.72%2020.9Zm27.94%200L28.1%2010.34%2038.66%200%2049%2010.34%2029.42%2048.4l-1.32-1.32L38.66%2020.9Z\%22/></svg>)] after:bg-cover after:box-border after:caret-transparent after:text-black after:block after:text-[10px] after:not-italic after:normal-nums after:font-normal after:h-[37px] after:tracking-[normal] after:leading-[11.5px] after:list-outside after:list-none after:outline-[3px] after:pointer-events-auto after:absolute after:text-start after:no-underline after:indent-[0px] after:normal-case after:visible after:w-[37px] after:border-separate after:right-0 after:font-instrument_sans after:md:text-[6.66667px] after:md:h-[32.6667px] after:md:leading-[7.66667px] after:md:w-[32.6667px]">
+          <span className="items-center box-border caret-transparent text-neutral-900 flex text-sm font-medium h-9 justify-center leading-[19.6px] min-h-[auto] min-w-9 outline-[3px] pointer-events-none text-center no-underline w-auto border border-neutral-900 rounded-[50%] border-solid md:text-[10.6667px] md:h-[30.6667px] md:leading-[14.9333px] md:min-w-6 md:w-[30.6667px] after:accent-auto after:box-border after:caret-transparent after:text-neutral-900 after:block after:text-sm after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-[19.6px] after:list-outside after:list-none after:min-h-[auto] after:min-w-[auto] after:outline-[3px] after:pointer-events-none after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:font-instrument_sans after:md:text-[10.6667px] after:md:leading-[14.9333px]"></span>
+          <span className="items-center box-border caret-transparent text-zinc-400 flex text-sm font-medium h-9 justify-center leading-[19.6px] min-h-[auto] min-w-9 outline-neutral-900 outline-[3px] text-center no-underline w-auto border border-zinc-400 rounded-[50%] border-solid md:text-[10.6667px] md:h-[30.6667px] md:leading-[14.9333px] md:min-w-6 md:w-[30.6667px] after:accent-auto after:box-border after:caret-transparent after:text-zinc-400 after:block after:text-sm after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-[19.6px] after:list-outside after:list-none after:min-h-[auto] after:min-w-[auto] after:outline-[3px] after:pointer-events-auto after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:font-instrument_sans after:md:text-[10.6667px] after:md:leading-[14.9333px]"></span>
+          <span className="items-center box-border caret-transparent text-zinc-400 flex text-sm font-medium h-9 justify-center leading-[19.6px] min-h-[auto] min-w-9 outline-neutral-900 outline-[3px] text-center no-underline w-auto border border-zinc-400 rounded-[50%] border-solid md:text-[10.6667px] md:h-[30.6667px] md:leading-[14.9333px] md:min-w-6 md:w-[30.6667px] after:accent-auto after:box-border after:caret-transparent after:text-zinc-400 after:block after:text-sm after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-[19.6px] after:list-outside after:list-none after:min-h-[auto] after:min-w-[auto] after:outline-[3px] after:pointer-events-auto after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:font-instrument_sans after:md:text-[10.6667px] after:md:leading-[14.9333px]"></span>
+          <span className="items-center box-border caret-transparent text-zinc-400 flex text-sm font-medium h-9 justify-center leading-[19.6px] min-h-[auto] min-w-9 outline-neutral-900 outline-[3px] text-center no-underline w-auto border border-zinc-400 rounded-[50%] border-solid md:text-[10.6667px] md:h-[30.6667px] md:leading-[14.9333px] md:min-w-6 md:w-[30.6667px] after:accent-auto after:box-border after:caret-transparent after:text-zinc-400 after:block after:text-sm after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-[19.6px] after:list-outside after:list-none after:min-h-[auto] after:min-w-[auto] after:outline-[3px] after:pointer-events-auto after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:font-instrument_sans after:md:text-[10.6667px] after:md:leading-[14.9333px]"></span>
+          <span className="items-center box-border caret-transparent text-zinc-400 flex text-sm font-medium h-9 justify-center leading-[19.6px] min-h-[auto] min-w-9 outline-neutral-900 outline-[3px] text-center no-underline w-auto border border-zinc-400 rounded-[50%] border-solid md:text-[10.6667px] md:h-[30.6667px] md:leading-[14.9333px] md:min-w-6 md:w-[30.6667px] after:accent-auto after:box-border after:caret-transparent after:text-zinc-400 after:block after:text-sm after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-[19.6px] after:list-outside after:list-none after:min-h-[auto] after:min-w-[auto] after:outline-[3px] after:pointer-events-auto after:text-center after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:font-instrument_sans after:md:text-[10.6667px] after:md:leading-[14.9333px]"></span>
+        </div>
+      </div>
+    </div>
+  );
+};
