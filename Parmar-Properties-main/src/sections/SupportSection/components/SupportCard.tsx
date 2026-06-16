@@ -14,7 +14,7 @@ export type SupportCardProps = {
   
   export const SupportCard = (props: SupportCardProps) => {
     return (
-      <ScrollReveal delay={props.delay || 0} className="box-border caret-transparent gap-x-[15px] grid text-[10px] h-[400px] leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative gap-y-[15px] no-underline w-[330px] overflow-hidden p-[30px] md:gap-x-2.5 md:text-[6.66667px] md:h-[313.333px] md:leading-[7.66667px] md:gap-y-2.5 md:w-auto md:p-[33.3333px]">
+      <ScrollReveal delay={props.delay || 0} className="box-border caret-transparent gap-x-[15px] flex flex-col text-[10px] min-h-[400px] h-auto leading-[11.5px] min-w-[auto] outline-neutral-900 outline-[3px] relative gap-y-[15px] no-underline w-full overflow-hidden p-[30px] md:grid md:gap-x-2.5 md:text-[6.66667px] md:h-[313.333px] md:leading-[7.66667px] md:gap-y-2.5 md:w-auto md:p-[33.3333px]">
         <div className="box-border caret-transparent text-[10px] leading-[11.5px] outline-neutral-900 outline-[3px] absolute no-underline inset-0 md:text-[6.66667px] md:leading-[7.66667px]">
           <img
             alt={props.imageAlt}

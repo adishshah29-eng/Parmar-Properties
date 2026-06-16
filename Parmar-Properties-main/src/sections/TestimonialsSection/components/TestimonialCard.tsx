@@ -5,7 +5,7 @@ export type TestimonialCardProps = {
   
   export const TestimonialCard = (props: TestimonialCardProps) => {
     return (
-      <div className="box-border snap-start caret-transparent shrink-0 text-[10px] h-full leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline w-[325px] md:text-[6.66667px] md:leading-[7.66667px] md:w-[435px]">
+      <div className="box-border snap-start caret-transparent shrink-0 text-[10px] h-full leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline w-[85vw] md:text-[6.66667px] md:leading-[7.66667px] md:w-[435px]">
         <div className="box-border caret-transparent text-[22px] tracking-[-0.22px] leading-[25.3px] outline-neutral-900 outline-[3px] no-underline font-lora md:text-[21.3333px] md:tracking-[-0.426667px] md:leading-[24.5333px]">
           <p className="box-border caret-transparent text-[22px] tracking-[-0.22px] leading-[25.3px] outline-neutral-900 outline-[3px] no-underline md:text-[21.3333px] md:tracking-[-0.426667px] md:leading-[24.5333px]">
             {props.quote}

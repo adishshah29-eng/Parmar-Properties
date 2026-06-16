@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const SupportHeader = () => {
   return (
-    <div className="box-border caret-transparent gap-x-10 grid text-[10px] grid-cols-none leading-[11.5px] outline-neutral-900 outline-[3px] gap-y-10 no-underline md:gap-x-[26.6667px] md:text-[6.66667px] md:grid-cols-[auto_650.667px] md:leading-[7.66667px] md:gap-y-[26.6667px]">
+    <div className="flex flex-col md:grid gap-10 md:gap-x-[26.6667px] md:grid-cols-[auto_650.667px] items-start">
       
       {/* Heading reveals first */}
       <ScrollReveal direction="up" delay={0}>

@@ -2,50 +2,48 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const FooterLegal = () => {
     return (
-      <ScrollReveal delay={100} className="box-border caret-transparent text-white/40 gap-x-[30px] flex flex-col text-sm font-medium col-end-[copyright] col-start-[copyright] row-end-[copyright] row-start-[copyright] justify-between leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] gap-y-[30px] no-underline mt-[30px] md:gap-x-5 md:flex-row md:text-[10.6667px] md:leading-4 md:gap-y-5 md:mt-5">
-        <div className="box-border caret-transparent gap-x-[30px] flex flex-col text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] gap-y-[30px] no-underline md:gap-x-5 md:flex-row md:text-[10.6667px] md:leading-4 md:gap-y-5">
+      <ScrollReveal delay={100} className="col-start-[copyright] col-end-[copyright] row-start-[copyright] row-end-[copyright] flex flex-col md:flex-row justify-between items-start md:items-center text-white/40 text-sm md:text-xs font-medium mt-8 md:mt-5 gap-6 md:gap-5">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-5">
           <a
             href="https://parmarproperties.com/terms-of-service"
-            className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4"
+            className="hover:text-white transition-colors"
           >
             Terms
           </a>
           <a
             href="https://parmarproperties.com/privacy-policy"
-            className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4"
+            className="hover:text-white transition-colors"
           >
             Privacy policy
           </a>
           <a
             href="https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf"
-            className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4"
+            className="hover:text-white transition-colors"
           >
             Fair Housing Notice
           </a>
           <a
             href="https://parmarproperties.com/operating-procedure"
-            className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4"
+            className="hover:text-white transition-colors"
           >
             Operating Procedure
           </a>
           <a
             href="https://parmarproperties.com/press"
-            className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4"
+            className="hover:text-white transition-colors"
           >
             Press
           </a>
-          <span className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4">
+          <span>
             Housing Choice Vouchers Welcome
           </span>
-          <span className="box-border caret-transparent block text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4">
+          <span>
             Se Aceptan Vales de Elección de Vivienda
           </span>
         </div>
-        <div className="box-border caret-transparent text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4">
-          Parmar Properties
-        </div>
-        <div className="box-border caret-transparent text-sm leading-[21px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[10.6667px] md:leading-4">
-          Copyright © 2026
+        <div className="flex flex-col md:flex-row gap-2 md:gap-6 mt-4 md:mt-0">
+          <div>Parmar Properties</div>
+          <div>Copyright © 2026</div>
         </div>
       </ScrollReveal>
     );
