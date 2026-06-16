@@ -5,7 +5,8 @@ export const HeaderLogo = () => {
     <div className="items-center box-border caret-transparent flex outline-[3px] no-underline">
       <a
         href="/"
-        className="box-border caret-transparent block outline-[3px] no-underline"
+        className="box-border caret-transparent block outline-[3px] no-underline cursor-pointer transition-opacity duration-200 hover:opacity-80"
+        aria-label="Go to home page"
       >
         <img
           src={logo}
