@@ -5,13 +5,13 @@ export const FooterLegal = () => {
       <ScrollReveal delay={100} className="col-start-[copyright] col-end-[copyright] row-start-[copyright] row-end-[copyright] flex flex-col md:flex-row justify-between items-start md:items-center text-white/40 text-sm md:text-xs font-medium mt-8 md:mt-5 gap-6 md:gap-5">
         <div className="flex flex-col md:flex-row gap-6 md:gap-5">
           <a
-            href="https://parmarproperties.com/terms-of-service"
+            href="https://parmarproperties.in/terms-of-service"
             className="hover:text-white transition-colors"
           >
             Terms
           </a>
           <a
-            href="https://parmarproperties.com/privacy-policy"
+            href="https://parmarproperties.in/privacy-policy"
             className="hover:text-white transition-colors"
           >
             Privacy policy
@@ -23,13 +23,13 @@ export const FooterLegal = () => {
             Fair Housing Notice
           </a>
           <a
-            href="https://parmarproperties.com/operating-procedure"
+            href="https://parmarproperties.in/operating-procedure"
             className="hover:text-white transition-colors"
           >
             Operating Procedure
           </a>
           <a
-            href="https://parmarproperties.com/press"
+            href="https://parmarproperties.in/press"
             className="hover:text-white transition-colors"
           >
             Press

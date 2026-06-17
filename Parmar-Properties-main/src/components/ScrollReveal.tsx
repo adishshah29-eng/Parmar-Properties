@@ -15,9 +15,9 @@ interface ScrollRevealProps {
 export const ScrollReveal = ({
   children,
   delay = 0,
-  duration = 700,
+  duration = 1200,
   direction = "up",
-  distance = 48,
+  distance = 64,
   className = "",
   as: Component = "div",
   triggerOnce = true,
@@ -27,13 +27,13 @@ export const ScrollReveal = ({
   const getTransform = () => {
     switch (direction) {
       case "up":
-        return `translateY(${distance}px) scale(0.96)`;
+        return `translateY(${distance}px) scale(0.96) skewY(1deg)`;
       case "down":
-        return `translateY(-${distance}px) scale(0.96)`;
+        return `translateY(-${distance}px) scale(0.96) skewY(-1deg)`;
       case "left":
-        return `translateX(${distance}px) scale(0.96)`;
+        return `translateX(${distance}px) scale(0.98) skewX(-2deg)`;
       case "right":
-        return `translateX(-${distance}px) scale(0.96)`;
+        return `translateX(-${distance}px) scale(0.98) skewX(2deg)`;
       default:
         return "scale(0.96)";
     }
@@ -41,10 +41,11 @@ export const ScrollReveal = ({
 
   const style: React.CSSProperties = {
     opacity: isVisible ? 1 : 0,
-    transform: isVisible ? "translate(0) scale(1)" : getTransform(),
-    transition: `opacity ${duration}ms ease, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+    transform: isVisible ? "translate(0) scale(1) skew(0)" : getTransform(),
+    filter: isVisible ? "blur(0px)" : "blur(8px)",
+    transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), filter ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`,
     transitionDelay: `${delay}ms`,
-    willChange: "transform, opacity",
+    willChange: "transform, opacity, filter",
   };
 
   return (

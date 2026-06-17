@@ -3,7 +3,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 export const NewsletterSignup = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = "https://parmarproperties.com/newsletter-confirmed";
+    window.location.href = "https://parmarproperties.in/newsletter-confirmed";
   };
 
   return (
@@ -52,10 +52,10 @@ export const NewsletterSignup = () => {
             Email Us
           </div>
           <a
-            href="mailto:hello@parmarproperties.com"
+            href="mailto:hello@parmarproperties.in"
             className="text-xl md:text-sm font-medium hover:text-white/70 transition-colors underline md:no-underline"
           >
-            hello@parmarproperties.com
+            hello@parmarproperties.in
           </a>
         </div>
         

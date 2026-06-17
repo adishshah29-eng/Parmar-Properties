@@ -1,26 +1,64 @@
-export type TestimonialCardProps = {
-    quote: string;
-    author: string;
-  };
-  
-  export const TestimonialCard = (props: TestimonialCardProps) => {
-    return (
-      <div className="box-border snap-start caret-transparent shrink-0 text-[10px] h-full leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline w-[85vw] md:text-[6.66667px] md:leading-[7.66667px] md:w-[435px]">
-        <div className="box-border caret-transparent text-[22px] tracking-[-0.22px] leading-[25.3px] outline-neutral-900 outline-[3px] no-underline font-lora md:text-[21.3333px] md:tracking-[-0.426667px] md:leading-[24.5333px]">
-          <p className="box-border caret-transparent text-[22px] tracking-[-0.22px] leading-[25.3px] outline-neutral-900 outline-[3px] no-underline md:text-[21.3333px] md:tracking-[-0.426667px] md:leading-[24.5333px]">
-            {props.quote}
-          </p>
+export interface TestimonialCardProps {
+  title: string;
+  quote: string;
+  author: string;
+  rating?: number;
+}
+
+export function TestimonialCard({ 
+  title, 
+  quote, 
+  author, 
+  rating = 5 
+}: TestimonialCardProps) {
+  return (
+    <div className="w-full bg-white rounded-2xl border border-neutral-200 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl p-8 flex flex-col justify-between group h-full">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="mb-6 h-10 w-10 text-neutral-300 group-hover:text-neutral-900 transition-colors duration-300"
+        >
+          <path
+            fillRule="evenodd"
+            d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
+            clipRule="evenodd"
+          />
+          <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
+        </svg>
+        <h5 className="text-xl font-lora font-semibold text-neutral-900 mb-3">
+          {title}
+        </h5>
+        <p className="text-sm text-neutral-600 font-instrument_sans leading-relaxed mb-8">
+          {quote}
+        </p>
+      </div>
+      <div className="pt-5 border-t border-neutral-100 flex items-center justify-between mt-auto">
+        <div className="uppercase text-xs font-semibold tracking-wider font-lora text-neutral-900">
+          {author}
         </div>
-        <div className="box-border caret-transparent text-[10px] leading-[11.5px] outline-neutral-900 outline-[3px] no-underline mt-[30px] md:text-[6.66667px] md:leading-[7.66667px] md:mt-[33.3333px]">
-          <div className="box-border caret-transparent inline-block text-xs font-medium leading-[13.2px] outline-neutral-900 outline-[3px] no-underline uppercase align-middle font-lora">
-            {props.author}
-          </div>
-          <div className="box-border caret-transparent inline-block text-xs font-medium leading-[13.2px] outline-neutral-900 outline-[3px] relative no-underline uppercase top-[-1.68px] align-middle mx-5 font-lora">
-            /
-          </div>
-          <div className="bg-[url(data:image/svg+xml,<svg%20xmlns=\%22http://www.w3.org/2000/svg\%22%20viewBox=\%220%200%2016%2016\%22><path%20fill=\%22%23151717\%22%20d=\%22M7.52%201.46a.5.5%200%200%201%20.96%200l1.2%203.72c.07.2.26.35.48.35h3.91a.5.5%200%200%201%20.3.9l-3.17%202.3a.5.5%200%200%200-.18.56l1.2%203.72a.5.5%200%200%201-.76.56l-3.17-2.3a.5.5%200%200%200-.58%200l-3.17%202.3a.5.5%200%200%201-.77-.56l1.21-3.72a.5.5%200%200%200-.18-.56l-3.16-2.3a.5.5%200%200%201%20.29-.9h3.91a.5.5%200%200%200%20.48-.35l1.2-3.72Z\%22/></svg>)] bg-size-[16px_16px] box-border caret-transparent inline-block text-[10px] h-4 leading-[11.5px] outline-neutral-900 outline-[3px] no-underline align-middle w-20 md:bg-size-[13.3333px_13.3333px] md:text-[6.66667px] md:h-[13.3333px] md:leading-[7.66667px] md:w-[66.6667px]"></div>
+        <div className="flex gap-1">
+          {[...Array(5)].map((_, i) => (
+            <svg
+              key={i}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className={`h-4 w-4 transition-colors duration-300 ${
+                i < rating ? "text-amber-400" : "text-neutral-200"
+              }`}
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ))}
         </div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+}
+

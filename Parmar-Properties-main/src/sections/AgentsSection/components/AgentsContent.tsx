@@ -31,7 +31,7 @@ export const AgentsContent = () => {
 
       <ScrollReveal delay={300}>
         <a
-          href="https://parmarproperties.com/join"
+          href="https://parmarproperties.in/join"
           className="inline-flex items-center justify-center bg-black text-white px-8 py-4 rounded-full font-medium text-sm transition-transform hover:scale-105"
         >
           <span>Join The Movement</span>

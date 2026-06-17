@@ -7,10 +7,10 @@ export const FooterLinks = () => {
       <FooterLinkColumn
         className="flex flex-col gap-y-4 max-w-max"
         links={[
-          { href: "https://parmarproperties.com/search", label: "Search" },
-          { href: "https://parmarproperties.com/agents", label: "Agents" },
-          { href: "https://parmarproperties.com/join", label: "Join" },
-          { href: "https://parmarproperties.com/about", label: "About Us" },
+          { href: "https://parmarproperties.in/search", label: "Search" },
+          { href: "https://parmarproperties.in/agents", label: "Agents" },
+          { href: "https://parmarproperties.in/join", label: "Join" },
+          { href: "https://parmarproperties.in/about", label: "About Us" },
           { href: "https://app.findrealestate.com/authentication/sign-in", label: "Agent Portal" },
         ]}
         isPrimary={true}

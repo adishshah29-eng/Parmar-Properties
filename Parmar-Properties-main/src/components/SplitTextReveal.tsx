@@ -14,7 +14,7 @@ export const SplitTextReveal = ({
   text,
   delayPerWord = 60,
   initialDelay = 0,
-  duration = 700,
+  duration = 1200,
   className = "",
   as: Component = "h2",
 }: SplitTextRevealProps) => {
@@ -26,9 +26,9 @@ export const SplitTextReveal = ({
       {words.map((word, index) => {
         const style: React.CSSProperties = {
           opacity: isVisible ? 1 : 0,
-          transform: isVisible ? "translateY(0)" : "translateY(100%)",
-          filter: isVisible ? "blur(0px)" : "blur(4px)",
-          transition: `opacity ${duration}ms ease, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), filter ${duration}ms ease`,
+          transform: isVisible ? "translateY(0) rotate(0deg)" : "translateY(120%) rotate(4deg)",
+          filter: isVisible ? "blur(0px)" : "blur(10px)",
+          transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), filter ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`,
           transitionDelay: `${initialDelay + index * delayPerWord}ms`,
           willChange: "transform, opacity, filter",
           display: "inline-block",
