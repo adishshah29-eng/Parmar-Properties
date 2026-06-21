@@ -29,10 +29,10 @@ export const Header = () => {
       {/* Mobile Nav Drawer */}
       <div className={`fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="flex flex-col items-center justify-center h-full gap-8 text-2xl font-['Instrument_Sans']">
-          <a href="/search" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Search</a>
-          <a href="/agents" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Agents</a>
-          <a href="/join" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Join</a>
-          <a href="/about" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">About Us</a>
+          <a href="/About" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Search</a>
+          <a href="/Expertise" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Agents</a>
+          <a href="/Opportunities" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Join</a>
+          <a href="/Contact" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">About Us</a>
         </div>
       </div>
     </header>

@@ -51,7 +51,7 @@ export const HeroSection = () => {
       setScrollVh(e.matches ? 220 : 500);
     };
     updateScrollVh(mQueryMobile);
-    
+
     // 3. Prefers-Reduced-Motion Setup
     const mQueryMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotionPreference = (e: MediaQueryListEvent | MediaQueryList) => {
@@ -532,11 +532,11 @@ export const HeroSection = () => {
             style={{ paddingTop: "18vh", opacity: contentOpacity, transform: `translateY(${contentY}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
             <p className="text-white/70 text-xs font-semibold tracking-[0.25em] uppercase mb-4 animate-hero-paragraph"
               style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
-              South Mumbai's Trusted Luxury Real Estate Advisory
+              South Mumbai's Trusted Luxury Real Estate Advisory since 1985
             </p>
             <h1 className="text-white font-bold leading-[1.05] mb-5 overflow-hidden flex flex-wrap justify-center"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(42px, 7.5vw, 110px)", letterSpacing: "-0.03em", textShadow: "0 2px 24px rgba(0,0,0,0.18)" }}>
-              {"Parmar Properties".split("").map((char, index) => (
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 5.5vw, 80px)", letterSpacing: "0.03em", textShadow: "0 2px 24px rgba(0,0,0,0.18)" }}>
+              {"Access. Influence. Legacy".split("").map((char, index) => (
                 <span
                   key={index}
                   className="animate-hero-letter"
@@ -553,7 +553,7 @@ export const HeroSection = () => {
             <a href="https://parmarproperties.in/contact"
               className="inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-7 py-3.5 hover:bg-gray-800 transition-colors animate-hero-button"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(14px, 1.1vw, 16px)" }}>
-              Explore Properties <span>→</span>
+              Explore Opportunities <span>→</span>
             </a>
           </div>
 
