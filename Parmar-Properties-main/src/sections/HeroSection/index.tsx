@@ -32,18 +32,68 @@ export const HeroSection = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [viewportH, setViewportH] = useState(0);
+  const [scrollVh, setScrollVh] = useState(500);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   const pathLengthsRef = useRef<number[]>([]);
   const letterStartRef = useRef<number[]>([]);
   const letterEndRef = useRef<number[]>([]);
   const pathsInitRef = useRef(false);
 
-  // Viewport height
+  // Viewport height, responsive scroll-jack height, and prefers-reduced-motion tracking
   useEffect(() => {
-    setViewportH(window.innerHeight);
-    const onResize = () => setViewportH(window.innerHeight);
+    // 1. Viewport Height Setup
+    setViewportH(document.documentElement.clientHeight);
+
+    // 2. Responsive Scroll-Jack Height Setup
+    const mQueryMobile = window.matchMedia("(max-width: 767px)");
+    const updateScrollVh = (e: MediaQueryListEvent | MediaQueryList) => {
+      setScrollVh(e.matches ? 220 : 500);
+    };
+    updateScrollVh(mQueryMobile);
+    
+    // 3. Prefers-Reduced-Motion Setup
+    const mQueryMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = (e: MediaQueryListEvent | MediaQueryList) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    updateMotionPreference(mQueryMotion);
+
+    // Add listeners
+    if (mQueryMobile.addEventListener) {
+      mQueryMobile.addEventListener("change", updateScrollVh);
+      mQueryMotion.addEventListener("change", updateMotionPreference);
+    } else {
+      // fallback for older browsers
+      mQueryMobile.addListener(updateScrollVh);
+      mQueryMotion.addListener(updateMotionPreference);
+    }
+
+    // Debounced Resize Handler (~150ms)
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const onResize = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setViewportH(document.documentElement.clientHeight);
+      }, 150);
+    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    return () => {
+      if (mQueryMobile.removeEventListener) {
+        mQueryMobile.removeEventListener("change", updateScrollVh);
+        mQueryMotion.removeEventListener("change", updateMotionPreference);
+      } else {
+        mQueryMobile.addListener
+          ? mQueryMobile.removeEventListener("change", updateScrollVh)
+          : (mQueryMobile as any).removeListener(updateScrollVh);
+        mQueryMotion.addListener
+          ? mQueryMotion.removeEventListener("change", updateMotionPreference)
+          : (mQueryMotion as any).removeListener(updateMotionPreference);
+      }
+      window.removeEventListener("resize", onResize);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   // Compute real path lengths once mounted
@@ -76,27 +126,58 @@ export const HeroSection = () => {
   // Scroll progress
   useEffect(() => {
     const handle = () => {
+      if (prefersReducedMotion) {
+        setScrollProgress(0);
+        return;
+      }
       const section = sectionRef.current;
       if (!section) return;
       const scrolled = window.scrollY - section.offsetTop;
-      const range = section.offsetHeight - (viewportH || window.innerHeight);
+      const range = section.offsetHeight - (viewportH || document.documentElement.clientHeight);
       setScrollProgress(range > 0 ? Math.max(0, Math.min(1, scrolled / range)) : 0);
     };
     window.addEventListener("scroll", handle, { passive: true });
     handle();
     return () => window.removeEventListener("scroll", handle);
-  }, [viewportH]);
+  }, [viewportH, prefersReducedMotion]);
 
   // Sync <header> opacity
   useEffect(() => {
     const header = document.querySelector("header") as HTMLElement | null;
     if (!header) return;
-    const p1 = Math.min(1, scrollProgress / 0.30);
-    const opacity = Math.max(0, 1 - p1 * 4);
-    header.style.opacity = String(opacity);
-    header.style.pointerEvents = opacity < 0.05 ? "none" : "";
-    header.style.transition = "opacity 0.1s linear";
+
+    const updateHeaderStyle = () => {
+      const isMenuOpen = header.getAttribute("data-mobile-menu-open") === "true";
+      if (isMenuOpen) {
+        // Reset styles so mobile menu is visible and interactive
+        header.style.opacity = "";
+        header.style.pointerEvents = "";
+        header.style.transition = "";
+      } else {
+        const p1 = Math.min(1, scrollProgress / 0.30);
+        const opacity = Math.max(0, 1 - p1 * 4);
+        header.style.opacity = String(opacity);
+        header.style.pointerEvents = opacity < 0.05 ? "none" : "";
+        header.style.transition = "opacity 0.1s linear";
+      }
+    };
+
+    // Run initially
+    updateHeaderStyle();
+
+    // Observe changes to attributes (specifically data-mobile-menu-open)
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === "attributes" && mutation.attributeName === "data-mobile-menu-open") {
+          updateHeaderStyle();
+        }
+      }
+    });
+
+    observer.observe(header, { attributes: true, attributeFilter: ["data-mobile-menu-open"] });
+
     return () => {
+      observer.disconnect();
       header.style.opacity = header.style.pointerEvents = header.style.transition = "";
     };
   }, [scrollProgress]);
@@ -204,8 +285,8 @@ export const HeroSection = () => {
 
   return (
     <>
-      {/* 500vh = lots of scroll room so everything feels slow & deliberate */}
-      <section ref={sectionRef} style={{ height: "500vh" }} className="relative w-full">
+      {/* Dynamic scroll room so mobile devices have a shorter scroll distance */}
+      <section ref={sectionRef} style={{ height: `${scrollVh}vh` }} className="relative w-full">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
 
           {/* ── Layer 1: Sky ── */}

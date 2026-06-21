@@ -17,6 +17,7 @@ export const Header = () => {
 
   return (
     <header
+      data-mobile-menu-open={isMobileMenuOpen}
       className="box-border caret-transparent text-sm min-h-[auto] min-w-[auto] sticky no-underline z-50 top-0 inset-x-0"
       style={{
         background: isScrolled ? "rgba(255, 255, 255, 0.15)" : "transparent",
