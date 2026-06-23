@@ -246,8 +246,8 @@ export const HeroSection = () => {
   // Building image scrolls from below (y=+30%) to above (y=-30%) inside letter cutouts during SVG+image phase
   const maskParallaxY = 30 - p4e * 60;
 
-  // Strokes draw in during p3 (0.40→0.75), fade out as image fill takes over (p4)
-  const strokeOpacity = Math.max(0, Math.min(1, p3 * 5));
+  // Strokes fade out perfectly in sync with the building fading out (0.60 → 0.70)
+  const strokeOpacity = 1 - buildingFadeProgress;
 
   // Image fill: starts slightly after strokes begin (0.42), completes with strokes at 0.75
   const fillProgress = easeOut(p4);
@@ -508,14 +508,14 @@ export const HeroSection = () => {
               </g>
 
               {/* Text strokes — scaled exactly like the mask cutout */}
-              <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
+              <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px", opacity: strokeOpacity }}>
                 {/* PARMAR strokes */}
                 <g transform="translate(117, 10) scale(1.5)">
-                  <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+                  <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </g>
                 {/* PROPERTIES strokes */}
                 <g transform="translate(144, 140) scale(0.80)">
-                  <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+                  <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </g>
               </g>
             </svg>

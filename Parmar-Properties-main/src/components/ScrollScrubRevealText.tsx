@@ -61,8 +61,7 @@ export const ScrollScrubRevealText = ({
       scrollTrigger: {
         trigger: containerRef.current,
         start: scrubStart,
-        end: scrubEnd,
-        scrub: 1.5, // buttery smooth 1.5s smoothing
+        once: true, // Only trigger once, never reverse
       }
     });
 
