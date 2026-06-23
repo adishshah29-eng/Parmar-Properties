@@ -460,10 +460,10 @@ export const HeroSection = () => {
                   <rect x="-5000" y="-5000" width="10000" height="10000" fill="white" />
                   <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
                     <g transform="translate(119, 10) scale(1)">
-                      <path fill="black" d={PARMAR_PATHS[0]} />
+                      <path fill="black" fillRule="evenodd" clipRule="evenodd" d={PARMAR_PATHS[0]} />
                     </g>
                     <g transform="translate(34, 105) scale(1.11)">
-                      <path fill="black" d={PROPS_PATHS[0]} />
+                      <path fill="black" fillRule="evenodd" clipRule="evenodd" d={PROPS_PATHS[0]} />
                     </g>
                   </g>
                 </mask>
