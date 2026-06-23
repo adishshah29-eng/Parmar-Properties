@@ -11,19 +11,22 @@ export const ServicesSection = () => {
         <ServicePanel
           imageUrl="https://c.animaapp.com/mq3zczchi8fb7N/assets/67.jpg"
           description="Access exclusive and pre-launch luxury inventory in South Mumbai. Take advantage of strategic timing, valuation guidance, and street-level pricing intelligence."
-          label="BUY"
+          label="Buy"
+          number={1}
           delay={0}
         />
         <ServicePanel
           imageUrl="https://c.animaapp.com/mq3zczchi8fb7N/assets/85.jpg"
           description="Achieve high-velocity sales execution. Leverage our direct reach to liquidity-rich HNI buyers and pre-launch sales capabilities to sell in record time."
-          label="SELL"
+          label="Sell"
+          number={2}
           delay={150}
         />
         <ServicePanel
           imageUrl="https://c.animaapp.com/mq3zczchi8fb7N/assets/48.jpg"
           description="Strategic wealth planning for HNIs, NRIs, and Family Businesses. Get zero-pressure advisory, negotiation leverage, and long-term capital appreciation."
-          label="PORTFOLIO"
+          label="Lease"
+          number={3}
           delay={300}
         />
       </div>

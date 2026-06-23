@@ -10,51 +10,53 @@ export type SupportCardProps = {
     iconAlt: string;
     delay?: number;
     href?: string;
-  };
-  
-  export const SupportCard = (props: SupportCardProps) => {
-    return (
-      <ScrollReveal delay={props.delay || 0} className="group box-border caret-transparent gap-x-[15px] flex flex-col text-[10px] min-h-[400px] h-auto leading-[11.5px] min-w-[auto] outline-neutral-900 outline-[3px] relative gap-y-[15px] no-underline w-full overflow-hidden p-[30px] md:grid md:gap-x-2.5 md:text-[6.66667px] md:h-[313.333px] md:leading-[7.66667px] md:gap-y-2.5 md:w-auto md:p-[33.3333px] rounded-2xl cursor-pointer">
-        <div className="box-border caret-transparent text-[10px] leading-[11.5px] outline-neutral-900 outline-[3px] absolute no-underline inset-0 md:text-[6.66667px] md:leading-[7.66667px] overflow-hidden">
-          <img
-            alt={props.imageAlt}
-            src={props.imageSrc}
-            className="aspect-[auto_1107_/_940] box-border text-transparent inline text-[10px] h-full leading-[11.5px] object-cover outline-neutral-900 outline-[3px] no-underline w-full scale-[1.01] transition-transform duration-700 ease-out group-hover:scale-105 md:text-[6.66667px] md:leading-[7.66667px]"
-          />
-          <div className="absolute inset-0 bg-neutral-950/40 group-hover:bg-neutral-950/50 transition-colors duration-500" />
-        </div>
-        <div className="box-border caret-transparent text-3xl font-medium tracking-[-0.3px] leading-[34.5px] max-w-[80%] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline md:text-[29.3333px] md:tracking-[-0.586667px] md:leading-[33.7333px] md:max-w-[230px]">
-          <h3 className="box-border caret-transparent text-3xl tracking-[-0.3px] leading-[34.5px] outline-neutral-900 outline-[3px] no-underline md:text-[29.3333px] md:tracking-[-0.586667px] md:leading-[33.7333px]">
-            {props.title}
-          </h3>
-        </div>
-        <div className="box-border caret-transparent text-base leading-6 max-w-none min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline md:text-[13.3333px] md:leading-5 md:max-w-[230px]">
-          <p className="box-border caret-transparent text-base leading-6 outline-neutral-900 outline-[3px] no-underline md:text-[13.3333px] md:leading-5 text-white/90">
-            {props.description}
-          </p>
-        </div>
-        <div className="self-end box-border caret-transparent text-[10px] leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] relative no-underline md:text-[6.66667px] md:leading-[7.66667px]">
-          <a
-            href={props.href || "https://parmarproperties.in/services"}
-            className="bg-transparent caret-transparent text-base font-medium leading-6 outline-neutral-900 outline-[3px] relative no-underline border px-6 py-3.5 rounded-[100px] border-white/50 group-hover:border-white group-hover:bg-white group-hover:text-neutral-900 md:text-xs md:leading-[16.8px] md:px-5 md:py-[10.2667px] inline-block transition-all duration-300"
-          >
-            <div className="items-center box-border caret-transparent gap-x-3.5 flex text-base justify-center leading-6 outline-neutral-900 outline-[3px] gap-y-3.5 no-underline overflow-hidden md:gap-x-[9.33333px] md:text-xs md:leading-[16.8px] md:gap-y-[9.33333px]">
-              <div className="box-border caret-transparent text-base leading-6 min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline overflow-hidden md:text-xs md:leading-[16.8px]">
-                <span className="box-border caret-transparent block text-base leading-6 outline-neutral-900 outline-[3px] relative no-underline md:text-xs md:leading-[16.8px] after:accent-auto after:box-border after:caret-transparent after:text-white after:block after:text-base after:not-italic after:normal-nums after:font-medium after:tracking-[normal] after:leading-6 after:list-outside after:list-disc after:outline-[3px] after:pointer-events-auto after:absolute after:text-start after:no-underline after:indent-[0px] after:normal-case after:visible after:border-separate after:top-[105%] after:inset-x-0 after:font-instrument_sans after:md:text-xs after:md:leading-[16.8px]">
-                  {props.buttonText}
-                </span>
-              </div>
-              <span className="items-center box-border caret-transparent flex text-base h-6 justify-center leading-6 min-h-[auto] min-w-6 outline-neutral-900 outline-[3px] no-underline w-6 md:text-xs md:h-4 md:leading-[16.8px] md:min-w-4 md:w-4 transition-transform duration-300 group-hover:translate-x-1">
-                <img
-                  src={props.iconSrc}
-                  alt={props.iconAlt}
-                  className="box-border caret-transparent text-base leading-6 outline-neutral-900 outline-[3px] no-underline md:text-xs md:leading-[16.8px] group-hover:invert"
-                />
-              </span>
+};
+
+export const SupportCard = (props: SupportCardProps) => {
+  return (
+      <div className="group relative flex-1 transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] hover:flex-[1.8] lg:hover:flex-[2.5] min-h-[320px] md:min-h-[380px] lg:min-h-[420px] rounded-xl overflow-hidden cursor-pointer">
+        <ScrollReveal 
+          delay={props.delay || 0} 
+          className="w-full h-full flex flex-col justify-between p-6 md:p-8"
+        >
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              alt={props.imageAlt}
+              src={props.imageSrc}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            {/* Gradients for readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 transition-opacity duration-500 ease-out group-hover:opacity-90" />
+          </div>
+
+          {/* Content Top */}
+          <div className="relative z-10 flex flex-col gap-4 w-[260px] md:w-[280px]">
+            <h3 className="text-3xl md:text-4xl font-['Instrument_Sans'] font-medium tracking-tight text-white leading-tight">
+              {props.title}
+            </h3>
+            
+            <div className="absolute top-full left-0 w-full mt-4 opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:-translate-y-2 pointer-events-none group-hover:pointer-events-auto">
+              <p className="text-base md:text-lg text-white/80 leading-relaxed font-['Instrument_Sans'] w-full">
+                {props.description}
+              </p>
             </div>
-          </a>
-        </div>
-      </ScrollReveal>
+          </div>
+
+          {/* Content Bottom (Button) */}
+          <div className="relative z-10 mt-auto transition-transform duration-500 ease-in-out group-hover:translate-y-0">
+            <a
+              href={props.href || "https://parmarproperties.in/services"}
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/50 text-white font-['Instrument_Sans'] text-sm md:text-base font-medium transition-all duration-300 group-hover:bg-white group-hover:text-black group-hover:border-white"
+            >
+              {props.buttonText}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
+                <path d="M5 12h14m-7-7 7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </ScrollReveal>
+      </div>
     );
   };
   

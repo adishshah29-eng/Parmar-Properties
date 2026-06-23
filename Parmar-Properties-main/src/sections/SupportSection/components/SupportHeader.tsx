@@ -1,4 +1,5 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
 
 export const SupportHeader = () => {
   return (
@@ -9,27 +10,14 @@ export const SupportHeader = () => {
         <div className="box-border caret-transparent text-[10px] leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[6.66667px] md:leading-[7.66667px]">
           <div className="box-border caret-transparent text-[44px] font-medium tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
             <h2 className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-              <div
-                aria-label="Developer Trusted Partnerships"
+              <ScrollScrubRevealText 
+                text="Developer Trusted Partnerships & Execution"
                 className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]"
-              >
-                <div className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] relative no-underline w-fit md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-                  Developer
-                </div>
-                <div className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] relative no-underline w-fit md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-                  {" "}Trusted{" "}
-                  <span className="box-border caret-transparent text-white/40 text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]"></span>
-                  <span className="box-border caret-transparent text-white/40 text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-                    Partner­ships
-                  </span>
-                </div>
-                <div className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] relative no-underline w-fit md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-                  <span className="box-border caret-transparent text-white/40 text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]"></span>
-                  <span className="box-border caret-transparent text-white/40 text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
-                    & Execution
-                  </span>
-                </div>
-              </div>
+                baseColorClass="text-white/30"
+                revealColorClass="text-white"
+                scrubStart="top 90%"
+                scrubEnd="center 40%"
+              />
             </h2>
           </div>
         </div>

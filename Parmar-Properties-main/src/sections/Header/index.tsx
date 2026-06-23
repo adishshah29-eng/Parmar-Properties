@@ -25,7 +25,7 @@ export const Header = () => {
           <div className="flex justify-end items-center">
             <a
               href="https://parmarproperties.in/contact"
-              className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
+              className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 hover:-translate-y-0.5 hover:scale-105 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg whitespace-nowrap"
             >
               Schedule Consultation
             </a>
@@ -43,7 +43,7 @@ export const Header = () => {
           <a href="/Contact" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">About Us</a>
           <a
             href="https://parmarproperties.in/contact"
-            className="mt-4 inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-base px-6 py-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md"
+            className="mt-4 inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 hover:-translate-y-0.5 hover:scale-105 text-white font-semibold text-base px-6 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Schedule Consultation

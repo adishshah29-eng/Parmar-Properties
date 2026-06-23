@@ -6,7 +6,7 @@ export const SupportSection = () => {
     <section className="bg-neutral-900 text-white py-16 md:py-[100px] w-full overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-6 md:px-16">
         <SupportHeader />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 mt-12 md:mt-16 w-full">
           <SupportCard
             imageAlt="Immediate HNI Reach"
             imageSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/18.jpg"

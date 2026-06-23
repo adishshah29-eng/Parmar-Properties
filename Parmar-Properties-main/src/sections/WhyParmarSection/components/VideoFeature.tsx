@@ -1,17 +1,17 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 
-// FIND's "why-us_preview" sits inside the SAME container as the text above
-// it (not a wider 1920px wrapper), and is just a bare <video> — no overlay.
 export const VideoFeature = () => {
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 md:px-12">
-      <ScrollReveal delay={200} direction="up" className="relative w-full aspect-[4/5] md:aspect-[21/9] rounded-2xl md:rounded-[40px] overflow-hidden">
-        <video
-          src="/videos/why-parmar.mp4"
-          autoPlay
-          playsInline
-          loop
-          muted
+    <div className="w-full max-w-7xl mx-auto px-6 md:px-12 pt-10">
+      <ScrollReveal 
+        direction="left" 
+        distance={200}
+        duration={1500}
+        className="relative w-full aspect-[4/5] md:aspect-[21/9] rounded-2xl md:rounded-[40px] overflow-hidden"
+      >
+        <img
+          src="https://c.animaapp.com/mq3zczchi8fb7N/assets/37.jpg"
+          alt="Luxury Real Estate Placeholder"
           className="absolute inset-0 w-full h-full object-cover"
         />
       </ScrollReveal>

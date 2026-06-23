@@ -12,7 +12,7 @@ export const FooterLogo = () => {
         <img
           src={logo}
           alt="Parmar Properties Logo"
-          className="box-border caret-transparent inline text-[10px] h-auto leading-[11.5px] outline-neutral-900 outline-[3px] no-underline w-auto md:text-[6.66667px] md:h-[186.667px] md:leading-[7.66667px] md:w-[650px]"
+          className="w-auto h-16 md:h-24 object-contain inline-block"
         />
       </a>
     </ScrollReveal>

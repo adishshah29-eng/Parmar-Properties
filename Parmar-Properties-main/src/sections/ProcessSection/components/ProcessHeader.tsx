@@ -1,12 +1,17 @@
-import { SplitTextReveal } from "@/components/SplitTextReveal";
+import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const ProcessHeader = () => {
   return (
     <div className="flex-1 flex-shrink-0 w-full md:w-[280px] mb-12 md:mb-0">
-      <SplitTextReveal
+      <ScrollScrubRevealText
+        as="h2"
         text="Why South Mumbai."
-        className="text-black font-['Instrument_Sans'] text-5xl md:text-6xl font-semibold tracking-[-0.04em] leading-[1.05] mb-10"
+        className="font-['Instrument_Sans'] text-5xl md:text-6xl font-semibold tracking-[-0.04em] leading-[1.05] mb-10"
+        baseColorClass="text-neutral-300"
+        revealColorClass="text-black"
+        scrubStart="top 90%"
+        scrubEnd="center 60%"
       />
       <ScrollReveal delay={200}>
         <a

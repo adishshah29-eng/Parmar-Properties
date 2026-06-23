@@ -1,4 +1,5 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
 
 // FIND's "why-us_grid": a small eyebrow column + ONE text block where the
 // lead-in is solid black/bold and the continuation is a lighter gray "em"
@@ -12,13 +13,24 @@ export const SectionIntro = () => {
         </p>
       </ScrollReveal>
       <ScrollReveal delay={200}>
-        <p className="text-black font-['Instrument_Sans'] font-semibold tracking-[-0.02em] leading-[1.15] text-3xl md:text-5xl">
-          40+ years of presence. Don&rsquo;t just find a broker
-          {" "}
-          <span className="text-black/40 font-medium">
-            — find proven outcomes. We give you direct access to the Jain&ndash;Marwadi network, clarity, and the right advisory by your side.
-          </span>
-        </p>
+        <ScrollScrubRevealText 
+          as="p"
+          className="font-['Instrument_Sans'] tracking-[-0.02em] leading-[1.15] text-3xl md:text-5xl"
+          segments={[
+            {
+              text: "40+ years of presence. Don’t just find a broker",
+              revealColorClass: "text-black font-semibold",
+              baseColorClass: "text-neutral-200 font-semibold"
+            },
+            {
+              text: " — find proven outcomes. We give you direct access to the Jain–Marwadi network, clarity, and the right advisory by your side.",
+              revealColorClass: "text-neutral-400 font-medium",
+              baseColorClass: "text-neutral-200 font-medium"
+            }
+          ]}
+          scrubStart="top 90%"
+          scrubEnd="center 40%"
+        />
       </ScrollReveal>
     </div>
   );

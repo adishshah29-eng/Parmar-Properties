@@ -8,6 +8,7 @@ interface ScrollRevealProps {
   direction?: "up" | "down" | "left" | "right" | "none";
   distance?: number;
   className?: string;
+  style?: React.CSSProperties;
   as?: ElementType;
   triggerOnce?: boolean;
 }
@@ -19,6 +20,7 @@ export const ScrollReveal = ({
   direction = "up",
   distance = 64,
   className = "",
+  style: customStyle = {},
   as: Component = "div",
   triggerOnce = true,
 }: ScrollRevealProps) => {
@@ -40,6 +42,7 @@ export const ScrollReveal = ({
   };
 
   const style: React.CSSProperties = {
+    ...customStyle,
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? "translate(0) scale(1) skew(0)" : getTransform(),
     filter: isVisible ? "blur(0px)" : "blur(8px)",
