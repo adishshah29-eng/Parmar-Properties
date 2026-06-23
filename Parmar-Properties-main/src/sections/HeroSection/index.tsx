@@ -198,11 +198,11 @@ export const HeroSection = () => {
   // Phase 4 : 0.92 → 1.00  white exit — next section begins
   // ───────────────────────────────────────────────────────────
   const p1 = Math.min(1, scrollProgress / 0.40);     // building rise (0→0.40)
-  
-  // Navigation Bar fade out: stays fully visible for the first 15%, then fades out by 30%
-  const navFadeProgress = Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.15));
-  const navOpacity = Math.max(0, 1 - navFadeProgress); 
-  const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.80) / 0.20));      // smoke (0.80→1.00)
+
+  // Navigation Bar fade out: stays fully visible for the first 80%, then fades out quickly by 90%
+  const navFadeProgress = Math.max(0, Math.min(1, (scrollProgress - 0.80) / 0.10));
+  const navOpacity = Math.max(0, 1 - navFadeProgress);
+  const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.70) / 0.20));      // smoke (0.65→0.85)
   const p3 = Math.max(0, Math.min(1, (scrollProgress - 0.30) / 0.45));      // 0.30→0.75
   const p4 = Math.max(0, Math.min(1, (scrollProgress - 0.72) / 0.20));      // 0.72→0.92
   const p5 = Math.max(0, Math.min(1, (scrollProgress - 0.92) / 0.08));      // white exit
@@ -228,10 +228,11 @@ export const HeroSection = () => {
   const contentOpacity = Math.max(0, 1 - p1 * 2.0);
   const contentY = p1e * 120;
 
-  // Clouds fade as SVG strokes begin
-  const cloudLeftX = -p1e * 80;
-  const cloudRightX = p1e * 80;
-  const cloudSideOpacity = Math.max(0, 1 - p3e * 2);
+  // Clouds stay at the same position (no drift, no scroll, no fade out)
+  const cloudLeftX = 0;
+  const cloudRightX = 0;
+  const cloudSideOpacity = 1;
+  const cloudY = 0;
 
   // Smoke — ONLY starts AFTER SVG is done (0.75+)
   const smokeY = 40 - p2e * 75;
@@ -396,9 +397,9 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* ── Layer 4a: Left Cloud — z-28, above building, bottom-left corner ── */}
+          {/* ── Layer 4a: Left Cloud — z-32, above everything, middle-left ── */}
           <div className="absolute pointer-events-none"
-            style={{ zIndex: 28, bottom: "-5%", left: "-15%", width: "52%", opacity: cloudSideOpacity, transform: `translateX(${cloudLeftX}px)` }}>
+            style={{ zIndex: 32, top: "15%", left: "-25%", width: "44%", opacity: cloudSideOpacity, transform: `translate(${cloudLeftX}px, ${cloudY}vh)` }}>
             <div className="animate-layer-entrance">
               <div className="animate-cloud-drift">
                 <img src={heroCloud} alt="" aria-hidden="true" className="w-full h-auto" />
@@ -406,9 +407,9 @@ export const HeroSection = () => {
             </div>
           </div>
 
-          {/* ── Layer 4b: Right Cloud — z-28, above building, bottom-right corner ── */}
+          {/* ── Layer 4b: Right Cloud — z-32, above everything, middle-right ── */}
           <div className="absolute pointer-events-none"
-            style={{ zIndex: 28, bottom: "-5%", right: "-15%", width: "52%", opacity: cloudSideOpacity, transform: `translateX(${cloudRightX}px) scaleX(-1)` }}>
+            style={{ zIndex: 32, top: "15%", right: "-25%", width: "44%", opacity: cloudSideOpacity, transform: `translate(${cloudRightX}px, ${cloudY}vh) scaleX(-1)` }}>
             <div className="animate-layer-entrance">
               <div className="animate-cloud-drift" style={{ animationDelay: "-14s" }}>
                 <img src={heroCloud} alt="" aria-hidden="true" className="w-full h-auto" />
@@ -421,7 +422,7 @@ export const HeroSection = () => {
             style={{ height: "40%", background: "linear-gradient(to top, rgba(255,255,255,0.65) 0%, transparent 100%)", opacity: bottomGradientOpacity }} />
 
           {/* ── Layer 6: SMOKE — rises to cover entire screen ── */}
-          <div className="absolute pointer-events-none z-30"
+          <div className="absolute pointer-events-none z-[34]"
             style={{
               bottom: "-20%",
               left: "-20%",
@@ -504,8 +505,8 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-white pointer-events-none z-50" style={{ opacity: whiteOpacity }} />
 
           {/* ── Layer 9: Hero content — z-10, BELOW building (z-25) so building rises over text ── */}
-          <div className="absolute inset-0 flex flex-col items-center justify-start text-center px-6"
-            style={{ zIndex: 10, paddingTop: "12vh", opacity: contentOpacity, transform: `translateY(${contentY}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentY - 10}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
             <h1 className="text-black font-bold leading-[1.05] mb-5 overflow-hidden flex flex-wrap justify-center"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 5.5vw, 80px)", letterSpacing: "0.03em", textShadow: "none" }}>
               {"Access. Influence. Legacy".split("").map((char, index) => (
@@ -518,11 +519,11 @@ export const HeroSection = () => {
                 </span>
               ))}
             </h1>
-            <p className="text-black/85 mb-10 max-w-xl leading-relaxed animate-hero-strong"
+            <p className="text-black/85 mb-3 max-w-xl leading-relaxed animate-hero-strong"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(15px, 1.4vw, 19px)" }}>
               <strong className="font-semibold text-black">SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985</strong>
             </p>
-            <a href="https://parmarproperties.in/contact"
+            <a href="https://parmar-properties-listing.vercel.app/" target="_blank"
               className="inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-7 py-3.5 hover:bg-gray-800 transition-colors animate-hero-button"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(14px, 1.1vw, 16px)" }}>
               Explore Opportunities <span>→</span>
