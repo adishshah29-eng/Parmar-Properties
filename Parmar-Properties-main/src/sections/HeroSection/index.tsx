@@ -242,7 +242,7 @@ export const HeroSection = () => {
 
   // SVG text layer — appears right as building phase ends / SVG phase starts
   const textLayerOpacity = easeOut2(Math.max(0, Math.min(1, (scrollProgress - 0.24) / 0.04)));
-  const maskScale = 0.40 + p3e * 0.05;
+  const maskScale = 0.52 + p3e * 0.065;
   // Building image scrolls from below (y=+30%) to above (y=-30%) inside letter cutouts during SVG+image phase
   const maskParallaxY = 30 - p4e * 60;
 
