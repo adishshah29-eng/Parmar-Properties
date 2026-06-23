@@ -236,7 +236,8 @@ export const HeroSection = () => {
 
   // Smoke — ONLY starts AFTER SVG is done (0.75+)
   const smokeY = 40 - p2e * 75;
-  const smokeScale = 1.0 + p2e * 2.2;
+  const smokeScaleY = 1.6; // Taller in height
+  const smokeScaleX = 1.0;
   const smokeOpacity = 1; // Always 1
 
   // SVG text layer — appears right as building phase ends / SVG phase starts
@@ -424,11 +425,12 @@ export const HeroSection = () => {
           {/* ── Layer 6: SMOKE — rises to cover entire screen ── */}
           <div className="absolute pointer-events-none z-[34]"
             style={{
-              bottom: "-20%",
-              left: "-20%",
-              width: "140%",
+              bottom: "-10%",
+              left: "-10%",
+              width: "120%",
               opacity: smokeOpacity,
-              transform: `translateY(${smokeY}%) scale(${smokeScale})`,
+              transform: `translateY(${smokeY}%) scaleX(${smokeScaleX}) scaleY(${smokeScaleY})`,
+              transformOrigin: "top center",
               willChange: "transform, opacity",
             }}>
             <img src={heroCloudScroll} alt="" aria-hidden="true"
