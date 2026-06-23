@@ -322,6 +322,16 @@ export const HeroSection = () => {
             transform: translateX(3%);
           }
         }
+        @keyframes breathe {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.03); }
+          100% { transform: scale(1); }
+        }
+        @keyframes pulseSmoke {
+          0% { transform: scale(1) translateY(0); opacity: 0.8; }
+          50% { transform: scale(1.02) translateY(-1%); opacity: 1; }
+          100% { transform: scale(1) translateY(0); opacity: 0.8; }
+        }
         .animate-layer-entrance {
           animation: layerEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           opacity: 0;
@@ -360,6 +370,12 @@ export const HeroSection = () => {
           margin-left: -3%;
           animation: buildingDrift 38s ease-in-out infinite alternate;
         }
+        .animate-breathe {
+          animation: breathe 22s ease-in-out infinite;
+        }
+        .animate-smoke-pulse {
+          animation: pulseSmoke 8s ease-in-out infinite;
+        }
       `}</style>
       {/* Dynamic scroll room so mobile devices have a shorter scroll distance */}
       <section ref={sectionRef} style={{ height: `${scrollVh}vh` }} className="relative w-full">
@@ -369,7 +385,7 @@ export const HeroSection = () => {
           <div className="absolute inset-0"
             style={{ transform: `scale(${skyScale})`, transformOrigin: "center center", willChange: "transform" }}>
             <div className="animate-layer-entrance w-full h-full">
-              <img src={heroBg} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+              <img src={heroBg} alt="" aria-hidden="true" className="w-full h-full object-cover animate-breathe" />
             </div>
           </div>
 
@@ -385,11 +401,11 @@ export const HeroSection = () => {
               opacity: buildingOpacity,
               willChange: "transform, opacity",
             }}>
-            <div className="animate-layer-entrance">
+            <div className="animate-layer-entrance" style={{ transformOrigin: "bottom center" }}>
               <img
                 src={heroBuilding}
                 alt="Luxury real estate building"
-                className="block w-full"
+                className="block w-full animate-breathe"
                 style={{
                   height: "auto",
                   objectFit: "cover",
@@ -433,9 +449,11 @@ export const HeroSection = () => {
               transformOrigin: "top center",
               willChange: "transform, opacity",
             }}>
-            <img src={heroCloudScroll} alt="" aria-hidden="true"
-              className="w-full h-auto object-cover"
-              style={{ minHeight: "70vh" }} />
+            <div className="animate-smoke-pulse w-full h-full">
+              <img src={heroCloudScroll} alt="" aria-hidden="true"
+                className="w-full h-auto object-cover"
+                style={{ minHeight: "70vh" }} />
+            </div>
           </div>
 
           {/* ── Layer 7: PARMAR PROPERTIES — strokes + sky overlay ── */}
@@ -459,7 +477,7 @@ export const HeroSection = () => {
                 <mask id="inverted-text-mask">
                   <rect x="-5000" y="-5000" width="10000" height="10000" fill="white" />
                   <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
-                    <g transform="translate(119, 10) scale(1)">
+                    <g transform="translate(146, 10) scale(1)">
                       <path fill="black" fillRule="evenodd" clipRule="evenodd" d={PARMAR_PATHS[0]} />
                     </g>
                     <g transform="translate(34, 105) scale(1.11)">
@@ -481,7 +499,7 @@ export const HeroSection = () => {
                     transform: `translate(-50%, -50%)`,
                   }}>
                     <div className="absolute inset-0" style={{ transform: `scale(${skyScale})`, transformOrigin: "center center" }}>
-                      <img src={heroBg} className="w-full h-full object-cover" />
+                      <img src={heroBg} className="w-full h-full object-cover animate-breathe" />
                     </div>
                     {/* Add the dark tint over the sky just like Layer 2 to perfectly match it */}
                     <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: darkOpacity }} />
@@ -492,7 +510,7 @@ export const HeroSection = () => {
               {/* Text strokes — scaled exactly like the mask cutout */}
               <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
                 {/* PARMAR strokes */}
-                <g transform="translate(119, 10) scale(1)">
+                <g transform="translate(146, 10) scale(1)">
                   <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
                 </g>
                 {/* PROPERTIES strokes */}
@@ -508,7 +526,7 @@ export const HeroSection = () => {
 
           {/* ── Layer 9: Hero content — z-10, BELOW building (z-25) so building rises over text ── */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
-            style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentY - 10}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
+            style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentY - 25}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
             <h1 className="text-black font-bold leading-[1.05] mb-5 overflow-hidden flex flex-wrap justify-center"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 5.5vw, 80px)", letterSpacing: "0.03em", textShadow: "none" }}>
               {"Access. Influence. Legacy".split("").map((char, index) => (
