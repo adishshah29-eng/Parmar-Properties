@@ -34,7 +34,7 @@ export const HeroSection = () => {
     // 2. Responsive Scroll-Jack Height Setup
     const mQueryMobile = window.matchMedia("(max-width: 767px)");
     const updateScrollVh = (e: MediaQueryListEvent | MediaQueryList) => {
-      setScrollVh(e.matches ? 600 : 1200); // Increased scroll height gives more ticks for all phases
+      setScrollVh(e.matches ? 300 : 600); // Decreased scroll height to make overall animation even faster
     };
     updateScrollVh(mQueryMobile);
 
@@ -480,7 +480,7 @@ export const HeroSection = () => {
                     <g transform="translate(117, 10) scale(1.5)">
                       <path fill="black" fillRule="evenodd" clipRule="evenodd" d={PARMAR_PATHS[0]} />
                     </g>
-                    <g transform="translate(174, 140) scale(0.70)">
+                    <g transform="translate(144, 140) scale(0.80)">
                       <path fill="black" fillRule="evenodd" clipRule="evenodd" d={PROPS_PATHS[0]} />
                     </g>
                   </g>
@@ -514,8 +514,8 @@ export const HeroSection = () => {
                   <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
                 </g>
                 {/* PROPERTIES strokes */}
-                <g transform="translate(174, 140) scale(0.70)">
-                  <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+                <g transform="translate(144, 140) scale(0.80)">
+                  <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
                 </g>
               </g>
             </svg>
