@@ -16,6 +16,7 @@ export const HeroSection = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [viewportH, setViewportH] = useState(0);
+  const [viewportW, setViewportW] = useState(0);
   const [scrollVh, setScrollVh] = useState(500);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -28,6 +29,7 @@ export const HeroSection = () => {
   useEffect(() => {
     // 1. Viewport Height Setup
     setViewportH(document.documentElement.clientHeight);
+    setViewportW(document.documentElement.clientWidth);
 
     // 2. Responsive Scroll-Jack Height Setup
     const mQueryMobile = window.matchMedia("(max-width: 767px)");
@@ -59,6 +61,7 @@ export const HeroSection = () => {
       if (timeoutId) clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setViewportH(document.documentElement.clientHeight);
+        setViewportW(document.documentElement.clientWidth);
       }, 150);
     };
     window.addEventListener("resize", onResize);
@@ -95,9 +98,9 @@ export const HeroSection = () => {
     });
 
     // Both paths start at same time, draw slowly across a wider scroll window
-    // PARMAR + PROPERTIES: both scroll 0.25 → 0.65 (slower draw)
-    const starts = [0.25, 0.25];
-    const ends = [0.65, 0.65];
+    // PARMAR + PROPERTIES: both scroll 0.40 → 0.70
+    const starts = [0.35, 0.35];
+    const ends = [0.85, 0.85];
 
     pathLengthsRef.current = lens;
     letterStartRef.current = starts;
@@ -194,11 +197,15 @@ export const HeroSection = () => {
   // Phase 3 : 0.75 → 0.92  smoke/fog blazes in (AFTER SVG is complete)
   // Phase 4 : 0.92 → 1.00  white exit — next section begins
   // ───────────────────────────────────────────────────────────
-  const p1 = Math.min(1, scrollProgress / 0.40);                            // building rise (0→0.40)
-  const p3 = Math.max(0, Math.min(1, (scrollProgress - 0.25) / 0.20));     // SVG strokes (0.25→0.45)
-  const p4 = Math.max(0, Math.min(1, (scrollProgress - 0.65) / 0.17));     // image fill (0.65→0.82)
-  const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.80) / 0.20));     // smoke (0.80→1.00)
-  const p5 = Math.max(0, Math.min(1, (scrollProgress - 0.92) / 0.08));     // white exit
+  const p1 = Math.min(1, scrollProgress / 0.40);     // building rise (0→0.40)
+  
+  // Navigation Bar fade out: stays fully visible for the first 15%, then fades out by 30%
+  const navFadeProgress = Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.15));
+  const navOpacity = Math.max(0, 1 - navFadeProgress); 
+  const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.80) / 0.20));      // smoke (0.80→1.00)
+  const p3 = Math.max(0, Math.min(1, (scrollProgress - 0.30) / 0.45));      // 0.30→0.75
+  const p4 = Math.max(0, Math.min(1, (scrollProgress - 0.72) / 0.20));      // 0.72→0.92
+  const p5 = Math.max(0, Math.min(1, (scrollProgress - 0.92) / 0.08));      // white exit
 
   const p1e = easeOut(p1);
   const p2e = easeOut(p2);
@@ -211,7 +218,11 @@ export const HeroSection = () => {
   // Building: anchored at top, starts with top-edge at 35% from viewport top
   // Moves upward continuously: from translateY(35%) → translateY(-45%) across full scroll
   const buildingY = 35 - scrollProgress * 80;
-  const buildingOpacity = Math.max(0.15, 1 - p2e);  // only fades when smoke starts at 0.75
+
+  // Fade IN the sky overlay as SVG nears completion (starts at 0.60, fully covers outside building by 0.70)
+  const buildingFadeProgress = Math.max(0, Math.min(1, (scrollProgress - 0.60) / 0.10));
+  const skyOverlayOpacity = easeOut(buildingFadeProgress);
+  const buildingOpacity = 1; // z-25 building stays opaque permanently!
 
   // Hero content: sinks DOWN into the rising building
   const contentOpacity = Math.max(0, 1 - p1 * 2.0);
@@ -424,13 +435,11 @@ export const HeroSection = () => {
               style={{ minHeight: "70vh" }} />
           </div>
 
-          {/* ── Layer 7: PARMAR PROPERTIES — strokes + image fill ── */}
-          <div className="absolute inset-0 pointer-events-none z-40"
+          {/* ── Layer 7: PARMAR PROPERTIES — strokes + sky overlay ── */}
+          <div className="absolute inset-0 pointer-events-none z-[29]"
             style={{
               opacity: textLayerOpacity,
-              transform: `scale(${maskScale})`,
-              transformOrigin: "center center",
-              willChange: "transform, opacity",
+              willChange: "opacity",
             }}>
 
             <svg
@@ -443,40 +452,50 @@ export const HeroSection = () => {
               aria-hidden="true"
             >
               <defs>
-                <mask id="parmar-mask">
-                  <rect width="100%" height="100%" fill="black" />
-
-                  {/* PARMAR group */}
-                  <g transform="translate(119, 10) scale(1)">
-                    <path fill="white" d={PARMAR_PATHS[0]} />
-                  </g>
-
-                  {/* PROPERTIES group */}
-                  <g transform="translate(34, 105) scale(1.11)">
-                    <path fill="white" d={PROPS_PATHS[0]} />
+                {/* Mask is white everywhere, but black exactly where the scaled text strokes are */}
+                <mask id="inverted-text-mask">
+                  <rect x="-5000" y="-5000" width="10000" height="10000" fill="white" />
+                  <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
+                    <g transform="translate(119, 10) scale(1)">
+                      <path fill="black" d={PARMAR_PATHS[0]} />
+                    </g>
+                    <g transform="translate(34, 105) scale(1.11)">
+                      <path fill="black" d={PROPS_PATHS[0]} />
+                    </g>
                   </g>
                 </mask>
               </defs>
 
-              {/* Image fill through letter cutouts — building scrolls from bottom to top inside letters */}
-              <g mask="url(#parmar-mask)" style={{ opacity: fillProgress }}>
-                {/* Sky background — static behind the building */}
-                <image xlinkHref={heroBg}
-                  x="0" y="0" width="100%" height="100%"
-                  preserveAspectRatio="xMidYMid slice" />
-                {/* Building — scrolls upward through the letter windows */}
-                <image xlinkHref={heroBuilding}
-                  x="-10%" y={`${maskParallaxY}%`} width="120%" height="150%"
-                  preserveAspectRatio="xMidYMid meet" />
+              {/* Sky Overlay — covers the building OUTSIDE the text, fading in to simulate building fading out */}
+              <g mask="url(#inverted-text-mask)" style={{ opacity: skyOverlayOpacity }}>
+                <foreignObject x={380 - 3000} y={90 - 3000} width={6000} height={6000}>
+                  <div style={{
+                    width: viewportW ? `${viewportW}px` : "100vw",
+                    height: viewportH ? `${viewportH}px` : "100vh",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(-50%, -50%)`,
+                  }}>
+                    <div className="absolute inset-0" style={{ transform: `scale(${skyScale})`, transformOrigin: "center center" }}>
+                      <img src={heroBg} className="w-full h-full object-cover" />
+                    </div>
+                    {/* Add the dark tint over the sky just like Layer 2 to perfectly match it */}
+                    <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: darkOpacity }} />
+                  </div>
+                </foreignObject>
               </g>
 
-              {/* PARMAR strokes — draw in per letter */}
-              <g transform="translate(119, 10) scale(1)">
-                <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
-              </g>
-              {/* PROPERTIES strokes */}
-              <g transform="translate(34, 105) scale(1.11)">
-                <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+              {/* Text strokes — scaled exactly like the mask cutout */}
+              <g style={{ transform: `scale(${maskScale})`, transformOrigin: "380px 90px" }}>
+                {/* PARMAR strokes */}
+                <g transform="translate(119, 10) scale(1)">
+                  <path className="lp" d={PARMAR_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+                </g>
+                {/* PROPERTIES strokes */}
+                <g transform="translate(34, 105) scale(1.11)">
+                  <path className="lp" d={PROPS_PATHS[0]} fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity={1} />
+                </g>
               </g>
             </svg>
           </div>
