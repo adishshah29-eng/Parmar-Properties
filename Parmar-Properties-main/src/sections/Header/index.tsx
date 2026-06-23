@@ -19,13 +19,13 @@ export const Header = () => {
       }}
     >
       <div className="box-border caret-transparent w-full max-w-[1920px] no-underline mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[94px] relative no-underline z-50 md:grid-cols-[166.667px_1fr_166.667px] md:leading-[1.5] md:min-h-[62px]">
+        <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[94px] relative no-underline z-50 md:grid-cols-[200px_1fr_200px] md:leading-[1.5] md:min-h-[62px]">
           <HeaderLogo />
           <DesktopNavigation />
           <div className="flex justify-end items-center">
             <a
               href="https://parmarproperties.in/contact"
-              className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-xs px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
+              className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
             >
               Schedule Consultation
             </a>

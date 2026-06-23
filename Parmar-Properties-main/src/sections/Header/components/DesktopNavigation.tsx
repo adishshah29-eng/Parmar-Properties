@@ -2,7 +2,7 @@ import { NavigationItem } from "@/sections/Header/components/NavigationItem";
 
 export const DesktopNavigation = () => {
   return (
-    <nav className="box-border caret-transparent gap-x-[normal] hidden text-[10px] leading-[11.5px] min-h-0 min-w-0 outline-[3px] gap-y-[normal] no-underline m-auto md:gap-x-[26.6667px] md:flex md:text-[6.66667px] md:leading-[7.66667px] md:min-h-[auto] md:min-w-[auto] md:gap-y-[26.6667px]">
+    <nav className="box-border caret-transparent gap-x-[normal] hidden text-[10px] leading-[11.5px] min-h-0 min-w-0 outline-[3px] gap-y-[normal] no-underline m-auto md:gap-x-12 md:flex md:text-[6.66667px] md:leading-[7.66667px] md:min-h-[auto] md:min-w-[auto] md:gap-y-[26.6667px]">
       <NavigationItem
         label="About"
         href="/About"

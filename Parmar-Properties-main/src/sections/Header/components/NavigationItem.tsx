@@ -11,7 +11,7 @@ export const NavigationItem = ({ label, href, itemVariant, isDropdown }: Navigat
       {isDropdown ? (
         <button
           type="button"
-          className="flex items-center gap-2 text-sm font-medium text-neutral-900 transition-colors duration-200"
+          className="flex items-center gap-2 text-base font-semibold text-neutral-900 transition-colors duration-200"
         >
           <span className="relative">
             {label}
@@ -24,7 +24,7 @@ export const NavigationItem = ({ label, href, itemVariant, isDropdown }: Navigat
       ) : (
         <a
           href={href}
-          className="block text-sm font-medium text-neutral-900 transition-colors duration-200"
+          className="block text-base font-semibold text-neutral-900 transition-colors duration-200"
         >
           <span className="relative">
             {label}

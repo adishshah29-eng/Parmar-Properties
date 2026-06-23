@@ -1,4 +1,4 @@
-import logo from "assets/Parmar logo without bg.png";
+import logo from "assets/Parmar logo without bg.webp";
 
 export const HeaderLogo = () => {
   return (
@@ -11,7 +11,7 @@ export const HeaderLogo = () => {
         <img
           src={logo}
           alt="Parmar Properties Logo"
-          className="box-border caret-transparent inline outline-[3px] no-underline h-[104px] md:h-[72px] w-auto object-contain object-left scale-[1.6] md:scale-[2.2] origin-left"
+          className="box-border caret-transparent inline outline-[3px] no-underline h-[104px] md:h-[72px] w-auto object-contain object-left scale-[1.6] md:scale-[2.2] origin-left translate-y-[10px]"
         />
       </a>
     </div>

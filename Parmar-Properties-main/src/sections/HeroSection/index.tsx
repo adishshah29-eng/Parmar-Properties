@@ -98,9 +98,9 @@ export const HeroSection = () => {
     });
 
     // Both paths start at same time, draw slowly across a wider scroll window
-    // PARMAR + PROPERTIES: both scroll 0.40 → 0.70
-    const starts = [0.35, 0.35];
-    const ends = [0.85, 0.85];
+    // PARMAR + PROPERTIES: start at 0.20, finish exactly when building fades out (0.70)
+    const starts = [0.20, 0.20];
+    const ends = [0.70, 0.70];
 
     pathLengthsRef.current = lens;
     letterStartRef.current = starts;
@@ -241,8 +241,8 @@ export const HeroSection = () => {
   const smokeOpacity = 1; // Always 1
 
   // SVG text layer — appears right as building phase ends / SVG phase starts
-  const textLayerOpacity = easeOut2(Math.max(0, Math.min(1, (scrollProgress - 0.24) / 0.04)));
-  const maskScale = 0.52 + p3e * 0.065;
+  const textLayerOpacity = easeOut2(Math.max(0, Math.min(1, (scrollProgress - 0.20) / 0.04)));
+  const maskScale = 0.65 + p3e * 0.065;
   // Building image scrolls from below (y=+30%) to above (y=-30%) inside letter cutouts during SVG+image phase
   const maskParallaxY = 30 - p4e * 60;
 
@@ -405,7 +405,7 @@ export const HeroSection = () => {
               <img
                 src={heroBuilding}
                 alt="Luxury real estate building"
-                className="block w-full animate-breathe"
+                className="block w-full"
                 style={{
                   height: "auto",
                   objectFit: "cover",
@@ -527,8 +527,8 @@ export const HeroSection = () => {
           {/* ── Layer 9: Hero content — z-10, BELOW building (z-25) so building rises over text ── */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
             style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentY - 25}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
-            <h1 className="text-black font-bold leading-[1.05] mb-5 overflow-hidden flex flex-wrap justify-center"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 5.5vw, 80px)", letterSpacing: "0.03em", textShadow: "none" }}>
+            <h1 className="text-black font-bold leading-[1.05] mb-1 pb-4 overflow-hidden flex flex-wrap justify-center"
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 7vw, 110px)", letterSpacing: "0.03em", textShadow: "none" }}>
               {"Access. Influence. Legacy".split("").map((char, index) => (
                 <span
                   key={index}
@@ -540,12 +540,12 @@ export const HeroSection = () => {
               ))}
             </h1>
             <p className="text-black/85 mb-3 max-w-xl leading-relaxed animate-hero-strong"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(15px, 1.4vw, 19px)" }}>
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(15px, 1.4vw, 22px)" }}>
               <strong className="font-semibold text-black">SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985</strong>
             </p>
             <a href="https://parmar-properties-listing.vercel.app/" target="_blank"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-7 py-3.5 hover:bg-gray-800 transition-colors animate-hero-button"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(14px, 1.1vw, 16px)" }}>
+              className="inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-5 py-2.5 hover:bg-gray-800 transition-colors animate-hero-button"
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(10px, 0.8vw, 13px)" }}>
               Explore Opportunities <span>→</span>
             </a>
           </div>
