@@ -8,6 +8,9 @@ export default defineConfig({
   plugins: [react()],
   publicDir: "./static",
   base: "./",
+  server: {
+    host: true, // Expose on LAN — use the Network URL printed in terminal to open on phone
+  },
   css: {
     postcss: {
       plugins: [tailwind()],

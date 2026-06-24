@@ -56,7 +56,7 @@ export const Header = () => {
       }`}
     >
       <div className="box-border caret-transparent w-full max-w-[1920px] no-underline mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[94px] relative no-underline z-50 md:grid-cols-[200px_1fr_200px] md:leading-[1.5] md:min-h-[62px]">
+        <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[64px] relative no-underline z-50 md:grid-cols-[200px_1fr_200px] md:leading-[1.5] md:min-h-[62px]">
           <HeaderLogo />
           <DesktopNavigation />
           <div className="flex justify-end items-center">

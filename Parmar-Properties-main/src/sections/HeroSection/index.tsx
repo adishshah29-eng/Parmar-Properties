@@ -215,9 +215,14 @@ export const HeroSection = () => {
   // Sky zoom (very subtle)
   const skyScale = 1 + p1e * 0.06;
 
-  // Building: anchored at top, starts with top-edge at 35% from viewport top
-  // Moves upward continuously: from translateY(35%) → translateY(-45%) across full scroll
-  const buildingY = 35 - scrollProgress * 80;
+  // Mobile detection — gated on viewportW > 0 so first render (0) defaults to desktop behavior
+  const isMobile = viewportW > 0 && viewportW < 768;
+
+  // Building: anchored at top.
+  // Desktop: starts with top-edge at 35% from viewport top (original behaviour).
+  // Mobile:  starts at 175% to balance the entrance from below the screen.
+  const buildingStartY = isMobile ? 175 : 35;
+  const buildingY = buildingStartY - scrollProgress * 80;
 
   // Fade IN the sky overlay as SVG nears completion (starts at 0.60, fully covers outside building by 0.70)
   const buildingFadeProgress = Math.max(0, Math.min(1, (scrollProgress - 0.60) / 0.10));
@@ -228,16 +233,26 @@ export const HeroSection = () => {
   const contentOpacity = Math.max(0, 1 - p1 * 2.0);
   const contentY = p1e * 120;
 
-  // Clouds stay at the same position (no drift, no scroll, no fade out)
-  const cloudLeftX = 0;
-  const cloudRightX = 0;
-  const cloudSideOpacity = 1;
-  const cloudY = 0;
+  // Content vertical offset:
+  // Desktop → same as before: -min(45px, 6vh) keeps text just above true center.
+  // Mobile adjusts text position — reduced negative offset to bring text further down
+  const contentTranslateY = isMobile
+    ? `${contentY - viewportH * 0.10}px`
+    : `calc(${contentY}px - min(45px, 6vh))`;
 
-  // Smoke — ONLY starts AFTER SVG is done (0.75+)
-  const smokeY = 40 - p2e * 75;
-  const smokeScaleY = 1.6; // Taller in height
-  const smokeScaleX = 1.0;
+  // On mobile, clouds drift left and right as you scroll down
+  const cloudLeftX = isMobile ? -scrollProgress * 200 : 0;
+  const cloudRightX = isMobile ? scrollProgress * 200 : 0;
+  const cloudSideOpacity = 1;
+  const cloudY = 0; // Clouds stay at a fixed vertical level
+  const cloudWidth = isMobile ? "60%" : "44%"; // Reduced cloud size
+  const cloudOffset = isMobile ? "-35%" : "-25%"; // Moved them a bit away
+  const cloudTop = isMobile ? "60%" : "15%"; // Brought clouds up to 60% height
+
+  // Smoke — attached to the building on mobile (shifted extremely high up), or rises late (0.75+) on desktop
+  const smokeY = isMobile ? buildingY - 145 : 40 - p2e * 75;
+  const smokeScaleY = isMobile ? 1.25 : 1.6; // Scaled down on mobile
+  const smokeScaleX = isMobile ? 0.85 : 1.0;
   const smokeOpacity = 1; // Always 1
 
   // SVG text layer — appears right as building phase ends / SVG phase starts
@@ -407,8 +422,11 @@ export const HeroSection = () => {
                 alt="Luxury real estate building"
                 className="block w-full"
                 style={{
-                  height: "auto",
+                  // Mobile: explicit height so object-fit: cover actually works. Reduced scale further.
+                  // Desktop: height: auto keeps the original behaviour (image natural height).
+                  height: isMobile ? "35vh" : "auto",
                   objectFit: "cover",
+                  objectPosition: "center top", // show upper floors of the building
                 }}
               />
             </div>
@@ -416,7 +434,7 @@ export const HeroSection = () => {
 
           {/* ── Layer 4a: Left Cloud — z-32, above everything, middle-left ── */}
           <div className="absolute pointer-events-none"
-            style={{ zIndex: 32, top: "15%", left: "-25%", width: "44%", opacity: cloudSideOpacity, transform: `translate(${cloudLeftX}px, ${cloudY}vh)` }}>
+            style={{ zIndex: 32, top: cloudTop, left: cloudOffset, width: cloudWidth, opacity: cloudSideOpacity, transform: `translate(${cloudLeftX}px, ${cloudY}vh)` }}>
             <div className="animate-layer-entrance">
               <div className="animate-cloud-drift">
                 <img src={heroCloud} alt="" aria-hidden="true" className="w-full h-auto" />
@@ -426,7 +444,7 @@ export const HeroSection = () => {
 
           {/* ── Layer 4b: Right Cloud — z-32, above everything, middle-right ── */}
           <div className="absolute pointer-events-none"
-            style={{ zIndex: 32, top: "15%", right: "-25%", width: "44%", opacity: cloudSideOpacity, transform: `translate(${cloudRightX}px, ${cloudY}vh) scaleX(-1)` }}>
+            style={{ zIndex: 32, top: cloudTop, right: cloudOffset, width: cloudWidth, opacity: cloudSideOpacity, transform: `translate(${cloudRightX}px, ${cloudY}vh) scaleX(-1)` }}>
             <div className="animate-layer-entrance">
               <div className="animate-cloud-drift" style={{ animationDelay: "-14s" }}>
                 <img src={heroCloud} alt="" aria-hidden="true" className="w-full h-auto" />
@@ -491,8 +509,11 @@ export const HeroSection = () => {
               <g mask="url(#inverted-text-mask)" style={{ opacity: skyOverlayOpacity }}>
                 <foreignObject x={380 - 3000} y={90 - 3000} width={6000} height={6000}>
                   <div style={{
-                    width: viewportW ? `${viewportW}px` : "100vw",
-                    height: viewportH ? `${viewportH}px` : "100vh",
+                    // The SVG is scaled by viewportW / 760 (due to viewBox="0 0 760 180" and xMidYMid meet).
+                    // To make this div exactly match the real screen size, we use 760 for width,
+                    // and proportionally scale the height. This cancels the SVG scale perfectly!
+                    width: "760px",
+                    height: viewportW > 0 ? `${(viewportH * 760) / viewportW}px` : "1080px",
                     position: "absolute",
                     top: "50%",
                     left: "50%",
@@ -526,20 +547,20 @@ export const HeroSection = () => {
 
           {/* ── Layer 9: Hero content — z-10, BELOW building (z-25) so building rises over text ── */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
-            style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentY - 45}px)`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
+            style={{ zIndex: 10, opacity: contentOpacity, transform: `translateY(${contentTranslateY})`, pointerEvents: contentOpacity < 0.05 ? "none" : "auto" }}>
             <h1 className="text-black font-bold leading-[1.05] mb-1 pb-4 overflow-hidden flex flex-wrap justify-center"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(32px, 7vw, 110px)", letterSpacing: "-0.02em", textShadow: "none" }}>
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(46px, max(7vw, 13vmin), 110px)", letterSpacing: "-0.02em", textShadow: "none" }}>
               <span className="animate-hero-letter" style={{ animationDelay: "300ms" }}>
                 Access. Influence. Legacy
               </span>
             </h1>
-            <p className="text-black/85 mb-3 max-w-none whitespace-nowrap leading-relaxed animate-hero-strong"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(11px, 1.3vw, 22px)" }}>
+            <p className="text-black/85 mb-3 max-w-[90vw] leading-relaxed animate-hero-strong"
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(13px, max(1.3vw, 3.5vmin), 22px)", textAlign: "center" }}>
               <strong className="font-semibold text-black">SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985</strong>
             </p>
             <a href="https://parmar-properties-listing.vercel.app/" target="_blank"
-              className="group inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-5 py-2.5 hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl animate-hero-button"
-              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(10px, 0.8vw, 13px)" }}>
+              className="group inline-flex items-center gap-2 bg-gray-900 text-white font-semibold rounded-full px-6 py-3 hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl animate-hero-button"
+              style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(14px, max(0.8vw, 3.5vmin), 16px)" }}>
               Explore Opportunities <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
           </div>
