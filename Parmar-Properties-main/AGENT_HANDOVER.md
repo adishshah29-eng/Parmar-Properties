@@ -1,213 +1,220 @@
-# Parmar Properties — Agent Handover
+﻿# Parmar Properties — Agent Handover Document
 
-> **Project:** Parmar Properties real-estate website  
-> **Stack:** Vite + React + TypeScript + TailwindCSS  
-> **Dev server:** `npm run dev` inside `Parmar-Properties-main/`  
-> **Last updated:** 2026-06-22  
+**Project root:** `c:\Users\HARIO\Downloads\Prathamesh\Parmar Properties\Parmar\Parmar-Properties-main`
+**Last verified build:** `npm run build` → zero errors, 85 modules, ~363 kB JS
 
 ---
 
-## 1. Project Structure
+## 1. Tech Stack
 
-```
-FindClone/
-└── Parmar-Properties-main/
-    ├── assets/                   # Static images (back.webp, house.webp, cloud.webp, smoke.webp)
-    ├── src/
-    │   ├── App.tsx               # Root: Header + Main + Footer + Agentation (dev-only)
-    │   ├── sections/
-    │   │   ├── HeroSection/      # ← PRIMARY FOCUS of this session
-    │   │   │   └── index.tsx
-    │   │   ├── Header/
-    │   │   ├── Main/
-    │   │   ├── Footer/
-    │   │   ├── WhyParmarSection/
-    │   │   ├── AgentsSection/
-    │   │   ├── CtaSection/
-    │   │   ├── IdentitySection/
-    │   │   ├── ProcessSection/
-    │   │   ├── ServicesSection/
-    │   │   ├── SupportSection/
-    │   │   └── TestimonialsSection/
-    │   └── ...
-    ├── vite.config.ts
-    ├── package.json
-    └── tailwind.config.js
-```
-
----
-
-## 2. Dependencies — Key Notes
-
-| Package | Purpose | Notes |
+| Layer | Tool | Version |
 |---|---|---|
-| `agentation` | Dev overlay UI | Import in `App.tsx` line 4, render conditionally `import.meta.env.DEV`. Was missing from `node_modules` — fixed by running `npm install` |
-| `gsap` | Animation library | Installed but not actively used in HeroSection (scroll is pure React state) |
-| `react-router-dom` | Routing | Installed but single-page app currently |
+| Framework | React | 18.2.0 |
+| Language | TypeScript | via Vite |
+| Build | Vite | 6.3.5 |
+| Styling | Tailwind CSS | 3.4.16 |
+| Animation | GSAP + ScrollTrigger | 3.15.0 |
+| Routing | react-router-dom | 6.8.1 |
+| Icons | lucide-react | 0.453.0 |
+| Dev tool | agentation | 3.0.2 |
+
+**Path alias:** `@/` -> `src/` (configured in `vite.config.ts`)
+**Dev server:** `npm run dev`
+**Build:** `npm run build`
 
 ---
 
-## 3. HeroSection — Complete Animation Architecture
-
-**File:** [`src/sections/HeroSection/index.tsx`](src/sections/HeroSection/index.tsx)
-
-### 3.1 Assets Used
-
-```tsx
-import heroBg        from "assets/back.webp";    // Sky background
-import heroBuilding   from "assets/house.webp";   // Building (luxury real estate)
-import heroCloud      from "assets/cloud.webp";   // Decorative side clouds (L + R)
-import heroCloudScroll from "assets/smoke.webp";  // Fog/smoke scroll overlay
-```
-
-### 3.2 Scroll-Jack Architecture
-
-The section uses a **sticky scroll-jack** pattern:
-- `<section>` has height `700vh` (desktop) / `320vh` (mobile)
-- Inner `<div>` is `sticky top-0 h-screen` — stays fixed while user scrolls
-- `scrollProgress` (0→1) is computed from `window.scrollY` relative to section offset
-
-```tsx
-const scrolled = window.scrollY - section.offsetTop;
-const range    = section.offsetHeight - viewportH;
-scrollProgress = Math.max(0, Math.min(1, scrolled / range));
-```
-
-### 3.3 Phase Map (Current — Final State)
+## 2. Architecture Overview
 
 ```
-scroll 0.00 → 0.40   Phase 1: Building rises from below, hero text sinks DOWN behind it
-scroll 0.40 → 0.75   Phase 2: PARMAR PROPERTIES SVG strokes draw IN on the building
-                               Building image fills through letter cutouts simultaneously
-                               ⚠ NO SMOKE during this phase — building stays fully visible
-scroll 0.75 → 0.92   Phase 3: Smoke/fog blazes in (AFTER SVG is complete)
-scroll 0.92 → 1.00   Phase 4: White exit cover — next section begins
-```
-
-**Phase variables:**
-```tsx
-const p1 = Math.min(1, scrollProgress / 0.40);                         // building rise
-const p3 = Math.max(0, Math.min(1, (scrollProgress - 0.40) / 0.35));  // SVG strokes
-const p4 = Math.max(0, Math.min(1, (scrollProgress - 0.42) / 0.33));  // image fill (alongside strokes)
-const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.75) / 0.17));  // smoke (AFTER SVG)
-const p5 = Math.max(0, Math.min(1, (scrollProgress - 0.92) / 0.08));  // white exit
-```
-
-### 3.4 Layer Stack (z-index order)
-
-| Layer | z-index | Element | Driven by |
-|---|---|---|---|
-| 1 | 0 | Sky background (`back.webp`) | `skyScale` (subtle zoom) |
-| 2 | 1 | Dark tint overlay | `darkOpacity` (fades in p1) |
-| 3 | **25** | Building (`house.webp`) | `buildingY` rises, `buildingOpacity` fades at p2 |
-| 4a/b | **28** | L + R decorative clouds | Fade with `cloudSideOpacity` (driven by p3) |
-| 5 | 20 | Bottom white gradient | `bottomGradientOpacity` fades with p3 |
-| 6 | 30 | Smoke overlay (`smoke.webp`) | `smokeOpacity/smokeY/smokeScale` — starts at scroll 0.75 |
-| 7 | 40 | SVG PARMAR PROPERTIES | `textLayerOpacity`, strokes + image fill |
-| 8 | 50 | White exit cover | `whiteOpacity` |
-| 9 | **10** | Hero text content | `contentOpacity` fades, `contentY` moves DOWN (sinks into building) |
-| 10 | 30 | Scroll hint | Fades early |
-
-> ⚠️ **Critical z-index rule:** Hero text is `z-10` and building is `z-25`. This is intentional — the building rises ABOVE the text, creating the "building swallows text" effect.
-
-### 3.5 Key Animation Variables
-
-```tsx
-// Building rises from 35% below bottom, enters view as user scrolls
-const buildingY      = (1 - p1e) * 35;
-const buildingOpacity = Math.max(0.15, 1 - p2e); // never fully hides (stays ghost)
-
-// Text SINKS DOWN (not up) into the building
-const contentY       = p1e * 120;   // px downward
-const contentOpacity = Math.max(0, 1 - p1 * 2.0);
-
-// SVG layer
-const textLayerOpacity = easeOut2(Math.max(0, (scrollProgress - 0.39) / 0.04));
-const maskParallaxY    = 30 - p4e * 60;  // building scrolls from y=+30% → y=-30% inside letters
-const strokeOpacity    = Math.max(0, Math.min(1, p3 * 5) * (1 - easeOut2(p4)));
-const fillProgress     = easeOut(p4);
-
-// Smoke
-const smokeY       = 40 - p2e * 75;
-const smokeScale   = 1.0 + p2e * 2.2;
-const smokeOpacity = easeOut(p2);  // 0 until scroll 0.75
-```
-
-### 3.6 SVG Wordmark
-
-The SVG contains **PARMAR** (row 1, y=89–230) and **PROPERTIES** (row 2, y=299–376) as:
-1. **Mask paths** (`fill="white"`) — define letter cutout shapes
-2. **Stroke paths** (`.lp` class) — animated via `strokeDashoffset` per-letter
-3. **Image fill** (`<g mask="url(#parmar-mask)">`) — building scrolls through the cutouts
-
-The stroke draw-in is driven by a `useEffect` that reads real `getTotalLength()` per path and distributes `strokeDashoffset` proportionally across the letters.
-
-### 3.7 Hero Content Text
-
-```tsx
-// h1
-"Access. Influence. Legacy"  — text-black, clamp(32px, 5.5vw, 80px), letter-by-letter entrance animation
-
-// Subtitle
-"SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985"  — text-black, font-semibold
-
-// CTA Button
-"Explore Opportunities →"  — bg-gray-900 text-white, rounded-full, links to parmarproperties.in/contact
+src/
+├── App.tsx                       ← Router root (BrowserRouter + Routes)
+├── index.tsx                     ← React entry point
+├── content/
+│   ├── content.ts                ← SINGLE SOURCE OF TRUTH for all copy
+│   └── config.ts                 ← Technical config (newsletter URL etc.)
+├── components/
+│   ├── ScrollReveal.tsx          ← Blur + translateY fade-in on scroll
+│   ├── ScrollScrubRevealText.tsx ← GSAP clip-path word reveal (all headings)
+│   └── SplitTextReveal.tsx       ← Word-by-word translateY reveal
+├── hooks/
+│   └── useScrollReveal.ts        ← IntersectionObserver hook
+├── pages/
+│   └── BlogPage.tsx              ← Full /blog page
+└── sections/
+    ├── Main/index.tsx            ← Composes all homepage sections in order
+    ├── Header/                   ← Sticky header, hide-on-scroll, mobile drawer
+    ├── HeroSection/              ← Cinematic hero with parallax
+    ├── WhyParmarSection/         ← "Why Parmar" scrub-reveal
+    ├── IdentitySection/          ← "Who We Are" with ImageStack
+    ├── ProcessSection/           ← "Why South Mumbai" steps
+    ├── AgentsSection/            ← "Don't Rent Your Career"
+    ├── TestimonialsSection/      ← Testimonial carousel
+    ├── ServicesSection/          ← Buy / Sell / Lease panels
+    ├── SupportSection/           ← Developer partnership cards
+    ├── BlogSection/              ← Preview of 3 blog posts → /blog
+    ├── CtaSection/               ← Final CTA + WhatsApp
+    └── Footer/                   ← Newsletter, links, legal, logo
 ```
 
 ---
 
-## 4. Changes Made This Session
+## 3. Routing (src/App.tsx)
 
-| # | What | File | Detail |
-|---|---|---|---|
-| 1 | Fixed `agentation` missing package | — | Ran `npm install` |
-| 2 | Hero layout: building positioned at bottom, text at top | `HeroSection/index.tsx` | Matches reference (FIND Real Estate site) |
-| 3 | Building scroll animation | `HeroSection/index.tsx` | `buildingY = (1-p1e)*35`, rises with scroll |
-| 4 | Text sinks DOWN into building | `HeroSection/index.tsx` | `contentY = p1e * 120` (was moving UP) |
-| 5 | z-index fix: text behind building | `HeroSection/index.tsx` | Text=z-10, Building=z-25, Clouds=z-28 |
-| 6 | Text colors changed to black | `HeroSection/index.tsx` | h1, subtitle, strong all black |
-| 7 | Removed empty tagline paragraph | `HeroSection/index.tsx` | Old "South Mumbai's..." `<p>` removed |
-| 8 | "Building Relationships" → full tagline | `HeroSection/index.tsx` | Now: "SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985" |
-| 9 | Scroll height extended to 700vh | `HeroSection/index.tsx` | Was 500vh; gives more time for each phase |
-| 10 | Full phase map redesign | `HeroSection/index.tsx` | SVG before smoke; smoke only at scroll 0.75+ |
-| 11 | Building image in SVG scrolls 60% | `HeroSection/index.tsx` | `maskParallaxY = 30 - p4e*60` |
-| 12 | Building size inside SVG: 120%×150% | `HeroSection/index.tsx` | Ensures building fills letter cutouts at all scroll positions |
+| Route | Component | Notes |
+|---|---|---|
+| `/` | `<HomePage>` | Header + Main + Footer |
+| `/blog` | `<BlogPage>` | Full blog listing page |
+| `/blog/*` | `<BlogPage>` | Catches sub-paths |
+| `/About` | NOT CREATED | Nav link exists, page does not |
+| `/Expertise` | NOT CREATED | Nav link exists, page does not |
+
+IMPORTANT: Use `<Link to="...">` from react-router-dom for internal links. Never plain `<a href>` for internal routes.
 
 ---
 
-## 5. Open Items / Known Issues
+## 4. Centralized Content System
 
-- [ ] **SVG image fill** — the building image (`heroBuilding`) inside the SVG mask at `preserveAspectRatio="xMidYMid meet"` may not fill letters perfectly on all aspect ratios. Consider switching to `slice` if gaps appear.
-- [ ] **Mobile experience** — scroll height is 320vh on mobile. Phase timings are the same fractions (not adjusted for mobile), so the animation may feel rushed on mobile.
-- [ ] **Header opacity** — currently fades out during Phase 1 (via `data-mobile-menu-open` mutation observer). The header becomes hidden quickly; may want to reconsider for UX.
-- [ ] **Smoke size** — on very large screens (4K), smoke at 140% width + 2.2× scale may not fully cover edges. Test at wide viewports.
-- [ ] **Other sections** — `WhyParmarSection`, `TestimonialsSection` etc. were not touched this session. May need review.
-- [ ] **`agentation` vulnerability** — `npm audit` reports 1 high severity vulnerability. Run `npm audit fix --force` if it's safe to upgrade.
+### src/content/content.ts
+The ONLY place to edit user-facing copy, URLs, and data.
+
+Exports:
+- `seoMeta`            → title, description, OG tags (not yet wired to <head>)
+- `brand`              → name, tagline, copyrightYear (auto-computed)
+- `navigation`         → links[] (NavLink + isDropdown), ctaButton
+- `hero`               → headline, subHeadline, ctaButton
+- `identity`           → heading, bodySegments[], images[]
+- `whyParmar`          → eyebrow, bodySegments[], featureImageUrl
+- `services`           → items[] (number, label, description, imageUrl)
+- `processSouthMumbai` → heading, subHeading, ctaButton, steps[]
+- `support`            → heading, subHeading, subHeadingMuted, ctaButton, cards[]
+- `blog`               → heading, subheading, ctaButton, categories[], posts[]
+- `agents`             → heading, imageUrl, bodySegments[], ctaButton
+- `testimonials`       → headingSegments[], sideImageUrl, items[]
+- `cta`                → headline, backgroundImageUrl, primaryButton, whatsapp
+- `footer`             → primaryLinks[], socialLinks[], legalLinks[], legalNotices[], newsletter, contact[]
+
+### src/content/config.ts
+Technical config only:
+- `config.newsletter.confirmationUrl`
 
 ---
 
-## 6. How to Run
+## 5. Design System — Key Tokens
 
-```bash
-cd Parmar-Properties-main
-npm run dev       # dev server (Vite)
-npm run build     # production build → dist/
+### Section Pattern (use exactly)
+```tsx
+<section className="bg-[COLOR] text-[COLOR] py-16 md:py-[100px] w-full overflow-hidden">
+  <div className="max-w-[1920px] mx-auto px-6 md:px-16">
+    ...
+  </div>
+</section>
 ```
 
-Aliases configured in `vite.config.ts`:
+### Heading Animation (ScrollScrubRevealText)
+Used on ALL section headings:
+```tsx
+<ScrollScrubRevealText
+  text="Heading Text"
+  as="h2"
+  className="font-['Instrument_Sans'] text-5xl md:text-6xl font-semibold tracking-[-0.04em] leading-[1.05]"
+  baseColorClass="text-neutral-300"
+  revealColorClass="text-black"
+  scrubStart="top 90%"
+  scrubEnd="center 60%"
+/>
+```
+
+### Body/Card Animation (ScrollReveal)
+```tsx
+<ScrollReveal direction="up" delay={0}>     // heading wrapper
+<ScrollReveal direction="up" delay={150}>   // body text
+<ScrollReveal delay={index * 100}>          // staggered cards
+```
+
+### Fonts
+- Headings:  font-['Instrument_Serif']
+- Body / UI: font-['Instrument_Sans']
+
+### CTA Button
+```
+bg-black text-white px-6 py-3.5 rounded-[100px] text-base md:text-xs font-medium hover:bg-black/80 transition-colors
+```
+
+---
+
+## 6. Blog System
+
+### Homepage Preview (BlogSection)
+- File: src/sections/BlogSection/index.tsx
+- Shows first 3 posts from blog.posts
+- "Visit Our Blog" uses <Link to="/blog">
+- Uses ScrollScrubRevealText heading + ScrollReveal body (matches other sections)
+
+### Full Blog Page (BlogPage)
+- File: src/pages/BlogPage.tsx
+- Route: /blog
+- Features: search, category filters, featured carousel, 3-col grid
+- All data from `blog` in content.ts
+
+### Adding a New Blog Post
+Edit blog.posts[] in src/content/content.ts:
 ```ts
-{ find: "@",      replacement: path.resolve(__dirname, "src")    }
-{ find: "assets", replacement: path.resolve(__dirname, "assets") }
+{
+  date: "YYYY-MM-DD",
+  title: "Post Title",
+  excerpt: "One or two sentence summary.",
+  imageUrl: "https://...",
+  href: "/blog/slug",
+  category: "Real Estate",  // must match one of blog.categories
+}
 ```
 
 ---
 
-## 7. Reference Design
+## 7. Known Stubs / TODOs
 
-The hero is modeled after the **FIND Real Estate** website hero:
-- Large text in upper portion of viewport
-- Building rooftop visible at the bottom (cropped, only top floors)
-- Fog/cloud flanking the building at bottom corners
-- SVG wordmark with building showing through letter cutouts (image mask effect)
-- Scroll drives the entire animation via `scrollProgress` (0→1)
+- /About page             → Route not created. Nav link href is "/About"
+- /Expertise page         → Route not created. Nav link href is "/Expertise"
+- Opportunities nav link  → href: "#" — fill when page exists
+- Contact nav link        → href: "#" — fill when page exists
+- WhatsApp number         → cta.whatsapp.phone = "1234567890" — REPLACE with real number
+- OG image URL            → seoMeta.ogImage — REPLACE with production URL
+- SEO meta in <head>      → seoMeta not wired to any <Helmet> or meta tags yet
+- ProcessSection CTA href → "#" — fill when Opportunities page exists
+- Head Office address     → footer.contact[0].value — currently NYC, update to Mumbai
+- Individual blog posts   → /blog/* slugs have no individual article pages yet
+
+---
+
+## 8. Header Behaviour
+
+- Transparent over HeroSection
+- White/blurred (bg-white/95 backdrop-blur-md) after scrolling past Hero
+- Auto-hides on scroll down, reappears on scroll up (300px threshold)
+- Mobile drawer: slides in from right, renders navigation.links + CTA
+- Desktop CTA: plain <a href> — change to <Link> if contact page gets a route
+
+---
+
+## 9. How to Add a New Page
+
+1. Create src/pages/MyPage.tsx
+2. Add route in src/App.tsx:
+   <Route path="/my-page" element={<MyPage />} />
+3. Update matching href in src/content/content.ts
+4. If in nav: change isDropdown: true stub to isDropdown: false and set real href
+
+---
+
+## 10. How to Add a New Section
+
+1. Create src/sections/MySection/index.tsx
+2. Add content block to src/content/content.ts
+3. Import + insert in src/sections/Main/index.tsx at desired position
+4. Follow section pattern from §5: py-16 md:py-[100px], px-6 md:px-16,
+   ScrollScrubRevealText heading, ScrollReveal body
+
+---
+
+Generated: 2026-06-24. Build verified clean at time of writing.

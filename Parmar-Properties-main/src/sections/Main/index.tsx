@@ -6,6 +6,7 @@ import { AgentsSection } from "@/sections/AgentsSection";
 import { TestimonialsSection } from "@/sections/TestimonialsSection";
 import { ServicesSection } from "@/sections/ServicesSection";
 import { SupportSection } from "@/sections/SupportSection";
+import { BlogSection } from "@/sections/BlogSection";
 import { CtaSection } from "@/sections/CtaSection";
 
 const clipStyle = { overflowX: "clip" as const };
@@ -22,6 +23,7 @@ export const Main = () => {
         <TestimonialsSection />
         <ServicesSection />
         <SupportSection />
+        <BlogSection />
         <CtaSection />
       </div>
     </main>

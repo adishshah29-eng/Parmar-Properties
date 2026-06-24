@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { HeaderLogo } from "@/sections/Header/components/HeaderLogo";
 import { DesktopNavigation } from "@/sections/Header/components/DesktopNavigation";
 import { MobileMenuButton } from "@/sections/Header/components/MobileMenuButton";
+import { navigation } from "@/content/content";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -61,10 +62,10 @@ export const Header = () => {
           <DesktopNavigation />
           <div className="flex justify-end items-center">
             <a
-              href="https://parmarproperties.in/contact"
+              href={navigation.ctaButton.href}
               className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 hover:-translate-y-0.5 hover:scale-105 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg whitespace-nowrap"
             >
-              Schedule Consultation
+              {navigation.ctaButton.label}
             </a>
             <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
           </div>
@@ -74,16 +75,22 @@ export const Header = () => {
       {/* Mobile Nav Drawer */}
       <div className={`fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <div className="flex flex-col items-center justify-center h-full gap-8 text-2xl font-['Instrument_Sans']">
-          <a href="/About" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Search</a>
-          <a href="/Expertise" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Agents</a>
-          <a href="/Opportunities" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">Join</a>
-          <a href="/Contact" className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors">About Us</a>
+          {navigation.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-neutral-900 font-medium no-underline hover:text-neutral-600 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
-            href="https://parmarproperties.in/contact"
+            href={navigation.ctaButton.href}
             className="mt-4 inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 hover:-translate-y-0.5 hover:scale-105 text-white font-semibold text-base px-6 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Schedule Consultation
+            {navigation.ctaButton.label}
           </a>
         </div>
       </div>
