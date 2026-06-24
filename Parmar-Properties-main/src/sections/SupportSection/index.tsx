@@ -1,5 +1,6 @@
 import { SupportHeader } from "@/sections/SupportSection/components/SupportHeader";
 import { SupportCard } from "@/sections/SupportSection/components/SupportCard";
+import { support } from "@/content/content";
 
 export const SupportSection = () => {
   return (
@@ -7,36 +8,19 @@ export const SupportSection = () => {
       <div className="max-w-[1920px] mx-auto px-6 md:px-16">
         <SupportHeader />
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 mt-12 md:mt-16 w-full">
-          <SupportCard
-            imageAlt="Immediate HNI Reach"
-            imageSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/18.jpg"
-            title="Immediate HNI Reach"
-            description="Direct access to qualified, liquidity-rich HNI buyers and business families."
-            buttonText="Learn More"
-            iconSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg"
-            iconAlt="Icon"
-            delay={0}
-          />
-          <SupportCard
-            imageAlt="Pre-Launch Velocity"
-            imageSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/91.jpg"
-            title="Pre-Launch Velocity"
-            description="Proven pre-launch and early-launch sales execution capabilities."
-            buttonText="Learn More"
-            iconSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg"
-            iconAlt="Icon"
-            delay={100}
-          />
-          <SupportCard
-            imageAlt="Pricing Insights"
-            imageSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/17.jpg"
-            title="Pricing Insights"
-            description="Market-backed pricing intelligence and transparent mandate-based relationships."
-            buttonText="Learn More"
-            iconSrc="https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg"
-            iconAlt="Icon"
-            delay={200}
-          />
+          {support.cards.map((card, index) => (
+            <SupportCard
+              key={card.title}
+              imageAlt={card.title}
+              imageSrc={card.imageSrc}
+              title={card.title}
+              description={card.description}
+              buttonText={card.buttonText}
+              iconSrc={card.iconSrc}
+              iconAlt="Icon"
+              delay={index * 100}
+            />
+          ))}
         </div>
       </div>
     </section>

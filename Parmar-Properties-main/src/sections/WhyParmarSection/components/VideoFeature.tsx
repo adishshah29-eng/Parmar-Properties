@@ -1,4 +1,5 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { whyParmar } from "@/content/content";
 
 export const VideoFeature = () => {
   return (
@@ -10,7 +11,7 @@ export const VideoFeature = () => {
         className="relative w-full aspect-[4/5] md:aspect-[21/9] rounded-2xl md:rounded-[40px] overflow-hidden"
       >
         <img
-          src="https://c.animaapp.com/mq3zczchi8fb7N/assets/37.jpg"
+          src={whyParmar.featureImageUrl}
           alt="Luxury Real Estate Placeholder"
           className="absolute inset-0 w-full h-full object-cover"
         />

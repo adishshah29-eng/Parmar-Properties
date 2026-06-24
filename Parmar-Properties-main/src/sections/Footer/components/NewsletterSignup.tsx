@@ -1,21 +1,27 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { footer } from "@/content/content";
+import { config } from "@/content/config";
 
 export const NewsletterSignup = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = "https://parmarproperties.in/newsletter-confirmed";
+    window.location.href = config.newsletter.confirmationUrl;
   };
+
+  const headOffice = footer.contact.find(c => c.label === "Head Office");
+  const emailUs = footer.contact.find(c => c.label === "Email Us");
+  const callUs = footer.contact.find(c => c.label === "Call Us");
 
   return (
     <div className="flex flex-col gap-y-12 md:max-w-xl font-['Instrument_Sans']">
       <div>
         <h3 className="text-xl md:text-2xl font-medium tracking-tight mb-6">
-          Subscribe to our Newsletter!
+          {footer.newsletter.heading}
         </h3>
         <form onSubmit={handleSubmit} className="relative border-b border-white/40 pb-3 flex items-center group focus-within:border-white transition-colors duration-300">
           <input
             type="email"
-            placeholder="Enter address"
+            placeholder={footer.newsletter.placeholder}
             name="email"
             className="w-full bg-transparent text-base text-white placeholder-white/50 focus:outline-none focus:ring-0"
             required
@@ -33,43 +39,47 @@ export const NewsletterSignup = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-y-8 md:grid-cols-3 md:gap-x-12 mt-6 md:mt-12">
-        <div className="flex flex-col order-2 md:order-none">
-          <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
-            Head Office
+        {headOffice && (
+          <div className="flex flex-col order-2 md:order-none">
+            <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
+              {headOffice.label}
+            </div>
+            <a
+              href={headOffice.href}
+              className="text-base md:text-sm font-medium leading-relaxed hover:text-white/70 transition-colors"
+            >
+              {headOffice.value}
+            </a>
           </div>
-          <a
-            href="geo://40.75104385252497,-73.98395637414475"
-            className="text-base md:text-sm font-medium leading-relaxed hover:text-white/70 transition-colors"
-          >
-            5 West 37th Street, 12th Floor,
-            <br />
-            New York, NY 10018
-          </a>
-        </div>
+        )}
         
-        <div className="flex flex-col order-1 md:order-none">
-          <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
-            Email Us
+        {emailUs && (
+          <div className="flex flex-col order-1 md:order-none">
+            <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
+              {emailUs.label}
+            </div>
+            <a
+              href={emailUs.href}
+              className="text-xl md:text-sm font-medium hover:text-white/70 transition-colors underline md:no-underline"
+            >
+              {emailUs.value}
+            </a>
           </div>
-          <a
-            href="mailto:hello@parmarproperties.in"
-            className="text-xl md:text-sm font-medium hover:text-white/70 transition-colors underline md:no-underline"
-          >
-            hello@parmarproperties.in
-          </a>
-        </div>
+        )}
         
-        <div className="flex flex-col order-3 md:order-none">
-          <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
-            Call Us
+        {callUs && (
+          <div className="flex flex-col order-3 md:order-none">
+            <div className="hidden md:block text-[11px] font-medium text-white/40 uppercase tracking-widest mb-4">
+              {callUs.label}
+            </div>
+            <a
+              href={callUs.href}
+              className="text-base md:text-sm font-medium hover:text-white/70 transition-colors"
+            >
+              {callUs.value}
+            </a>
           </div>
-          <a
-            href="tel:+12129949965"
-            className="text-base md:text-sm font-medium hover:text-white/70 transition-colors"
-          >
-            +1 212 994 9965
-          </a>
-        </div>
+        )}
       </div>
     </div>
   );

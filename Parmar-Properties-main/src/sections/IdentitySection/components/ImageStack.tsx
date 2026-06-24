@@ -1,12 +1,8 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { identity } from "@/content/content";
 
 export const ImageStack = () => {
-  const images = [
-    "https://c.animaapp.com/mq3zczchi8fb7N/assets/21.jpg",
-    "https://c.animaapp.com/mq3zczchi8fb7N/assets/77.jpg",
-    "https://c.animaapp.com/mq3zczchi8fb7N/assets/37.jpg",
-    "https://c.animaapp.com/mq3zczchi8fb7N/assets/28.jpg",
-  ];
+  const images = identity.images;
 
   const chevronClipPath = "polygon(0% 0%, 53.1% 0%, 100% 50%, 53.1% 100%, 0% 100%, 46.8% 50%)";
 
