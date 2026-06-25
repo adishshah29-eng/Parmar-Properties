@@ -118,7 +118,7 @@ export const HeroSection = () => {
         setScrollProgress(0);
         return;
       }
-      
+
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const section = sectionRef.current;
@@ -132,7 +132,7 @@ export const HeroSection = () => {
         ticking = true;
       }
     };
-    
+
     window.addEventListener("scroll", handle, { passive: true });
     handle();
     return () => window.removeEventListener("scroll", handle);
@@ -195,7 +195,7 @@ export const HeroSection = () => {
   // Mobile:  starts at 175% to balance the entrance from below the screen.
   const buildingStartY = isMobile ? 175 : 45;
   const buildingY = buildingStartY - scrollProgress * 80;
-  
+
   // Building POP effect: scales up to 15% larger as you scroll, creating a looming 3D effect
   const buildingScale = 1 + p1e * 0.15;
 
@@ -222,7 +222,7 @@ export const HeroSection = () => {
   const cloudY = 0; // Clouds stay at a fixed vertical level
   const cloudWidth = isMobile ? "60%" : "44%"; // Reduced cloud size
   const cloudOffset = isMobile ? "-35%" : "-25%"; // Moved them a bit away
-  const cloudTop = isMobile ? "60%" : "15%"; // Brought clouds up to 60% height
+  const cloudTop = isMobile ? "calc(60% + 200px)" : "15%"; // Brought clouds up to 60% height
 
   // Smoke — attached to the building on mobile (shifted extremely high up), or rises late (0.75+) on desktop
   const smokeY = isMobile ? buildingY - 145 : 40 - p2e * 75;
@@ -232,7 +232,7 @@ export const HeroSection = () => {
 
   // SVG text layer — appears right as building phase ends / SVG phase starts
   const textLayerOpacity = easeOut2(Math.max(0, Math.min(1, (scrollProgress - 0.10) / 0.04)));
-  const maskScale = 0.65;
+  const maskScale = isMobile ? 0.94 : 0.60;
   // Building image scrolls from below (y=+30%) to above (y=-30%) inside letter cutouts during SVG+image phase
   const maskParallaxY = 30 - p4e * 60;
 
@@ -366,7 +366,7 @@ export const HeroSection = () => {
         }
       `}</style>
       {/* Dynamic scroll room so mobile devices have a shorter scroll distance */}
-      <section ref={sectionRef} style={{ height: `${scrollVh}vh` }} className="relative w-full">
+      <section id="hero-section" ref={sectionRef} style={{ height: `${scrollVh}vh` }} className="relative w-full">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
 
           {/* ── Layer 1: Sky ── */}
@@ -533,15 +533,15 @@ export const HeroSection = () => {
             </p>
             <a href="https://parmar-properties-listing.vercel.app/" target="_blank"
               className="group inline-flex items-center bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl animate-hero-button"
-              style={{ 
-                fontFamily: "'Instrument Sans', sans-serif", 
+              style={{
+                fontFamily: "'Instrument Sans', sans-serif",
                 fontSize: "clamp(14px, 1.1vw, 32px)",
                 padding: "clamp(12px, 1vw, 32px) clamp(24px, 2vw, 64px)",
                 gap: "clamp(8px, 0.5vw, 16px)"
               }}>
-              Explore Opportunities 
+              Explore Opportunities
               <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
-                <path d="M5 12h14m-7-7 7 7-7 7"/>
+                <path d="M5 12h14m-7-7 7 7-7 7" />
               </svg>
             </a>
           </div>

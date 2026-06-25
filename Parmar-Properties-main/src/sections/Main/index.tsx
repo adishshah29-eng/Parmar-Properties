@@ -2,7 +2,6 @@ import { HeroSection } from "@/sections/HeroSection";
 import { WhyFindSection } from "@/sections/WhyParmarSection";
 import { IdentitySection } from "@/sections/IdentitySection";
 import { ProcessSection } from "@/sections/ProcessSection";
-import { AgentsSection } from "@/sections/AgentsSection";
 import { TestimonialsSection } from "@/sections/TestimonialsSection";
 import { ServicesSection } from "@/sections/ServicesSection";
 import { SupportSection } from "@/sections/SupportSection";
@@ -19,7 +18,6 @@ export const Main = () => {
         <WhyFindSection />
         <IdentitySection />
         <ProcessSection />
-        <AgentsSection />
         <TestimonialsSection />
         <ServicesSection />
         <SupportSection />

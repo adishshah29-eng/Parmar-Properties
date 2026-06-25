@@ -8,7 +8,7 @@ export const AgentsMedia = ({ imageUrl }: AgentsMediaProps) => {
       <div className="text-black/60 font-['Instrument_Sans'] font-semibold tracking-widest text-sm uppercase mb-4 md:mb-6">
         For Agents
       </div>
-      <div className="relative w-full max-w-[280px] md:max-w-[320px] h-[340px] sm:h-auto aspect-[4/5] rounded-none overflow-hidden mt-8 md:mt-24">
+      <div className="relative w-full max-w-[280px] md:max-w-[320px] h-[340px] sm:h-auto aspect-[4/5] rounded-none overflow-hidden mt-8 md:mt-24 hidden md:block">
         <img
           src={imageUrl}
           alt="Agent portrait"

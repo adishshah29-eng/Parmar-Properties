@@ -1,8 +1,8 @@
-import logo from "assets/Parmar logo without bg.webp";
+import logo from "assets/Parmar new  (1).png";
 
 export const HeaderLogo = () => {
   return (
-    <div className="flex items-center h-full">
+    <div className="flex items-center py-[5px]">
       <a
         href="/"
         className="flex items-center transition-opacity duration-200 hover:opacity-80"
@@ -11,7 +11,7 @@ export const HeaderLogo = () => {
         <img
           src={logo}
           alt="Parmar Properties Logo"
-          className="h-[64px] md:h-[72px] w-auto object-contain object-left scale-[1.76] md:scale-[2.42] origin-left pointer-events-none"
+          className="h-[54px] md:h-[52px] w-auto object-contain object-left pointer-events-none"
         />
       </a>
     </div>

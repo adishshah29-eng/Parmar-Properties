@@ -9,10 +9,10 @@ export const FooterLogo = () => {
         aria-label="Go to home page"
       >
         <div className="flex flex-col items-start justify-center font-['Instrument_Sans']">
-          <span className="text-[52px] md:text-[80px] font-bold tracking-tight leading-none">
+          <span className="text-[52px] md:text-[120px] font-bold tracking-tight leading-none">
             PARMAR
           </span>
-          <span className="text-[15px] md:text-[22px] font-medium tracking-[0.3em] text-white/70 leading-none mt-1 md:mt-2">
+          <span className="text-[15px] md:text-[32px] font-medium tracking-[0.3em] text-white/70 leading-none mt-1 md:mt-2">
             PROPERTIES
           </span>
         </div>

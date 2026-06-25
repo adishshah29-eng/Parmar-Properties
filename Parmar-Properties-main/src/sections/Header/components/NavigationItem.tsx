@@ -6,12 +6,17 @@ export type NavigationItemProps = {
 };
 
 export const NavigationItem = ({ label, href, itemVariant, isDropdown }: NavigationItemProps) => {
+  const customStyle = {
+    fontFamily: '"Instrument Sans", "Instrument Sans", sans-serif',
+  };
+
   return (
-    <div className={`group relative font-['Instrument_Sans'] ${itemVariant}`}>
+    <div className={`group relative ${itemVariant}`}>
       {isDropdown ? (
         <button
           type="button"
           className="flex items-center gap-2 text-base font-semibold text-neutral-900 transition-colors duration-200"
+          style={customStyle}
         >
           <span className="relative">
             {label}
@@ -25,6 +30,7 @@ export const NavigationItem = ({ label, href, itemVariant, isDropdown }: Navigat
         <a
           href={href}
           className="block text-base font-semibold text-neutral-900 transition-colors duration-200"
+          style={customStyle}
         >
           <span className="relative">
             {label}

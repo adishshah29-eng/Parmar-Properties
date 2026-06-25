@@ -10,6 +10,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
 
   const isHomePage = location.pathname === "/";
 
@@ -23,6 +24,11 @@ export const Header = () => {
           const currentScrollY = window.scrollY;
           const atTop = currentScrollY === 0;
           const isScrollingDownFast = currentScrollY > lastScrollY && currentScrollY > 300;
+
+          const heroElement = document.getElementById("hero-section");
+          // If no hero element, fallback to innerHeight
+          const heroHeight = heroElement ? heroElement.offsetHeight : window.innerHeight;
+          setIsPastHero(currentScrollY > heroHeight - 100);
 
           // Keep both features: set state for top, and hide appropriately with custom logic
           setIsAtTop(atTop);
@@ -48,7 +54,7 @@ export const Header = () => {
   }, []);
 
   // On blog pages, we want the white background even at the top if it's not the home page
-  const showWhiteBg = !isAtTop || !isHomePage;
+  const showWhiteBg = isHomePage ? (!isAtTop && isPastHero) : true;
 
   return (
     <>
@@ -60,16 +66,10 @@ export const Header = () => {
           : "opacity-100 pointer-events-auto translate-y-0"
       } ${
         showWhiteBg
-          ? "bg-white/95 backdrop-blur-md shadow-sm" 
+          ? "bg-transparent md:bg-white/95 md:backdrop-blur-md md:shadow-sm" 
           : "bg-transparent"
       }`}
     >
-      {!showWhiteBg && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[120px] bg-gradient-to-b from-black/35 via-black/15 to-transparent md:h-[150px]"
-        />
-      )}
       <div className="box-border caret-transparent w-full max-w-[1920px] no-underline mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[64px] relative no-underline z-[100] md:grid-cols-[200px_1fr_200px] md:leading-[1.5] md:min-h-[62px]">
           <div className="relative z-10 w-full">
