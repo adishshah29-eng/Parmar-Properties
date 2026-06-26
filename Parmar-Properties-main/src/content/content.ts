@@ -12,7 +12,8 @@
 export type { BlogPost } from "@/lib/types";
 
 // â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-type NavLink = { label: string; href: string; isDropdown?: boolean };
+type DropdownItem = { label: string; href: string };
+type NavLink = { label: string; href: string; isDropdown?: boolean; dropdownItems?: DropdownItem[] };
 type CtaButton = { label: string; href: string };
 type TextSegment = { text: string; revealColorClass: string; baseColorClass: string };
 type ServiceItem = { number: number; label: string; description: string; imageUrl: string };
@@ -61,8 +62,26 @@ export const navigation = {
   links: [
     { label: "About", href: "/About", isDropdown: false },
     { label: "Expertise", href: "/Expertise", isDropdown: false },
-    { label: "Opportunities", href: "#", isDropdown: true }, // STUB â€” fill when page is ready
-    { label: "Contact", href: "#", isDropdown: true }, // STUB â€” fill when page is ready
+    {
+      label: "Opportunities",
+      href: "#",
+      isDropdown: true,
+      dropdownItems: [
+        { label: "Helpful Partnerships", href: "https://parmarproperties.in/join" },
+        { label: "Commercial", href: "https://parmarproperties.in/services" },
+        { label: "Operating Procedure", href: "https://parmarproperties.in/operating-procedure" },
+        { label: "Rent Vs Buy Calculator", href: "#" }
+      ]
+    },
+    {
+      label: "Contact",
+      href: "#",
+      isDropdown: true,
+      dropdownItems: [
+        { label: "Mail us", href: "mailto:hello@parmarproperties.in" },
+        { label: "WhatsApp us", href: "https://wa.me/1234567890" }
+      ]
+    },
   ] as NavLink[],
   ctaButton: { label: "Schedule Consultation", href: "https://parmarproperties.in/contact" } as CtaButton,
 };
@@ -188,6 +207,21 @@ export const support = {
       href: "https://parmarproperties.in/services",
     },
   ] as SupportCard[],
+};
+
+// ─── About Section ───────────────────────────────────────────
+export const aboutSection = {
+  eyebrow: "Our Heritage & Philosophy",
+  heading: "Forty Years of Unwavering Advisory.",
+  bodySegments: [
+    {
+      text: "With unwavering dedication, we’ve completed over a hundred remarkable projects, each one a testament to our commitment to innovation and elegance.",
+      revealColorClass: "text-[#111111] font-medium",
+      baseColorClass: "text-neutral-300 font-medium",
+    }
+  ] as TextSegment[],
+  ctaButton: { label: "About us", href: "/about" },
+  imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
 };
 
 // â”€â”€â”€ Blog & Resources Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

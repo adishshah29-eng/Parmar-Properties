@@ -21,14 +21,16 @@ export const DesktopNavigation = () => {
       <NavigationItem
         label={opportunities.label}
         href={opportunities.href}
-        itemVariant="text-[10px] leading-[11.5px] md:text-[6.66667px] md:leading-[7.66667px]"
+        itemVariant="items-center gap-x-2.5 flex text-lg font-medium leading-[22.5px] gap-y-2.5 md:gap-x-[6.66667px] md:text-[13.3333px] md:leading-[16.6667px] md:gap-y-[6.66667px]"
         isDropdown={opportunities.isDropdown ?? true}
+        dropdownItems={opportunities.dropdownItems}
       />
       <NavigationItem
         label={contact.label}
         href={contact.href}
-        itemVariant="text-[10px] leading-[11.5px] md:text-[6.66667px] md:leading-[7.66667px]"
+        itemVariant="items-center gap-x-2.5 flex text-lg font-medium leading-[22.5px] gap-y-2.5 md:gap-x-[6.66667px] md:text-[13.3333px] md:leading-[16.6667px] md:gap-y-[6.66667px]"
         isDropdown={contact.isDropdown ?? true}
+        dropdownItems={contact.dropdownItems}
       />
     </nav>
   );

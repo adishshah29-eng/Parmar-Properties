@@ -53,6 +53,8 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
   // On blog pages, we want the white background even at the top if it's not the home page
   const showWhiteBg = isHomePage ? (!isAtTop && isPastHero) : true;
 
@@ -83,36 +85,88 @@ export const Header = () => {
             >
               {navigation.ctaButton.label}
             </a>
-            <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+            <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              if (isMobileMenuOpen) setActiveDropdown(null);
+            }} />
           </div>
         </div>
       </div>
     </header>
-
+ 
       {/* Mobile Nav Drawer */}
       <div 
         className={`fixed inset-0 bg-white z-[90] transition-all duration-300 md:hidden flex flex-col pt-28 px-8 pb-10 ${
           isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col flex-1 gap-7 mt-2">
-          {navigation.links.map((link, index) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className={`flex items-center justify-between text-black text-[28px] md:text-5xl font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-500 ${
-                isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-              }`}
-              style={{ transitionDelay: `${isMobileMenuOpen ? 100 + index * 50 : 0}ms`, fontFamily: "'Inter', sans-serif" }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <span>{link.label}</span>
-              {/* Thin chevron matching the image */}
-              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
-                <path d="M1 1L7 7L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          ))}
+        <div className="flex flex-col flex-1 gap-6 mt-2 overflow-y-auto">
+          {navigation.links.map((link, index) => {
+            const hasDropdown = link.isDropdown && link.dropdownItems && link.dropdownItems.length > 0;
+            const isOpen = activeDropdown === link.label;
+
+            return (
+              <div key={link.label} className="flex flex-col">
+                {hasDropdown ? (
+                  <button
+                    type="button"
+                    onClick={() => setActiveDropdown(isOpen ? null : link.label)}
+                    className={`flex items-center justify-between text-black text-[28px] md:text-5xl font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-500 w-full text-left py-1 ${
+                      isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    }`}
+                    style={{ transitionDelay: `${isMobileMenuOpen ? 100 + index * 50 : 0}ms`, fontFamily: "'Inter', sans-serif" }}
+                  >
+                    <span>{link.label}</span>
+                    <svg 
+                      width="16" 
+                      height="10" 
+                      viewBox="0 0 14 8" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className={`opacity-80 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    >
+                      <path d="M1 1L7 7L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                ) : (
+                  <a
+                    href={link.href}
+                    className={`flex items-center justify-between text-black text-[28px] md:text-5xl font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-500 py-1 ${
+                      isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    }`}
+                    style={{ transitionDelay: `${isMobileMenuOpen ? 100 + index * 50 : 0}ms`, fontFamily: "'Inter', sans-serif" }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <span>{link.label}</span>
+                  </a>
+                )}
+
+                {/* Subitems container */}
+                {hasDropdown && (
+                  <div 
+                    className={`flex flex-col gap-3 pl-4 overflow-hidden transition-all duration-300 ease-in-out ${
+                      isOpen ? "max-h-[300px] mt-4 mb-2 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    {link.dropdownItems!.map((subItem) => (
+                      <a
+                        key={subItem.label}
+                        href={subItem.href}
+                        className="text-xl text-neutral-600 hover:text-black py-1.5 transition-colors"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          setActiveDropdown(null);
+                        }}
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         
         <div className={`mt-auto w-full transition-all duration-500 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`} style={{ transitionDelay: `${isMobileMenuOpen ? 100 + navigation.links.length * 50 : 0}ms` }}>
