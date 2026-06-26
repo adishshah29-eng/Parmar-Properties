@@ -15,7 +15,7 @@ const ArrowIcon = ({ size = 16 }: { size?: number }) => (
 );
 
 const SearchIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
   </svg>
 );
@@ -66,15 +66,15 @@ export const BlogPage = () => {
 
       <div className="px-5 md:px-12">
         <ScrollReveal direction="up" delay={120}>
-          <div className="relative flex items-center pb-2 border-b border-black">
+          <div className="group relative flex items-center pb-2 border-b border-black/10 focus-within:border-black/60 transition-colors duration-500">
             <input
               type="text"
               placeholder="Search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 text-[14px] md:text-[20px] text-black placeholder-black bg-transparent outline-none py-1 font-['Instrument_Sans']"
+              className="flex-1 text-[14px] md:text-[20px] text-black placeholder-black/30 bg-transparent outline-none py-1 font-['Instrument_Sans']"
             />
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 text-black">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 text-black/30 group-focus-within:text-black/60 transition-colors duration-500">
               <SearchIcon />
             </div>
           </div>
@@ -125,7 +125,7 @@ export const BlogPage = () => {
         {/* Featured post — shown when not searching/filtering */}
         {search.trim() === "" && activeCategory === "All" && (
           loading ? (
-            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-10 md:mb-16 border border-black/10 overflow-hidden animate-pulse">
+            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-10 md:mb-16 border border-transparent overflow-hidden animate-pulse">
               <div className="bg-neutral-200 aspect-[16/10] md:aspect-auto" />
               <div className="p-8 md:p-10 bg-white flex flex-col gap-4 justify-center">
                 <div className="h-3 w-24 bg-neutral-200 rounded" />
@@ -136,7 +136,7 @@ export const BlogPage = () => {
               </div>
             </div>
           ) : featuredPost && (
-            <ScrollReveal direction="up" delay={0} className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-10 md:mb-16 border border-black/10 rounded-none overflow-hidden">
+            <ScrollReveal direction="up" delay={0} className="relative grid grid-cols-1 md:grid-cols-2 gap-0 mb-10 md:mb-16 border border-transparent rounded-none overflow-hidden">
               <ScrollReveal direction="left" delay={0} className="relative aspect-[16/10] md:aspect-auto overflow-hidden">
                 <img
                   src={featuredPost.imageUrl}

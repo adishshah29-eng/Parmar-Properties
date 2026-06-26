@@ -57,7 +57,7 @@ const RowCard = ({
 }) => (
   <ScrollReveal
     delay={delay}
-    className="grid grid-cols-1 md:grid-cols-[minmax(0,1.02fr)_minmax(0,1.35fr)] gap-8 md:gap-14 py-10 md:py-14 items-stretch"
+    className="grid grid-cols-1 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-6 md:gap-10 py-7 md:py-10 items-stretch"
   >
     <div className="flex h-full flex-col justify-between">
       {loading ? (
@@ -70,7 +70,7 @@ const RowCard = ({
           {post.date}
         </time>
       )}
-      <div className="pt-10 md:pt-16 flex flex-col gap-5 max-w-[550px]">
+      <div className="pt-7 md:pt-10 flex flex-col gap-4 max-w-[520px]">
         {loading ? (
           <>
             <Shimmer className="w-full h-8" />
@@ -80,15 +80,15 @@ const RowCard = ({
           </>
         ) : (
           <>
-            <h3 className="text-[28px] md:text-[33px] font-['Instrument_Sans'] font-medium leading-[1.12] tracking-[-0.05em]">
+            <h3 className="text-[22px] md:text-[26px] font-['Instrument_Sans'] font-medium leading-[1.1] tracking-[-0.05em]">
               {post.title}
             </h3>
-            <p className="text-[13px] md:text-[14px] text-black/85 leading-[1.55] max-w-[510px]">
+            <p className="text-[12px] md:text-[13px] text-black/85 leading-[1.5] max-w-[460px]">
               {post.excerpt}
             </p>
             <Link
               to={post.href}
-              className="mt-4 inline-flex items-center gap-3 w-fit rounded-full border border-black/15 bg-white/70 px-5 py-3 text-sm font-medium text-black shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-all duration-300 hover:bg-black hover:text-white hover:border-black"
+              className="mt-3 inline-flex items-center gap-3 w-fit rounded-full border border-black/15 bg-white/70 px-4 py-2.5 text-sm font-medium text-black shadow-[0_1px_0_rgba(0,0,0,0.04)] transition-all duration-300 hover:bg-black hover:text-white hover:border-black"
             >
               Read More
               <ArrowIcon size={14} />
@@ -98,7 +98,7 @@ const RowCard = ({
       </div>
     </div>
 
-    <div className="overflow-hidden rounded-none aspect-[16/10] md:aspect-[16/9]">
+    <div className="overflow-hidden rounded-none aspect-[16/10] md:aspect-[4/3]">
       {loading ? (
         <Shimmer className="w-full h-full" />
       ) : (

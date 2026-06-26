@@ -7,7 +7,9 @@ import { BlogPreviewCard, BlogPreviewCardSkeleton } from "@/components/BlogPrevi
 
 export const BlogSection = () => {
   const { posts, loading } = useBlogPosts();
-  const previewPosts = posts.slice(0, 3);
+  const previewPosts = [...posts]
+    .sort((a, b) => a.gridOrder - b.gridOrder)
+    .slice(0, 3);
 
   return (
     <section className="bg-[#f3f1ed] text-black py-16 md:py-[100px] w-full overflow-hidden">

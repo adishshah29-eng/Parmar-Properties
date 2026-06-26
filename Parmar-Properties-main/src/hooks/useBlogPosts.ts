@@ -119,11 +119,17 @@ export function useAllPostsAdmin(): {
       }
 
       const postIds = postRows.map((p) => p.id);
-      const { data: sectionRows } = await supabase
+      const { data: sectionRows, error: secErr } = await supabase
         .from("post_sections")
         .select("*")
         .in("post_id", postIds)
         .order("order", { ascending: true });
+
+      if (secErr) {
+        if (!cancelled) setError(secErr.message);
+        setLoading(false);
+        return;
+      }
 
       const sectionsByPost = (sectionRows ?? []).reduce<
         Record<string, typeof sectionRows>

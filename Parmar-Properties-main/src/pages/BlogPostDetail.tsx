@@ -14,18 +14,6 @@ const ArrowIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-const XIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
-
-const FacebookIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 3.656 10.99 8.792 12.75v-9.022H5.568v-3.728h3.224V7.226c0-3.18 1.89-4.944 4.798-4.944 1.393 0 2.852.248 2.852.248v3.136h-1.607c-1.576 0-2.067.978-2.067 1.983v2.38h3.533l-.565 3.728h-2.968v9.022c5.136-1.76 8.792-6.76 8.792-12.75z"/>
-  </svg>
-);
-
 export const BlogPostDetail = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<BlogPost | null | undefined>(undefined); // undefined=loading, null=not found
@@ -120,14 +108,6 @@ export const BlogPostDetail = () => {
                 </h1>
               </ScrollReveal>
 
-              <ScrollReveal direction="up" delay={200} className="mt-12 flex gap-4">
-                <button className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 text-black/60">
-                  <XIcon />
-                </button>
-                <button className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 text-black/60">
-                  <FacebookIcon />
-                </button>
-              </ScrollReveal>
             </div>
 
             {/* Right Column: Content */}
