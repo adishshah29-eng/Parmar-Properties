@@ -17,6 +17,8 @@ export const ProcessHeader = () => {
       <ScrollReveal delay={200}>
         <a
           href={processSouthMumbai.ctaButton.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center bg-black text-white px-8 py-4 rounded-full font-medium text-sm transition-transform hover:scale-105"
         >
           <span>{processSouthMumbai.ctaButton.label}</span>

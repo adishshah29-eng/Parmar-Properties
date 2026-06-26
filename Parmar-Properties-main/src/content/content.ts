@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // content.ts â€” Single source of truth for all user-facing content
 // NO React, NO JSX. Pure TypeScript.
 //
@@ -167,7 +167,7 @@ export const services = {
 export const processSouthMumbai = {
   heading: "Why South Mumbai.",
   subHeading: "Why South Mumbai:",
-  ctaButton: { label: "Explore Opportunities", href: "#" } as CtaButton, // STUB â€” fill when page is ready
+  ctaButton: { label: "Explore Opportunities", href: "https://parmar-properties-listing.vercel.app/" } as CtaButton,
   steps: [
     { stepNumber: "01", title: "Consistent High Liquidity.", description: "â‚¹12,000+ Cr annual luxury transaction volume." },
     { stepNumber: "02", title: "HNI Business Families.", description: "78% of buyers in this premium market are HNI business families." },
