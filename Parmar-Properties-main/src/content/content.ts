@@ -12,8 +12,12 @@
 export type { BlogPost } from "@/lib/types";
 
 // â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-type DropdownItem = { label: string; href: string };
-type NavLink = { label: string; href: string; isDropdown?: boolean; dropdownItems?: DropdownItem[] };
+type NavLink = {
+  label: string;
+  href: string;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href: string }[];
+};
 type CtaButton = { label: string; href: string };
 type TextSegment = { text: string; revealColorClass: string; baseColorClass: string };
 type ServiceItem = { number: number; label: string; description: string; imageUrl: string };
@@ -45,7 +49,7 @@ type BlogPost = {
 export const seoMeta = {
   title: "Parmar Properties â€” South Mumbai's Luxury Real Estate Advisory",
   description: "40+ years of premium South Bombay luxury real estate advisory. Record-breaking sales, HNI buyer access, pre-launch inventory.",
-  ogImage: "https://parmarproperties.in/og-image.jpg", // TODO: replace with production OG image URL
+  ogImage: "https://parmar-properties-two.vercel.app/og-image.jpg", // TODO: replace with production OG image URL
   ogUrl: "https://parmar-properties-two.vercel.app",
 };
 
@@ -60,17 +64,25 @@ export const brand = {
 // â”€â”€â”€ Header / Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const navigation = {
   links: [
-    { label: "About", href: "/About", isDropdown: false },
-    { label: "Expertise", href: "/Expertise", isDropdown: false },
+    {
+      label: "About",
+      href: "/About",
+      isDropdown: true,
+      dropdownItems: [
+        { label: "About Us", href: "/About" },
+        { label: "Blog", href: "/blog" },
+        { label: "Press", href: "#" }
+      ]
+    },
+    { label: "Expertise", href: "/#expertise", isDropdown: false },
     {
       label: "Opportunities",
       href: "#",
       isDropdown: true,
       dropdownItems: [
-        { label: "Helpful Partnerships", href: "https://parmarproperties.in/join" },
-        { label: "Commercial", href: "https://parmarproperties.in/services" },
-        { label: "Operating Procedure", href: "https://parmarproperties.in/operating-procedure" },
-        { label: "Rent Vs Buy Calculator", href: "#" }
+        { label: "Buy", href: "https://parmar-properties-listing.vercel.app/" },
+        { label: "Sell", href: "#" },
+        { label: "Lease", href: "#" }
       ]
     },
     {
@@ -78,12 +90,12 @@ export const navigation = {
       href: "#",
       isDropdown: true,
       dropdownItems: [
-        { label: "Mail us", href: "mailto:hello@parmarproperties.in" },
-        { label: "WhatsApp us", href: "https://wa.me/1234567890" }
+        { label: "WhatsApp us", href: "https://wa.me/1234567890" },
+        { label: "Email Us", href: "mailto:hello@parmar-properties-two.vercel.app" }
       ]
     },
   ] as NavLink[],
-  ctaButton: { label: "Schedule Consultation", href: "https://parmarproperties.in/contact" } as CtaButton,
+  ctaButton: { label: "Schedule Consultation", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
 };
 
 // â”€â”€â”€ Hero Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -167,7 +179,7 @@ export const services = {
 export const processSouthMumbai = {
   heading: "Why South Mumbai.",
   subHeading: "Why South Mumbai:",
-  ctaButton: { label: "Explore Opportunities", href: "https://parmar-properties-listing.vercel.app/" } as CtaButton,
+  ctaButton: { label: "Explore Opportunities", href: "#" } as CtaButton, // STUB â€” fill when page is ready
   steps: [
     { stepNumber: "01", title: "Consistent High Liquidity.", description: "â‚¹12,000+ Cr annual luxury transaction volume." },
     { stepNumber: "02", title: "HNI Business Families.", description: "78% of buyers in this premium market are HNI business families." },
@@ -188,7 +200,7 @@ export const support = {
       imageSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/18.jpg",
       iconSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg",
       buttonText: "Learn More",
-      href: "https://parmarproperties.in/services",
+      href: "https://parmar-properties-two.vercel.app/services",
     },
     {
       title: "Pre-Launch Velocity",
@@ -196,7 +208,7 @@ export const support = {
       imageSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/91.jpg",
       iconSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg",
       buttonText: "Learn More",
-      href: "https://parmarproperties.in/services",
+      href: "https://parmar-properties-two.vercel.app/services",
     },
     {
       title: "Pricing Insights",
@@ -204,7 +216,7 @@ export const support = {
       imageSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/17.jpg",
       iconSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg",
       buttonText: "Learn More",
-      href: "https://parmarproperties.in/services",
+      href: "https://parmar-properties-two.vercel.app/services",
     },
   ] as SupportCard[],
 };
@@ -215,13 +227,18 @@ export const aboutSection = {
   heading: "Forty Years of Unwavering Advisory.",
   bodySegments: [
     {
-      text: "With unwavering dedication, we’ve completed over a hundred remarkable projects, each one a testament to our commitment to innovation and elegance.",
-      revealColorClass: "text-[#111111] font-medium",
+      text: "For over four decades, Parmar Properties has been the silent force behind South Mumbai's most significant acquisitions.",
+      revealColorClass: "text-black font-semibold",
+      baseColorClass: "text-neutral-300 font-semibold",
+    },
+    {
+      text: " We do not simply list properties. We advise, strategize, and execute with absolute precision, protecting the legacy of South Bombay's most prominent families.",
+      revealColorClass: "text-neutral-500 font-medium",
       baseColorClass: "text-neutral-300 font-medium",
-    }
+    },
   ] as TextSegment[],
-  ctaButton: { label: "About us", href: "/about" },
-  imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  buttonLabel: "About us",
+  imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
 };
 
 // â”€â”€â”€ Blog & Resources Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -252,7 +269,7 @@ export const agents = {
       baseColorClass: "text-neutral-200 font-medium",
     },
   ] as TextSegment[],
-  ctaButton: { label: "Connect With Us", href: "https://parmarproperties.in/join" } as CtaButton,
+  ctaButton: { label: "Connect With Us", href: "https://parmar-properties-two.vercel.app/join" } as CtaButton,
 };
 
 // â”€â”€â”€ Testimonials Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -274,9 +291,9 @@ export const testimonials = {
 
 // â”€â”€â”€ CTA Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const cta = {
-  headline: "Parmar Properties. South Mumbai's Trusted Luxury Real Estate Advisory.",
+  headline: "Parmar Properties. <br/> South Mumbai's Trusted Luxury Real Estate Advisory.",
   backgroundImageUrl: "https://c.animaapp.com/mq3zczchi8fb7N/assets/14.webp",
-  primaryButton: { label: "Let's Get Started", href: "https://parmarproperties.in/contact" } as CtaButton,
+  primaryButton: { label: "Let's Get Started", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
   // Component builds `https://wa.me/${cta.whatsapp.phone}` â€” edit only the number here.
   whatsapp: { label: "Chat on WhatsApp", phone: "1234567890" }, // TODO: replace with real number
 };
@@ -284,10 +301,10 @@ export const cta = {
 // â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const footer = {
   primaryLinks: [
-    { label: "Search", href: "https://parmarproperties.in/search" },
-    { label: "Agents", href: "https://parmarproperties.in/agents" },
-    { label: "Join", href: "https://parmarproperties.in/join" },
-    { label: "About Us", href: "https://parmarproperties.in/about" },
+    { label: "Search", href: "https://parmar-properties-two.vercel.app/search" },
+    { label: "Agents", href: "https://parmar-properties-two.vercel.app/agents" },
+    { label: "Join", href: "https://parmar-properties-two.vercel.app/join" },
+    { label: "About Us", href: "https://parmar-properties-two.vercel.app/about" },
     { label: "Agent Portal", href: "https://app.findrealestate.com/authentication/sign-in" },
   ] as FooterLink[],
   socialLinks: [
@@ -297,11 +314,11 @@ export const footer = {
     { label: "Linkedin", href: "https://www.linkedin.com/company/parmarproperties" },
   ] as FooterLink[],
   legalLinks: [
-    { label: "Terms", href: "https://parmarproperties.in/terms-of-service" },
-    { label: "Privacy policy", href: "https://parmarproperties.in/privacy-policy" },
+    { label: "Terms", href: "https://parmar-properties-two.vercel.app/terms-of-service" },
+    { label: "Privacy policy", href: "https://parmar-properties-two.vercel.app/privacy-policy" },
     { label: "Fair Housing Notice", href: "https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf" },
-    { label: "Operating Procedure", href: "https://parmarproperties.in/operating-procedure" },
-    { label: "Press", href: "https://parmarproperties.in/press" },
+    { label: "Operating Procedure", href: "https://parmar-properties-two.vercel.app/operating-procedure" },
+    { label: "Press", href: "https://parmar-properties-two.vercel.app/press" },
   ] as FooterLink[],
   legalNotices: [
     "Housing Choice Vouchers Welcome",
@@ -313,7 +330,7 @@ export const footer = {
   },
   contact: [
     { label: "Head Office", value: "5 West 37th Street, 12th Floor, New York, NY 10018", href: "geo://40.75104385252497,-73.98395637414475" },
-    { label: "Email Us", value: "hello@parmarproperties.in", href: "mailto:hello@parmarproperties.in" },
+    { label: "Email Us", value: "hello@parmar-properties-two.vercel.app", href: "mailto:hello@parmar-properties-two.vercel.app" },
     { label: "Call Us", value: "+1 212 994 9965", href: "tel:+12129949965" },
   ] as ContactInfo[],
 };

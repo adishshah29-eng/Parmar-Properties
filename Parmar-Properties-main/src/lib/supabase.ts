@@ -14,6 +14,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
     "[Parmar] Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY in .env — " +
     "blog data will not load until these are set."
   );
+} else {
+  console.log("Supabase Anon Key loaded:", supabaseAnonKey.slice(0, 15) + "...");
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

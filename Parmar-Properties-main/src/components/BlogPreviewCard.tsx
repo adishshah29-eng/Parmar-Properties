@@ -98,7 +98,7 @@ const RowCard = ({
       </div>
     </div>
 
-    <div className="overflow-hidden rounded-none aspect-[16/10] md:aspect-[16/9]">
+    <div className="overflow-hidden rounded-none aspect-[2.39/1]">
       {loading ? (
         <Shimmer className="w-full h-full" />
       ) : (
@@ -125,7 +125,7 @@ const GridCard = ({
   loading?: boolean;
 }) => (
   <ScrollReveal delay={delay} className="flex flex-col gap-3 group">
-    <div className="overflow-hidden aspect-[4/3]">
+    <div className="overflow-hidden aspect-[2.39/1]">
       {loading ? (
         <Shimmer className="w-full h-full" />
       ) : (
@@ -183,7 +183,7 @@ const ArticleCard = ({
   <ScrollReveal delay={delay} className="flex flex-col gap-3 group">
     <Link
       to={post.href}
-      className="overflow-hidden rounded-none aspect-[16/10] md:aspect-[16/9] block"
+      className="overflow-hidden rounded-none aspect-[2.39/1] block"
     >
       {loading ? (
         <Shimmer className="w-full h-full" />

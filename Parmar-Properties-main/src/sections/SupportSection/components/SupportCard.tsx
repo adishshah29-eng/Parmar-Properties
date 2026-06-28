@@ -14,10 +14,10 @@ export type SupportCardProps = {
 
 export const SupportCard = (props: SupportCardProps) => {
   return (
-      <div className="group relative flex-1 transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] hover:flex-[1.8] lg:hover:flex-[2.5] min-h-[320px] md:min-h-[380px] lg:min-h-[420px] rounded-xl overflow-hidden cursor-pointer">
+      <div className="group relative flex-1 flex flex-col transition-[flex] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] hover:flex-[1.8] lg:hover:flex-[2.5] min-h-[320px] md:min-h-[380px] lg:min-h-[420px] rounded-xl overflow-hidden cursor-pointer">
         <ScrollReveal 
           delay={props.delay || 0} 
-          className="w-full h-full flex flex-col justify-between p-6 md:p-8"
+          className="w-full flex-1 flex flex-col justify-between p-6 md:p-8"
         >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
@@ -46,7 +46,7 @@ export const SupportCard = (props: SupportCardProps) => {
           {/* Content Bottom (Button) */}
           <div className="relative z-10 mt-auto transition-transform duration-500 ease-in-out group-hover:translate-y-0">
             <a
-              href={props.href || "https://parmarproperties.in/services"}
+              href={props.href || "https://parmar-properties-two.vercel.app/services"}
               className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/50 text-white font-['Instrument_Sans'] text-sm md:text-base font-medium transition-all duration-300 group-hover:bg-white group-hover:text-black group-hover:border-white"
             >
               {props.buttonText}

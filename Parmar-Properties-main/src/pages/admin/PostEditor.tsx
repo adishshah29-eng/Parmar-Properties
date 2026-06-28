@@ -936,6 +936,11 @@ export const PostEditor = () => {
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) {
+                        if (file.size > 5 * 1024 * 1024) {
+                          setImageError("Image size must be less than 5MB.");
+                          e.currentTarget.value = "";
+                          return;
+                        }
                         handleImageUpload(file);
                         e.currentTarget.value = "";
                       }

@@ -1,17 +1,17 @@
+import { Link } from "react-router-dom";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { SplitTextReveal } from "@/components/SplitTextReveal";
 import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
+import { SplitTextReveal } from "@/components/SplitTextReveal";
 import { aboutSection } from "@/content/content";
 
 export const AboutSection = () => {
   return (
-    <section className="bg-white relative py-16 md:py-24 w-full overflow-hidden border-y border-black/5">
-      <div className="flex flex-col gap-16 md:gap-24 w-full max-w-[1920px] mx-auto px-6 md:px-16 2xl:px-32">
-        
-        {/* Top Section: Eyebrow Left, Heading Right */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start w-full">
+    <section className="bg-white relative py-16 md:py-[100px] w-full overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-16 lg:px-24 xl:px-32 flex flex-col gap-12 md:gap-16">
+        {/* Header Grid: Matches other sections (small on left, big on right) */}
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,420px)_1fr] gap-10 md:gap-16 items-start pb-4">
           {/* Left Column: Eyebrow */}
-          <div className="w-full md:w-[35%] lg:w-[40%] flex-shrink-0">
+          <div className="w-full">
             <ScrollReveal delay={100} direction="right">
               <p className="text-black font-['Instrument_Sans'] text-lg md:text-xl font-semibold tracking-[0.02em] uppercase">
                 {aboutSection.eyebrow}
@@ -19,56 +19,57 @@ export const AboutSection = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right Column: Heading */}
-          <div className="w-full md:w-[65%] lg:w-[60%]">
-            <ScrollReveal delay={150}>
-              <h2 className="font-['Instrument_Sans'] tracking-[-0.04em] leading-[1.05] text-[36px] md:text-[54px] lg:text-[64px] font-semibold text-black">
+          {/* Right Column: Premium SplitTextReveal Headline */}
+          <div className="w-full">
+            <ScrollReveal delay={100} direction="up">
+              <h2 className="font-['Instrument_Sans'] tracking-[-0.03em] leading-[1.2] text-[26px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-semibold text-black text-balance">
                 <SplitTextReveal text={aboutSection.heading} initialDelay={100} />
               </h2>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Bottom Section: 2 columns */}
-        <div className="w-full flex flex-col-reverse md:flex-row gap-12 md:gap-20 items-end justify-between">
-          
-          <div className="w-full md:w-[60%] lg:w-[55%]">
-            <ScrollReveal 
-              direction="right" 
-              distance={100}
-              duration={1200}
-              className="relative w-full rounded-none overflow-hidden shadow-sm"
+        {/* Bottom Section: Image on LEFT, Description on RIGHT */}
+        <div className="grid grid-cols-1 md:grid-cols-[1.8fr_1.2fr] gap-10 md:gap-16 items-stretch">
+          {/* Left Column: Sharp Image with LEFT to RIGHT reveal animation */}
+          <div className="w-full h-full">
+            <ScrollReveal
+              direction="left"
+              distance={120}
+              duration={1600}
+              className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-none overflow-hidden shadow-sm h-full"
             >
               <img
                 src={aboutSection.imageUrl}
-                alt="About us visual"
+                alt="Parmar Properties Heritage"
                 loading="lazy"
-                className="w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10] transition-transform duration-[2000ms] hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] hover:scale-105"
               />
             </ScrollReveal>
           </div>
 
-          {/* Right text + Button */}
-          <div className="w-full md:w-[38%] flex flex-col gap-8 pb-4">
-            <ScrollReveal delay={250}>
-              <ScrollScrubRevealText
-                as="p"
-                className="font-['Instrument_Sans'] tracking-[-0.02em] leading-relaxed text-lg md:text-xl text-neutral-600 font-medium"
-                segments={aboutSection.bodySegments}
-                scrubStart="top 90%"
-                scrubEnd="center 50%"
-              />
-            </ScrollReveal>
-            <ScrollReveal delay={350} direction="up">
-              <a
-                href={aboutSection.ctaButton.href}
-                className="inline-block bg-[#1a1a1a] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-black transition-colors w-fit font-['Instrument_Sans']"
+          {/* Right Column: Narrative Copy & Button */}
+          <div className="flex flex-col justify-between gap-8 max-w-[420px] h-full py-2">
+            <div className="flex flex-col gap-6 md:gap-8">
+              <ScrollReveal delay={200}>
+                <ScrollScrubRevealText
+                  as="p"
+                  className="font-['Instrument_Sans'] tracking-[-0.02em] leading-[1.2] text-xl md:text-2xl lg:text-[26px] text-balance"
+                  segments={aboutSection.bodySegments}
+                  scrubStart="top 90%"
+                  scrubEnd="center 50%"
+                />
+              </ScrollReveal>
+            </div>
+            <ScrollReveal delay={300} direction="up">
+              <Link
+                to="/about"
+                className="bg-black text-white text-xs md:text-sm font-semibold px-6 py-3 rounded-full hover:bg-black/85 transition-all duration-300 w-fit inline-block tracking-normal shadow-sm hover:shadow"
               >
-                {aboutSection.ctaButton.label}
-              </a>
+                {aboutSection.buttonLabel}
+              </Link>
             </ScrollReveal>
           </div>
-
         </div>
       </div>
     </section>
