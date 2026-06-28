@@ -4,7 +4,15 @@ import { Footer } from "@/sections/Footer/index";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
 import { SplitTextReveal } from "@/components/SplitTextReveal";
-
+import Tejukaya from "assets/Tejukaya.webp";
+import Sugee from "assets/sugee-Photoroom.webp";
+import Rustomjee from "assets/Rustomjee-Photoroom.webp";
+import RunwalWebp from "assets/Runwal.webp";
+import PeninsulaLand from "assets/Peninsula land-Photoroom.webp";
+import Lodha from "assets/lodha-500x328-Photoroom.webp";
+import Bhoomi from "assets/bhoomi.webp";
+import Avighna from "assets/Avighna-Photoroom.webp";
+import Avhad from "assets/avhad-Photoroom.webp";
 const ArrowIcon = ({ size = 16 }: { size?: number }) => (
   <svg
     width={size}
@@ -33,12 +41,12 @@ const useCountUp = (end: number, duration: number = 1600, startImmediately: bool
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easeOutProgress = progress;
         const currentCount = Math.round(easeOutProgress * end);
-        
+
         if (currentCount !== lastCount) {
           setCount(currentCount);
           lastCount = currentCount;
         }
-        
+
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }
@@ -60,12 +68,12 @@ const useCountUp = (end: number, duration: number = 1600, startImmediately: bool
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const easeOutProgress = progress;
             const currentCount = Math.round(easeOutProgress * end);
-            
+
             if (currentCount !== lastCount) {
               setCount(currentCount);
               lastCount = currentCount;
             }
-            
+
             if (progress < 1) {
               window.requestAnimationFrame(step);
             }
@@ -78,7 +86,7 @@ const useCountUp = (end: number, duration: number = 1600, startImmediately: bool
     );
 
     let timeoutId = setTimeout(() => {
-        observer.observe(element);
+      observer.observe(element);
     }, 100);
 
     return () => {
@@ -90,19 +98,19 @@ const useCountUp = (end: number, duration: number = 1600, startImmediately: bool
   return { count, ref };
 };
 
-const AnimatedStat = ({ 
-  end, 
-  suffix, 
-  prefix = "", 
-  label, 
-  alignLeft = false, 
+const AnimatedStat = ({
+  end,
+  suffix,
+  prefix = "",
+  label,
+  alignLeft = false,
   textSize = "text-[64px] md:text-[88px]",
   labelColor = "text-white/50",
   startImmediately = false
-}: { 
-  end: number; 
-  suffix?: React.ReactNode; 
-  prefix?: string; 
+}: {
+  end: number;
+  suffix?: React.ReactNode;
+  prefix?: string;
   label: string;
   alignLeft?: boolean;
   textSize?: string;
@@ -152,12 +160,15 @@ export const AboutPage = () => {
   ];
 
   const partners = [
-    { name: "LODHA", logo: "LODHA" },
-    { name: "OBEROI REALTY", logo: "OBEROI REALTY" },
-    { name: "GODREJ PROPERTIES", logo: "GODREJ" },
-    { name: "RUNWAL", logo: "RUNWAL" },
-    { name: "RAHEJA", logo: "RAHEJA" },
-    { name: "PRESTIGE", logo: "PRESTIGE" },
+    { name: "Tejukaya", logo: Tejukaya },
+    { name: "Sugee", logo: Sugee, customClass: "scale-125 md:scale-150" },
+    { name: "Rustomjee", logo: Rustomjee, customClass: "scale-125 md:scale-150" },
+    { name: "Runwal", logo: RunwalWebp, customClass: "scale-125 md:scale-150" },
+    { name: "Peninsula Land", logo: PeninsulaLand, customClass: "scale-125 md:scale-150" },
+    { name: "Lodha", logo: Lodha, customClass: "scale-125 md:scale-150" },
+    { name: "Bhoomi", logo: Bhoomi, customClass: "scale-125 md:scale-150" },
+    { name: "Avighna", logo: Avighna },
+    { name: "Avhad", logo: Avhad },
   ];
 
   return (
@@ -183,7 +194,7 @@ export const AboutPage = () => {
                   Est. 1985 &mdash; South Mumbai
                 </p>
               </ScrollReveal>
-              
+
               <h1 className="text-[52px] md:text-[80px] lg:text-[96px] font-['Instrument_Serif'] italic font-normal tracking-[-0.04em] text-black max-w-[800px] mb-8 flex flex-col gap-0 leading-[0.85]">
                 <span><SplitTextReveal text="Access." initialDelay={100} /></span>
                 <span><SplitTextReveal text="Influence." initialDelay={300} /></span>
@@ -198,12 +209,12 @@ export const AboutPage = () => {
 
               <div className="flex gap-12 border-t border-black/10 pt-8 w-full max-w-[540px]">
                 <div>
-                  <AnimatedStat 
-                    end={12} 
-                    prefix="₹" 
-                    suffix={<><span className="text-[18px] md:text-[24px]">k+ Cr</span></>} 
-                    label="Ecosystem volume" 
-                    alignLeft={true} 
+                  <AnimatedStat
+                    end={12}
+                    prefix="₹"
+                    suffix={<><span className="text-[18px] md:text-[24px]">k+ Cr</span></>}
+                    label="Ecosystem volume"
+                    alignLeft={true}
                     textSize="text-[36px] md:text-[48px]"
                     labelColor="text-black/40"
                     startImmediately={true}
@@ -211,11 +222,11 @@ export const AboutPage = () => {
                 </div>
                 <div className="w-[1px] bg-black/10 h-12 self-center"></div>
                 <div>
-                  <AnimatedStat 
-                    end={40} 
-                    suffix="+" 
-                    label="Market Authority" 
-                    alignLeft={true} 
+                  <AnimatedStat
+                    end={40}
+                    suffix="+"
+                    label="Market Authority"
+                    alignLeft={true}
                     textSize="text-[36px] md:text-[48px]"
                     labelColor="text-black/40"
                     startImmediately={true}
@@ -251,9 +262,9 @@ export const AboutPage = () => {
               <div className="flex flex-col gap-6">
                 <ScrollReveal delay={100} className="w-full aspect-[4/5] bg-neutral-100 relative overflow-hidden group">
                   {/* PLACEHOLDER: Replace src with actual founder image */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Founder Name" 
+                  <img
+                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Founder Name"
                     className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
@@ -271,9 +282,9 @@ export const AboutPage = () => {
               <div className="flex flex-col gap-6 md:mt-12">
                 <ScrollReveal delay={200} className="w-full aspect-[4/5] bg-neutral-100 relative overflow-hidden group">
                   {/* PLACEHOLDER: Replace src with actual founder image */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Founder Name" 
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Founder Name"
                     className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
@@ -291,9 +302,9 @@ export const AboutPage = () => {
               <div className="flex flex-col gap-6 md:mt-24">
                 <ScrollReveal delay={300} className="w-full aspect-[4/5] bg-neutral-100 relative overflow-hidden group">
                   {/* PLACEHOLDER: Replace src with actual founder image */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Founder Name" 
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Founder Name"
                     className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
@@ -315,10 +326,10 @@ export const AboutPage = () => {
           <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 lg:gap-24 items-center">
             <div className="order-2 lg:order-1 relative h-full min-h-[500px]">
               <ScrollReveal direction="right" delay={100} className="absolute top-0 left-0 w-[70%] aspect-[3/4] z-10">
-                 <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Interior Details" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Interior Details" className="w-full h-full object-cover" />
               </ScrollReveal>
               <ScrollReveal direction="up" delay={300} className="absolute bottom-0 right-0 w-[60%] aspect-square z-20 shadow-2xl">
-                 <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxury Architecture" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxury Architecture" className="w-full h-full object-cover" />
               </ScrollReveal>
             </div>
 
@@ -390,25 +401,25 @@ export const AboutPage = () => {
         {/* 5. Track Record Showcase */}
         <section className="bg-black text-white py-24 md:py-32 px-6 md:px-16 border-y border-white/10">
           <div className="max-w-[1920px] mx-auto text-center mb-16 md:mb-24">
-             <ScrollReveal direction="up" delay={0}>
-                <h2 className="font-['Instrument_Serif'] text-[48px] md:text-[72px] italic text-white leading-none">
-                  Decades of Trusted Execution.
-                </h2>
-             </ScrollReveal>
+            <ScrollReveal direction="up" delay={0}>
+              <h2 className="font-['Instrument_Serif'] text-[48px] md:text-[72px] italic text-white leading-none">
+                Decades of Trusted Execution.
+              </h2>
+            </ScrollReveal>
           </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 text-center">
-              {/* Stat 1 */}
-              <ScrollReveal direction="up" delay={100} className="w-full flex items-center justify-center">
-                <AnimatedStat end={40} suffix="+" label="Years Presence" />
-              </ScrollReveal>
-              {/* Stat 2 */}
-              <ScrollReveal direction="up" delay={200} className="w-full flex items-center justify-center md:border-x border-white/10">
-                <AnimatedStat end={12} prefix="₹" suffix={<><span className="text-[40px] md:text-[60px]">k+ Cr</span></>} label="Ecosystem Volume" />
-              </ScrollReveal>
-              {/* Stat 3 */}
-              <ScrollReveal direction="up" delay={300} className="w-full flex items-center justify-center">
-                <AnimatedStat end={154} prefix="₹" suffix={<><span className="text-[40px] md:text-[60px]"> Cr</span></>} label="Sold in 30 Days" />
-              </ScrollReveal>
+            {/* Stat 1 */}
+            <ScrollReveal direction="up" delay={100} className="w-full flex items-center justify-center">
+              <AnimatedStat end={40} suffix="+" label="Years Presence" />
+            </ScrollReveal>
+            {/* Stat 2 */}
+            <ScrollReveal direction="up" delay={200} className="w-full flex items-center justify-center md:border-x border-white/10">
+              <AnimatedStat end={12} prefix="₹" suffix={<><span className="text-[40px] md:text-[60px]">k+ Cr</span></>} label="Ecosystem Volume" />
+            </ScrollReveal>
+            {/* Stat 3 */}
+            <ScrollReveal direction="up" delay={300} className="w-full flex items-center justify-center">
+              <AnimatedStat end={154} prefix="₹" suffix={<><span className="text-[40px] md:text-[60px]"> Cr</span></>} label="Sold in 30 Days" />
+            </ScrollReveal>
           </div>
         </section>
 
@@ -452,13 +463,15 @@ export const AboutPage = () => {
               {/* Gradient masks for smooth fade on edges */}
               <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
               <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-              
-              <div className="flex w-max animate-marquee">
+
+              <div className="flex w-max animate-marquee items-center h-24 md:h-32">
                 {[...partners, ...partners, ...partners, ...partners].map((partner, idx) => (
-                  <div key={idx} className="flex-none w-48 mx-8 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:bg-neutral-50 cursor-default p-4 rounded-xl">
-                    {/* PLACEHOLDER: Replace text with actual SVG/PNG logos of the builders */}
-                    <span className="font-semibold tracking-widest text-lg uppercase text-black text-center">{partner.logo}</span>
-                  </div>
+                  <img
+                    key={idx}
+                    src={partner.logo}
+                    alt={partner.name}
+                    className={`flex-none w-40 h-16 md:w-56 md:h-24 mx-0 object-contain cursor-default ${partner.customClass || ""}`}
+                  />
                 ))}
               </div>
             </div>
