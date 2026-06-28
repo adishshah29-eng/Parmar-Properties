@@ -11,14 +11,18 @@ export const SupportHeader = () => {
         <div className="box-border caret-transparent text-[10px] leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline md:text-[6.66667px] md:leading-[7.66667px]">
           <div className="box-border caret-transparent text-[44px] font-medium tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]">
             <h2 className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px] text-balance">
-              <ScrollScrubRevealText 
-                text={support.heading}
-                className="box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]"
-                baseColorClass="text-white/30"
-                revealColorClass="text-white"
-                scrubStart="top 90%"
-                scrubEnd="center 40%"
-              />
+              {support.heading.split('\n').map((line, i) => (
+                <ScrollScrubRevealText 
+                  key={i}
+                  as="span"
+                  text={line}
+                  className="block box-border caret-transparent text-[44px] tracking-[-0.88px] leading-[46.2px] outline-neutral-900 outline-[3px] no-underline md:text-5xl md:tracking-[-1.92px] md:leading-[48px]"
+                  baseColorClass="text-white/30"
+                  revealColorClass={i === 1 ? "text-neutral-400" : "text-white"}
+                  scrubStart="top 90%"
+                  scrubEnd="center 40%"
+                />
+              ))}
             </h2>
           </div>
         </div>

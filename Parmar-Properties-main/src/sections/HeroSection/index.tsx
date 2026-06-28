@@ -529,7 +529,7 @@ export const HeroSection = () => {
             </h1>
             <p className="text-black/85 mb-3 max-w-[90vw] leading-relaxed animate-hero-strong"
               style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "clamp(13px, 1.4vw, 50px)", textAlign: "center", marginTop: "clamp(0px, 1vw, 20px)", marginBottom: "clamp(12px, 2vw, 40px)" }}>
-              <strong className="font-semibold text-black">SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985</strong>
+              <strong className="font-semibold text-black">{hero.subHeadline}</strong>
             </p>
             <a href="https://parmar-properties-listing.vercel.app/" target="_blank"
               className="group inline-flex items-center bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl animate-hero-button"

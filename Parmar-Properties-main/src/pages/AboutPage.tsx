@@ -4,6 +4,7 @@ import { Footer } from "@/sections/Footer/index";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
 import { SplitTextReveal } from "@/components/SplitTextReveal";
+import { brand } from "@/content/content";
 import Tejukaya from "assets/Tejukaya.webp";
 import Sugee from "assets/sugee-Photoroom.webp";
 import Rustomjee from "assets/Rustomjee-Photoroom.webp";
@@ -191,7 +192,7 @@ export const AboutPage = () => {
             <div className="flex flex-col items-start text-left">
               <ScrollReveal direction="up" delay={0}>
                 <p className="text-xs md:text-sm font-semibold tracking-[0.15em] uppercase text-black/40 mb-6">
-                  Est. 1985 &mdash; South Mumbai
+                  Est. {brand.tagline.match(/\d{4}/)?.[0] || '1981'} &mdash; South Mumbai
                 </p>
               </ScrollReveal>
 

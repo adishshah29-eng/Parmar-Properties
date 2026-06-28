@@ -57,7 +57,7 @@ const RowCard = ({
 }) => (
   <ScrollReveal
     delay={delay}
-    className="grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.3fr)] gap-8 md:gap-20 py-10 md:py-14 items-stretch border-b border-black/[0.08] last:border-b-0"
+    className="grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.3fr)] gap-8 md:gap-20 py-10 md:py-14 items-center border-b border-black/[0.08] last:border-b-0"
   >
     <div className="flex h-full flex-col justify-between py-1">
       {loading ? (
@@ -98,7 +98,7 @@ const RowCard = ({
       </div>
     </div>
 
-    <div className="overflow-hidden rounded-none aspect-[2.39/1]">
+    <div className="overflow-hidden rounded-none w-full aspect-[2/1] md:aspect-none md:h-[380px] lg:h-[420px]">
       {loading ? (
         <Shimmer className="w-full h-full" />
       ) : (
