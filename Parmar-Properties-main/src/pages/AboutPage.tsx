@@ -174,14 +174,20 @@ export const AboutPage = () => {
 
   return (
     <>
-      <div id="main-content-wrapper" className="min-h-screen bg-[#f3f1ed] text-black font-['Instrument_Sans'] overflow-x-hidden selection:bg-black selection:text-white relative z-10">
+      <div id="main-content-wrapper" className="min-h-screen bg-[#f3f1ed] text-black font-['Instrument_Sans'] overflow-x-clip selection:bg-black selection:text-white relative z-10">
         <style>{`
           @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
           }
+          @-webkit-keyframes marquee {
+            0% { -webkit-transform: translateX(0); }
+            100% { -webkit-transform: translateX(-50%); }
+          }
           .animate-marquee {
             animation: marquee 42s linear infinite;
+            -webkit-animation: marquee 42s linear infinite;
+            will-change: transform;
           }
         `}</style>
         <Header />
@@ -240,8 +246,8 @@ export const AboutPage = () => {
               <ScrollReveal direction="left" delay={400} className="w-full h-full relative">
                 <img
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="South Mumbai Luxury Architecture"
-                  className="w-full aspect-[4/3] object-cover grayscale opacity-90 transition-all duration-700 hover:grayscale-0 hover:opacity-100"
+                  alt="Our Story"
+                  className="w-full aspect-[4/3] object-cover transition-all duration-700 hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
               </ScrollReveal>
@@ -262,11 +268,10 @@ export const AboutPage = () => {
               {/* Founder 1 */}
               <div className="flex flex-col gap-6">
                 <ScrollReveal delay={100} className="w-full aspect-[4/5] bg-neutral-100 relative overflow-hidden group">
-                  {/* PLACEHOLDER: Replace src with actual founder image */}
                   <img
                     src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     alt="Founder Name"
-                    className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
                 </ScrollReveal>
@@ -286,7 +291,7 @@ export const AboutPage = () => {
                   <img
                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     alt="Founder Name"
-                    className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
                 </ScrollReveal>
@@ -306,7 +311,7 @@ export const AboutPage = () => {
                   <img
                     src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     alt="Founder Name"
-                    className="w-full h-full object-cover grayscale opacity-60 mix-blend-multiply group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 border border-black/5 pointer-events-none"></div>
                 </ScrollReveal>

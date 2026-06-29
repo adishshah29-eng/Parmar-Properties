@@ -36,22 +36,18 @@ export const AboutSection = () => {
           {/* Right Column: Heading, Narrative Copy & Button */}
           <div className="flex flex-col gap-8 py-2 lg:pt-[52px] w-full">
             <div className="flex flex-col gap-4 w-full">
-              <ScrollReveal delay={100} direction="up" className="w-full">
-                <h2 className="font-['Instrument_Sans'] tracking-[-0.03em] leading-[1.2] text-[26px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-medium text-black w-full">
-                  <SplitTextReveal text={aboutSection.heading} initialDelay={100} />
-                </h2>
-              </ScrollReveal>
+              <h2 className="font-['Instrument_Sans'] tracking-[-0.03em] leading-[1.2] text-[26px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-medium text-black w-full">
+                <SplitTextReveal text={aboutSection.heading} initialDelay={100} />
+              </h2>
             </div>
 
-            <ScrollReveal delay={200} className="w-full">
-              <ScrollScrubRevealText
-                as="p"
-                className="font-['Instrument_Sans'] tracking-[-0.02em] leading-[1.2] text-xl md:text-2xl lg:text-[26px] w-full"
-                segments={aboutSection.bodySegments}
-                scrubStart="top 90%"
-                scrubEnd="center 50%"
-              />
-            </ScrollReveal>
+            <ScrollScrubRevealText
+              as="p"
+              className="font-['Instrument_Sans'] tracking-[-0.02em] leading-[1.2] text-xl md:text-2xl lg:text-[26px] w-full"
+              segments={aboutSection.bodySegments}
+              scrubStart="top 90%"
+              scrubEnd="center 50%"
+            />
 
             <ScrollReveal delay={300} direction="up">
               <Link

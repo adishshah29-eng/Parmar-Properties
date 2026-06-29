@@ -29,8 +29,14 @@ export const PartnersSection = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @-webkit-keyframes marquee {
+          0% { -webkit-transform: translateX(0); }
+          100% { -webkit-transform: translateX(-50%); }
+        }
         .animate-marquee {
           animation: marquee 42s linear infinite;
+          -webkit-animation: marquee 42s linear infinite;
+          will-change: transform;
         }
       `}</style>
       <div className="max-w-[1920px] mx-auto flex flex-col items-center">

@@ -324,16 +324,9 @@ export const footer = {
     { label: "Whatsapp", href: "https://wa.me/1234567890" },
   ] as FooterLink[],
   legalLinks: [
-    { label: "Terms", href: "https://parmar-properties-two.vercel.app/terms-of-service" },
+    { label: "Terms & Conditions", href: "https://parmar-properties-two.vercel.app/terms-of-service" },
     { label: "Privacy policy", href: "https://parmar-properties-two.vercel.app/privacy-policy" },
-    { label: "Fair Housing Notice", href: "https://dos.ny.gov/system/files/documents/2025/03/nys-housing-and-anti-discrimination-notice_02.2025.pdf" },
-    { label: "Operating Procedure", href: "https://parmar-properties-two.vercel.app/operating-procedure" },
-    { label: "Press", href: "https://parmar-properties-two.vercel.app/press" },
   ] as FooterLink[],
-  legalNotices: [
-    "Housing Choice Vouchers Welcome",
-    "Se Aceptan Vales de ElecciÃ³n de Vivienda",
-  ],
   contact: [
     { label: "Head Office", value: "208, Parmar Properties, Peninsula Centre", href: "geo://40.75104385252497,-73.98395637414475" },
     { label: "Email Us", value: "office@parmarproperties.in", href: "mailto:office@parmarproperties.in" },
