@@ -121,7 +121,7 @@ const AnimatedStat = ({
   const { count, ref } = useCountUp(end, 1600, startImmediately);
   return (
     <div className={`flex flex-col ${alignLeft ? "items-start text-left" : "items-center text-center justify-center"}`}>
-      <span ref={ref} className={`${textSize} font-medium tracking-[-0.04em] leading-none mb-3 flex items-baseline ${alignLeft ? "" : "justify-center"}`}>
+      <span ref={ref} className={`${textSize} font-medium tracking-[-0.04em] leading-[1.1] mb-3 flex items-baseline ${alignLeft ? "" : "justify-center"}`}>
         {prefix}{count}{suffix}
       </span>
       <span className={`text-xs md:text-sm font-semibold tracking-widest uppercase ${labelColor}`}>{label}</span>
@@ -366,7 +366,7 @@ export const AboutPage = () => {
               {/* Pillar 1 */}
               <div className="p-10 md:p-16 flex flex-col gap-6 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:bg-neutral-50 cursor-default">
                 <ScrollReveal delay={100}>
-                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-none">01</span>
+                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-[1.1]">01</span>
                   <h3 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.04em] mt-4 mb-2">Unmatched Access</h3>
                   <p className="text-base text-black/60 leading-relaxed">
                     We unlock off-market luxury inventory, pre-launch developer opportunities, and highly restricted residential assets across South Bombay's most prestigious micro-markets.
@@ -377,7 +377,7 @@ export const AboutPage = () => {
               {/* Pillar 2 */}
               <div className="p-10 md:p-16 flex flex-col gap-6 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:bg-neutral-50 cursor-default">
                 <ScrollReveal delay={200}>
-                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-none">02</span>
+                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-[1.1]">02</span>
                   <h3 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.04em] mt-4 mb-2">Absolute Discretion</h3>
                   <p className="text-base text-black/60 leading-relaxed">
                     Protecting the privacy and strategic interests of South Mumbai's prominent business families, industrialists, and corporate leaders is our highest operational mandate.
@@ -388,7 +388,7 @@ export const AboutPage = () => {
               {/* Pillar 3 */}
               <div className="p-10 md:p-16 flex flex-col gap-6 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:bg-neutral-50 cursor-default">
                 <ScrollReveal delay={300}>
-                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-none">03</span>
+                  <span className="font-['Instrument_Serif'] text-[64px] md:text-[84px] italic text-black/10 leading-[1.1]">03</span>
                   <h3 className="text-[24px] md:text-[28px] font-semibold tracking-[-0.04em] mt-4 mb-2">Pricing Intelligence</h3>
                   <p className="text-base text-black/60 leading-relaxed">
                     Our recommendations are backed by decades of street-level transaction records, proprietary valuation models, and deep developer alignments to ensure optimal entry and exit timing.
@@ -403,7 +403,7 @@ export const AboutPage = () => {
         <section className="bg-black text-white py-24 md:py-32 px-6 md:px-16 border-y border-white/10">
           <div className="max-w-[1920px] mx-auto text-center mb-16 md:mb-24">
             <ScrollReveal direction="up" delay={0}>
-              <h2 className="font-['Instrument_Serif'] text-[48px] md:text-[72px] italic text-white leading-none">
+              <h2 className="font-['Instrument_Serif'] text-[48px] md:text-[72px] italic text-white leading-[1.1]">
                 Decades of Trusted Execution.
               </h2>
             </ScrollReveal>
@@ -428,7 +428,7 @@ export const AboutPage = () => {
         <section className="bg-[#f3f1ed] py-24 md:py-36 px-6 md:px-16 text-center border-b border-black/5">
           <div className="max-w-5xl mx-auto flex flex-col items-center">
             <ScrollReveal direction="up" delay={100} className="mb-6">
-              <span className="text-[64px] md:text-[96px] font-['Instrument_Serif'] italic text-black/20 leading-none">“</span>
+              <span className="text-[64px] md:text-[96px] font-['Instrument_Serif'] italic text-black/20 leading-[1.1]">“</span>
             </ScrollReveal>
             <ScrollReveal delay={200}>
               <ScrollScrubRevealText
@@ -483,7 +483,7 @@ export const AboutPage = () => {
         <section className="bg-[#f8f7f4] text-black py-20 md:py-28 px-6 md:px-16 text-center border-t border-black/5">
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-8">
             <ScrollReveal direction="up" delay={100}>
-              <h2 className="font-['Instrument_Serif'] text-[42px] md:text-[64px] font-normal italic leading-none tracking-tight text-black">
+              <h2 className="font-['Instrument_Serif'] text-[42px] md:text-[64px] font-normal italic leading-[1.1] tracking-tight text-black">
                 Begin Your Private Consultation
               </h2>
             </ScrollReveal>

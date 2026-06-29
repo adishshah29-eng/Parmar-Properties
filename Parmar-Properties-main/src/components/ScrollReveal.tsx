@@ -16,7 +16,7 @@ interface ScrollRevealProps {
 export const ScrollReveal = ({
   children,
   delay = 0,
-  duration = 1600,
+  duration = 1360,
   direction = "up",
   distance = 80,
   className = "",

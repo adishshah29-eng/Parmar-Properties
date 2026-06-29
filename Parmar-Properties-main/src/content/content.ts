@@ -311,17 +311,17 @@ export const cta = {
 // â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const footer = {
   primaryLinks: [
-    { label: "Search", href: "https://parmar-properties-two.vercel.app/search" },
-    { label: "Agents", href: "https://parmar-properties-two.vercel.app/agents" },
-    { label: "Join", href: "https://parmar-properties-two.vercel.app/join" },
-    { label: "About Us", href: "https://parmar-properties-two.vercel.app/about" },
-    { label: "Agent Portal", href: "https://app.findrealestate.com/authentication/sign-in" },
+    { label: "About", href: "https://parmar-properties-two.vercel.app/about" },
+    { label: "Expertise", href: "/#expertise" },
+    { label: "Opportunities", href: "/#services" },
+    { label: "Contact", href: "https://parmar-properties-two.vercel.app/contact" },
   ] as FooterLink[],
   socialLinks: [
-    { label: "Facebook", href: "https://facebook.com/parmarproperties" },
-    { label: "Instagram", href: "https://www.instagram.com/parmarproperties" },
-    { label: "Youtube", href: "https://www.youtube.com/@parmarproperties" },
+    { label: "Facebook", href: "https://www.facebook.com/people/Parmar-Properties/61556751864965/" },
+    { label: "Instagram", href: "https://www.instagram.com/parmar_properties?igsh=Y3B6amlmMHRydmpl" },
+    { label: "Youtube", href: "https://www.youtube.com/@parmarpropertiesofficial" },
     { label: "Linkedin", href: "https://www.linkedin.com/company/parmarproperties" },
+    { label: "Whatsapp", href: "https://wa.me/1234567890" },
   ] as FooterLink[],
   legalLinks: [
     { label: "Terms", href: "https://parmar-properties-two.vercel.app/terms-of-service" },
@@ -334,10 +334,6 @@ export const footer = {
     "Housing Choice Vouchers Welcome",
     "Se Aceptan Vales de ElecciÃ³n de Vivienda",
   ],
-  newsletter: {
-    heading: "Subscribe to our Newsletter!",
-    placeholder: "Enter address",
-  },
   contact: [
     { label: "Head Office", value: "208, Parmar Properties, Peninsula Centre", href: "geo://40.75104385252497,-73.98395637414475" },
     { label: "Email Us", value: "office@parmarproperties.in", href: "mailto:office@parmarproperties.in" },

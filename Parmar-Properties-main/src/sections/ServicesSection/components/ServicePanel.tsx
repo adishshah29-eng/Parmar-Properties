@@ -37,7 +37,7 @@ export const ServicePanel = ({ imageUrl, description, label, number, delay = 0 }
 
         {/* Right Side: Huge Label Text & Huge Arrow */}
         <div className="w-full flex items-center justify-start gap-4 md:gap-10">
-          <span className="block relative text-white font-['Instrument_Sans'] text-6xl md:text-[160px] lg:text-[180px] font-medium tracking-tight leading-none transition-transform duration-500 md:group-hover:scale-105
+          <span className="block relative text-white font-['Instrument_Sans'] text-6xl md:text-[160px] lg:text-[180px] font-medium tracking-tight leading-[1.1] transition-transform duration-500 md:group-hover:scale-105
                          after:content-[''] after:absolute after:bottom-[-8px] md:after:bottom-3 after:left-0 after:w-full after:h-[3px] md:after:h-[6px] after:bg-white after:scale-x-0 after:origin-right md:group-hover:after:scale-x-100 md:group-hover:after:origin-left after:transition-transform after:duration-500">
             {label}
           </span>

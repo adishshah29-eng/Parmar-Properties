@@ -12,9 +12,9 @@ interface SplitTextRevealProps {
 
 export const SplitTextReveal = ({
   text,
-  delayPerWord = 60,
+  delayPerWord = 5,
   initialDelay = 0,
-  duration = 1200,
+  duration = 300,
   className = "",
   as: Component = "h2",
 }: SplitTextRevealProps) => {
@@ -44,6 +44,10 @@ export const SplitTextReveal = ({
               overflow: "hidden",
               display: "inline-block",
               marginRight: "0.25em",
+              paddingTop: "0.15em",
+              paddingBottom: "0.15em",
+              marginTop: "-0.15em",
+              marginBottom: "-0.15em",
             }}
           >
             <span style={style}>{word}</span>

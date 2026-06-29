@@ -1,14 +1,15 @@
-import { ScrollReveal } from "@/components/ScrollReveal";
 import { footer, brand } from "@/content/content";
 
 export const FooterLegal = () => {
   return (
-      <ScrollReveal delay={100} className="col-start-[copyright] col-end-[copyright] row-start-[copyright] row-end-[copyright] flex flex-col md:flex-row justify-between items-start md:items-center text-white/40 text-sm md:text-xs font-medium mt-8 md:mt-5 gap-6 md:gap-5">
+      <div className="col-span-full flex flex-col md:flex-row justify-between items-start md:items-center text-white/40 text-sm md:text-xs font-medium mt-8 md:mt-5 gap-6 md:gap-5">
         <div className="flex flex-col md:flex-row gap-6 md:gap-5">
           {footer.legalLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-white transition-colors"
             >
               {link.label}
@@ -22,7 +23,7 @@ export const FooterLegal = () => {
           <div>{brand.name}</div>
           <div>Copyright © {brand.copyrightYear}</div>
         </div>
-      </ScrollReveal>
+      </div>
   );
 };
   

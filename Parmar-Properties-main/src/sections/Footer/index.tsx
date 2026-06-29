@@ -17,7 +17,8 @@ export const Footer = () => {
     const updateMargin = (height: number) => {
       if (!wrapper) return;
       if (window.innerWidth >= 768) {
-        wrapper.style.marginBottom = `${height}px`;
+        // Subtract 1px to prevent subpixel rendering gaps between the main content wrapper and fixed footer
+        wrapper.style.marginBottom = `${height - 1}px`;
       } else {
         wrapper.style.marginBottom = '0px';
       }
@@ -59,7 +60,7 @@ export const Footer = () => {
           <ScrollReveal 
             direction="up" 
             distance={40} 
-            className="grid [grid-template-areas:'newsletter''links''logo''copyright'] grid-cols-1 pt-16 pb-10 gap-y-12 md:[grid-template-areas:'newsletter_links''logo_logo''copyright_copyright'] md:grid-cols-[1fr_auto] md:justify-between md:pt-24 md:pb-8"
+            className="grid grid-cols-1 md:grid-cols-2 pt-10 pb-6 gap-y-8 md:pt-14 md:pb-6 md:gap-y-6 justify-between"
           >
             <NewsletterSignup />
             <FooterLinks />

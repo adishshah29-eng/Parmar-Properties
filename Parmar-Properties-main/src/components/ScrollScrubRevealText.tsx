@@ -55,7 +55,7 @@ export const ScrollScrubRevealText = ({
 
     const wordEls = containerRef.current.querySelectorAll(".reveal-word-fg");
     if (!wordEls.length) return;
-    
+
     // Create ScrollTrigger timeline
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -67,9 +67,9 @@ export const ScrollScrubRevealText = ({
 
     // Staggered clip-path animation left-to-right filling each word
     // using a low stagger value (e.g. 0.05) to make it smooth and buttery
-    tl.fromTo(wordEls, 
-      { clipPath: "inset(0% 100% 0% 0%)" }, 
-      { clipPath: "inset(0% 0% 0% 0%)", duration: 1, stagger: 0.05, ease: "sine.inOut" }
+    tl.fromTo(wordEls,
+      { clipPath: "inset(0% 100% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 0.85, stagger: 0.0425, ease: "sine.inOut" }
     );
 
     return () => {
@@ -92,7 +92,7 @@ export const ScrollScrubRevealText = ({
             {item.word}
           </span>
           {/* Reveal Overlay Layer (Black or Gray) */}
-          <span 
+          <span
             className={`reveal-word-fg absolute top-0 left-0 inline-block ${item.revealClass}`}
             style={{ clipPath: "inset(0% 100% 0% 0%)" }}
             aria-hidden="true"
