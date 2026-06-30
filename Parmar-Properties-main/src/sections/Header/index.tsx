@@ -78,18 +78,12 @@ export const Header = () => {
       }`}
     >
       <div className="box-border caret-transparent w-full max-w-[1920px] no-underline mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="items-center box-border caret-transparent text-neutral-900 grid grid-cols-[1fr_auto] leading-[11.5px] min-h-[64px] relative no-underline z-[100] md:grid-cols-[200px_1fr_200px] md:leading-[1.5] md:min-h-[75px]">
-          <div className="relative z-10 w-full">
+        <div className="flex justify-between items-center box-border caret-transparent text-neutral-900 leading-[11.5px] min-h-[64px] relative no-underline z-[100] md:leading-[1.5] md:min-h-[75px] w-full">
+          <div className="relative z-10">
             <HeaderLogo />
           </div>
           <DesktopNavigation />
-          <div className="flex justify-end items-center relative z-[9999] pointer-events-auto">
-            <a
-              href={navigation.ctaButton.href}
-              className="hidden md:inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 hover:-translate-y-0.5 hover:scale-105 text-white font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-lg whitespace-nowrap"
-            >
-              {navigation.ctaButton.label}
-            </a>
+          <div className="flex justify-end items-center relative z-[9999] pointer-events-auto md:hidden">
             <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
           </div>
         </div>
@@ -112,7 +106,7 @@ export const Header = () => {
                   <>
                     <button
                       onClick={() => toggleMobileDropdown(link.label)}
-                      className={`flex items-center justify-between text-black text-[24px] font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-300 w-full text-left py-2 ${
+                      className={`uppercase flex items-center justify-between text-black text-[24px] font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-300 w-full text-left py-2 ${
                         isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                       }`}
                       style={{ transitionDelay: `${isMobileMenuOpen ? 100 + index * 50 : 0}ms`, fontFamily: "'Inter', sans-serif" }}
@@ -132,7 +126,7 @@ export const Header = () => {
                             href={item.href}
                             target={isNewTab ? "_blank" : undefined}
                             rel={isNewTab ? "noopener noreferrer" : undefined}
-                            className="text-black/70 text-lg hover:text-black py-1.5 transition-colors block"
+                            className="uppercase text-black/70 text-lg hover:text-black py-1.5 transition-colors block"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
                             {item.label}
@@ -144,7 +138,9 @@ export const Header = () => {
                 ) : (
                   <a
                     href={link.href}
-                    className={`flex items-center justify-between text-black text-[24px] font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-300 py-2 ${
+                    target={link.href.startsWith('http') ? "_blank" : undefined}
+                    rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                    className={`uppercase flex items-center justify-between text-black text-[24px] font-normal tracking-normal no-underline hover:text-black/60 transition-all duration-300 py-2 ${
                       isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}
                     style={{ transitionDelay: `${isMobileMenuOpen ? 100 + index * 50 : 0}ms`, fontFamily: "'Inter', sans-serif" }}
@@ -161,7 +157,7 @@ export const Header = () => {
         <div className={`mt-auto w-full transition-all duration-500 ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`} style={{ transitionDelay: `${isMobileMenuOpen ? 100 + navigation.links.length * 50 : 0}ms` }}>
           <a
             href={navigation.ctaButton.href}
-            className="w-full md:w-auto md:px-16 flex items-center justify-center bg-[#0F0F0F] text-white font-medium text-[17px] py-[18px] rounded-full hover:bg-black transition-colors"
+            className="uppercase w-full md:w-auto md:px-16 flex items-center justify-center bg-[#0F0F0F] text-white font-medium text-[17px] py-[18px] rounded-full hover:bg-black transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {navigation.ctaButton.label}

@@ -13,7 +13,7 @@ export const ProcessHeader = () => {
             text={line}
             className="block"
             baseColorClass="text-neutral-300"
-            revealColorClass={i === 1 ? "text-neutral-400" : "text-black"}
+            revealColorClass={i === 1 ? "text-neutral-400" : "text-white"}
             scrubStart="top 90%"
             scrubEnd="center 60%"
           />
@@ -24,7 +24,7 @@ export const ProcessHeader = () => {
           href={processSouthMumbai.ctaButton.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center bg-black text-white px-8 py-4 rounded-full font-medium text-sm transition-transform hover:scale-105"
+          className="inline-flex items-center justify-center bg-white text-black px-8 py-4 rounded-full font-medium text-sm transition-transform hover:scale-105"
         >
           <span>{processSouthMumbai.ctaButton.label}</span>
           <svg className="ml-3 w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

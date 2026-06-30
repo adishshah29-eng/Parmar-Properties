@@ -5,7 +5,7 @@ import { processSouthMumbai } from "@/content/content";
 export const ProcessSteps = () => {
   return (
     <div className="flex-1 min-w-0 w-full lg:-ml-[250px]">
-      <ScrollReveal className="text-black font-medium text-xl md:text-2xl mb-8 font-['Instrument_Sans']">
+      <ScrollReveal className="text-white font-medium text-xl md:text-2xl mb-8 font-['Instrument_Sans']">
         {processSouthMumbai.subHeading}
       </ScrollReveal>
       <div className="flex flex-col">

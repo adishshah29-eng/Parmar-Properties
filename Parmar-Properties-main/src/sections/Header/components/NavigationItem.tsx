@@ -57,6 +57,8 @@ export const NavigationItem = ({ label, href, itemVariant, isDropdown, dropdownI
       ) : (
         <a
           href={href}
+          target={href.startsWith('http') ? "_blank" : undefined}
+          rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
           className="block text-base font-semibold text-neutral-900 transition-colors duration-200 py-2"
           style={customStyle}
         >

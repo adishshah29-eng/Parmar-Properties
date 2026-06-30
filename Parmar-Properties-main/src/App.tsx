@@ -13,6 +13,8 @@ import { Agentation } from "agentation";
 import { NewsletterConfirmedPage } from "@/pages/NewsletterConfirmedPage";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
+import { Preloader } from "@/components/Preloader";
+
 const HomePage = () => (
   <>
     <SmoothScroll />
@@ -27,10 +29,18 @@ const HomePage = () => (
   </>
 );
 
+import { useLocation } from "react-router-dom";
+
+const GlobalPreloader = () => {
+  const location = useLocation();
+  return <Preloader key={location.pathname} />;
+};
+
 export const App = () => {
   return (
     <>
       <BrowserRouter>
+        <GlobalPreloader />
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<HomePage />} />

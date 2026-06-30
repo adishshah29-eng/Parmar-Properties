@@ -1,7 +1,7 @@
 
 export const FooterLogo = () => {
   return (
-    <div className="box-border caret-transparent text-[10px] col-span-full leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline mt-[5px] md:text-[6.66667px] md:leading-[7.66667px] md:mt-[8.3333px]">
+    <div className="box-border caret-transparent text-[10px] leading-[11.5px] min-h-[auto] min-w-[auto] outline-neutral-900 outline-[3px] no-underline mt-[5px] md:text-[6.66667px] md:leading-[7.66667px] md:mt-[8.3333px]">
       <a
         href="/"
         className="no-underline cursor-pointer transition-opacity duration-200 hover:opacity-80 inline-block"

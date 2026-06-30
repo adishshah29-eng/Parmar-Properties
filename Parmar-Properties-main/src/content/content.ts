@@ -38,48 +38,20 @@ export const seoMeta = {
 // ─── Brand ──────────────────────────────────────────────────
 export const brand = {
   name: "Parmar Properties",
-<<<<<<< HEAD
-  tagline: "South Mumbai's Trusted Luxury Real Estate Advisory Since 1985",
-=======
   tagline: "South Mumbai's Trusted Luxury Real Estate Advisory Since 1981",
   // Computed at build time â€” no manual annual update needed
->>>>>>> efc0caeafe50b585c1d6ed32850f70cc46c268aa
   copyrightYear: new Date().getFullYear(),
 };
 
 // ─── Header / Navigation ────────────────────────────────────
 export const navigation = {
   links: [
-    {
-      label: "About",
-      href: "/About",
-      isDropdown: true,
-      dropdownItems: [
-        { label: "About Us", href: "/About" },
-        { label: "Blog", href: "/blog" },
-        { label: "Press", href: "#" }
-      ]
-    },
+    { label: "Home", href: "/", isDropdown: false },
+    { label: "About Us", href: "/About", isDropdown: false },
+    { label: "Services", href: "/#services", isDropdown: false },
     { label: "Expertise", href: "/#expertise", isDropdown: false },
-    {
-      label: "Opportunities",
-      href: "#",
-      isDropdown: true,
-      dropdownItems: [
-        { label: "Buy", href: "https://parmar-properties-listing.vercel.app/" },
-        { label: "Sell", href: "#" },
-        { label: "Lease", href: "#" }
-      ]
-    },
-    {
-      label: "Contact",
-      href: "#",
-      isDropdown: true,
-      dropdownItems: [
-        { label: "WhatsApp us", href: "https://wa.me/1234567890" },
-        { label: "Email Us", href: "mailto:hello@parmar-properties-two.vercel.app" }
-      ]
-    },
+    { label: "Blogs", href: "/blog", isDropdown: false },
+    { label: "Contact", href: "https://wa.me/1234567890", isDropdown: false },
   ] as NavLink[],
   ctaButton: { label: "Schedule Consultation", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
 };
@@ -88,7 +60,7 @@ export const navigation = {
 export const hero = {
   headline: "Access. Influence. Legacy",
   subHeadline: "SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1981",
-  ctaButton: { label: "Explore Opportunities", href: "https://parmar-properties-listing.vercel.app/" } as CtaButton,
+  ctaButton: { label: "Find Properties", href: "https://parmar-properties-listing.vercel.app/" } as CtaButton,
 };
 
 // ─── Identity Section ───────────────────────────────────────
@@ -97,17 +69,13 @@ export const identity = {
   bodySegments: [
     {
       text: "For over four decades, Parmar Properties has been helping families, homebuyers, and investors make confident real estate decisions.",
-      revealColorClass: "text-black font-medium",
-      baseColorClass: "text-neutral-200 font-medium",
+      revealColorClass: "text-white font-medium",
+      baseColorClass: "text-neutral-800 font-medium",
     },
     {
-<<<<<<< HEAD
-      text: " We deliver record-breaking sales—including ₹154 Cr sold in 30 days at Tribeca Tower 1—and provide portfolio planning, investment acquisition, valuation guidance, and high-velocity sales execution.",
-=======
       text: "With honest guidance, personalized service, and a deep understanding of the market, we help you find not just the right property, but the right opportunity for your future.",
->>>>>>> efc0caeafe50b585c1d6ed32850f70cc46c268aa
       revealColorClass: "text-neutral-400 font-medium",
-      baseColorClass: "text-neutral-200 font-medium",
+      baseColorClass: "text-neutral-800 font-medium",
     },
   ] as TextSegment[],
   images: [
@@ -138,18 +106,8 @@ export const whyParmar = {
 
 // ─── Services Section ───────────────────────────────────────
 export const services = {
-<<<<<<< HEAD
-  eyebrow: "Advisory Services",
-  heading: "Luxury & Ultra-Luxury Real Estate Advisory",
-  ctaSection: {
-    body: "Our certified agents guide you through every stage of real estate ",
-    bodyMuted: "with expert knowledge and reliable support.",
-    ctaButton: { label: "Get Started with Parmar Properties", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
-  },
-=======
   eyebrow: "Luxury & Ultra-Luxury\nReal Estate Advisory",
   heading: "How Parmar\nCan Help You",
->>>>>>> efc0caeafe50b585c1d6ed32850f70cc46c268aa
   items: [
     {
       number: 1,
@@ -170,23 +128,11 @@ export const services = {
       imageUrl: "https://c.animaapp.com/mq3zczchi8fb7N/assets/48.jpg",
     },
   ] as ServiceItem[],
+  ctaSection: {
+    ctaButton: { label: "Talk to an Expert", href: "/contact" } as CtaButton,
+  }
 };
 
-<<<<<<< HEAD
-// ─── Process / Why South Mumbai Section ─────────────────────
-export const processSouthMumbai = {
-  heading: "Why South Mumbai.",
-  subHeading: "Why South Mumbai:",
-  ctaButton: { label: "Explore Opportunities", href: "#" } as CtaButton,
-  steps: [
-    { stepNumber: "01", title: "Consistent High Liquidity.", description: "₹12,000+ Cr annual luxury transaction volume." },
-    { stepNumber: "02", title: "HNI Business Families.", description: "78% of buyers in this premium market are HNI business families." },
-    { stepNumber: "03", title: "Limited Supply.", description: "Limited supply ensures long-term appreciation and wealth preservation." },
-  ] as ProcessStep[],
-};
-
-// ─── Support / Features Section ─────────────────────────────
-=======
 // ——— Process / Why South Mumbai Section —————————————————————
 export const processSouthMumbai = {
   heading: "Real Estate,\nRewired.",
@@ -200,21 +146,13 @@ export const processSouthMumbai = {
 };
 
 // ——— Support / Features Section —————————————————————————————
->>>>>>> efc0caeafe50b585c1d6ed32850f70cc46c268aa
 export const support = {
   heading: "Our\nExpertise",
   subHeading: "We believe buying a property should feel simple, informed, and rewarding.",
   subHeadingMuted: "Every recommendation we make is guided by experience, market knowledge, and a genuine understanding of your goals.",
   ctaButton: { label: "Explore Our Network", href: "/services" } as CtaButton,
   cards: [
-    {
-      title: "Luxury Homes",
-      description: "Every recommendation we make is guided by experience, market knowledge, and a genuine understanding of your goals.",
-      imageSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/18.jpg",
-      iconSrc: "https://c.animaapp.com/mq3zczchi8fb7N/assets/icon-6.svg",
-      buttonText: "Learn More",
-      href: "https://parmar-properties-two.vercel.app/services",
-    },
+
     {
       title: "Investment Advisory",
       description: "Thoughtful guidance to help you make confident investment decisions.",
@@ -339,17 +277,7 @@ export const footer = {
     { label: "Terms & Conditions", href: "https://parmar-properties-two.vercel.app/terms-of-service" },
     { label: "Privacy policy", href: "https://parmar-properties-two.vercel.app/privacy-policy" },
   ] as FooterLink[],
-<<<<<<< HEAD
-  legalNotices: [
-    "Housing Choice Vouchers Welcome",
-    "Se Aceptan Vales de Elección de Vivienda",
-  ],
-  newsletter: {
-    heading: "Subscribe to our Newsletter!",
-    placeholder: "Enter address",
-  },
-=======
->>>>>>> efc0caeafe50b585c1d6ed32850f70cc46c268aa
+
   contact: [
     { label: "Head Office", value: "208, Parmar Properties, Peninsula Centre", href: "geo://40.75104385252497,-73.98395637414475" },
     { label: "Email Us", value: "office@parmarproperties.in", href: "mailto:office@parmarproperties.in" },
