@@ -1,5 +1,5 @@
 // ============================================================
-// content.ts â€” Single source of truth for all user-facing content
+// content.ts – Single source of truth for all user-facing content
 // NO React, NO JSX. Pure TypeScript.
 //
 // BLOG DATA: Moved to Supabase. Use useBlogPosts() / fetchPostBySlug().
@@ -11,7 +11,7 @@
 // continues to compile without changes.
 export type { BlogPost } from "@/lib/types";
 
-// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Types ──────────────────────────────────────────────────
 type NavLink = {
   label: string;
   href: string;
@@ -26,42 +26,23 @@ type SupportCard = { title: string; description: string; imageSrc: string; iconS
 type TestimonialItem = { quote: string; author: string; rating: number; imageUrl: string };
 type FooterLink = { label: string; href: string };
 type ContactInfo = { label: string; value: string; href: string };
-type BlogPost = {
-  date: string;
-  title: string;
-  excerpt: string;
-  imageUrl: string;
-  href: string;
-  category?: string;
-  content?: {
-    intro: string[];
-    sections: {
-      title?: string;
-      paragraphs: string[];
-      insight?: string;
-    }[];
-    downloads?: { label: string; href: string }[];
-  };
-};
-// BlogPost type removed â€” now lives in src/lib/types.ts
 
-// â”€â”€â”€ SEO Meta â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── SEO Meta ──────────────────────────────────────────────
 export const seoMeta = {
-  title: "Parmar Properties â€” South Mumbai's Luxury Real Estate Advisory",
+  title: "Parmar Properties — South Mumbai's Luxury Real Estate Advisory",
   description: "40+ years of premium South Bombay luxury real estate advisory. Record-breaking sales, HNI buyer access, pre-launch inventory.",
-  ogImage: "https://parmar-properties-two.vercel.app/og-image.jpg", // TODO: replace with production OG image URL
+  ogImage: "https://parmar-properties-two.vercel.app/og-image.jpg",
   ogUrl: "https://parmar-properties-two.vercel.app",
 };
 
-// â”€â”€â”€ Brand â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Brand ──────────────────────────────────────────────────
 export const brand = {
   name: "Parmar Properties",
   tagline: "South Mumbai's Trusted Luxury Real Estate Advisory Since 1985",
-  // Computed at build time â€” no manual annual update needed
   copyrightYear: new Date().getFullYear(),
 };
 
-// â”€â”€â”€ Header / Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Header / Navigation ────────────────────────────────────
 export const navigation = {
   links: [
     {
@@ -98,19 +79,16 @@ export const navigation = {
   ctaButton: { label: "Schedule Consultation", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
 };
 
-// â”€â”€â”€ Hero Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Hero Section ───────────────────────────────────────────
 export const hero = {
   headline: "Access. Influence. Legacy",
   subHeadline: "SOUTH MUMBAI'S TRUSTED LUXURY REAL ESTATE ADVISORY SINCE 1985",
   ctaButton: { label: "Explore Opportunities", href: "https://parmar-properties-listing.vercel.app/" } as CtaButton,
-  // NOTE: heroBg / heroBuilding / heroCloud / heroCloudScroll are Vite static
-  // asset imports and remain inside HeroSection/index.tsx â€” not referenced here.
 };
 
-// â”€â”€â”€ Identity Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Identity Section ───────────────────────────────────────
 export const identity = {
   heading: "Who We Are & What We Do",
-  // ORDER-DEPENDENT â€” scrub-reveal animates segments in array sequence. Do not reorder.
   bodySegments: [
     {
       text: "A premier luxury real estate advisory with 40+ years presence in premium South Bombay markets.",
@@ -118,12 +96,11 @@ export const identity = {
       baseColorClass: "text-neutral-200 font-medium",
     },
     {
-      text: " We deliver record-breaking salesâ€”including â‚¹154 Cr sold in 30 days at Tribeca Tower 1â€”and provide portfolio planning, investment acquisition, valuation guidance, and high-velocity sales execution.",
+      text: " We deliver record-breaking sales—including ₹154 Cr sold in 30 days at Tribeca Tower 1—and provide portfolio planning, investment acquisition, valuation guidance, and high-velocity sales execution.",
       revealColorClass: "text-neutral-400 font-medium",
       baseColorClass: "text-neutral-200 font-medium",
     },
   ] as TextSegment[],
-  // ORDER-DEPENDENT â€” displayed left-to-right in chevron stack
   images: [
     "https://c.animaapp.com/mq3zczchi8fb7N/assets/28.jpg",
     "https://c.animaapp.com/mq3zczchi8fb7N/assets/77.jpg",
@@ -132,10 +109,9 @@ export const identity = {
   ],
 };
 
-// â”€â”€â”€ Why Parmar Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Why Parmar Section ─────────────────────────────────────
 export const whyParmar = {
   eyebrow: "Why PARMAR",
-  // ORDER-DEPENDENT
   bodySegments: [
     {
       text: "Don't settle for a broker—partner with trusted advisors.",
@@ -151,8 +127,15 @@ export const whyParmar = {
   featureImageUrl: "https://c.animaapp.com/mq3zczchi8fb7N/assets/37.jpg",
 };
 
-// â”€â”€â”€ Services Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Services Section ───────────────────────────────────────
 export const services = {
+  eyebrow: "Advisory Services",
+  heading: "Luxury & Ultra-Luxury Real Estate Advisory",
+  ctaSection: {
+    body: "Our certified agents guide you through every stage of real estate ",
+    bodyMuted: "with expert knowledge and reliable support.",
+    ctaButton: { label: "Get Started with Parmar Properties", href: "https://parmar-properties-two.vercel.app/contact" } as CtaButton,
+  },
   items: [
     {
       number: 1,
@@ -175,19 +158,19 @@ export const services = {
   ] as ServiceItem[],
 };
 
-// â”€â”€â”€ Process / Why South Mumbai Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Process / Why South Mumbai Section ─────────────────────
 export const processSouthMumbai = {
   heading: "Why South Mumbai.",
   subHeading: "Why South Mumbai:",
-  ctaButton: { label: "Explore Opportunities", href: "#" } as CtaButton, // STUB â€” fill when page is ready
+  ctaButton: { label: "Explore Opportunities", href: "#" } as CtaButton,
   steps: [
-    { stepNumber: "01", title: "Consistent High Liquidity.", description: "â‚¹12,000+ Cr annual luxury transaction volume." },
+    { stepNumber: "01", title: "Consistent High Liquidity.", description: "₹12,000+ Cr annual luxury transaction volume." },
     { stepNumber: "02", title: "HNI Business Families.", description: "78% of buyers in this premium market are HNI business families." },
     { stepNumber: "03", title: "Limited Supply.", description: "Limited supply ensures long-term appreciation and wealth preservation." },
   ] as ProcessStep[],
 };
 
-// â”€â”€â”€ Support / Features Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Support / Features Section ─────────────────────────────
 export const support = {
   heading: "Developer Trusted Partnerships & Execution",
   subHeading: "Why South Mumbai's strongest developer ecosystem trusts Parmar Properties.",
@@ -254,6 +237,7 @@ export const blog = {
 
 // â”€â”€â”€ Agents / Join Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const agents = {
+  eyebrow: "Join Our Team",
   heading: "Don't Rent Your Career. Own It.",
   imageUrl: "https://c.animaapp.com/mq3zczchi8fb7N/assets/94.jpg",
   // ORDER-DEPENDENT
@@ -322,7 +306,7 @@ export const footer = {
   ] as FooterLink[],
   legalNotices: [
     "Housing Choice Vouchers Welcome",
-    "Se Aceptan Vales de ElecciÃ³n de Vivienda",
+    "Se Aceptan Vales de Elección de Vivienda",
   ],
   newsletter: {
     heading: "Subscribe to our Newsletter!",

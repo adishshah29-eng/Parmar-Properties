@@ -31,7 +31,6 @@ export const Header = () => {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
           const atTop = currentScrollY === 0;
-          const isScrollingDownFast = currentScrollY > lastScrollY && currentScrollY > 300;
 
           const heroElement = document.getElementById("hero-section");
           // If no hero element, fallback to innerHeight

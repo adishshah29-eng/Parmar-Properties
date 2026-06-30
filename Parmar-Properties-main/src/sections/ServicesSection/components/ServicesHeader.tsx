@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ScrollScrubRevealText } from "@/components/ScrollScrubRevealText";
+import { services } from "@/content/content";
 
 export const ServicesHeader = () => {
   return (
@@ -7,7 +8,7 @@ export const ServicesHeader = () => {
       {/* Label */}
       <ScrollReveal className="mb-10 md:mb-0">
         <h3 className="text-white font-['Instrument_Sans'] font-semibold text-xl tracking-wide">
-          Advisory Services
+          {services.eyebrow}
         </h3>
       </ScrollReveal>
 
@@ -15,7 +16,7 @@ export const ServicesHeader = () => {
       <ScrollReveal delay={120} className="max-w-2xl">
         <ScrollScrubRevealText
           as="h2"
-          text="Luxury & Ultra-Luxury Real Estate Advisory"
+          text={services.heading}
           className="font-['Instrument_Sans'] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1]"
           baseColorClass="text-white/30"
           revealColorClass="text-white"
